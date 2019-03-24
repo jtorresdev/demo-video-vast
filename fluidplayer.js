@@ -2375,14 +2375,14 @@ var fluidPlayerClass = {
 		volumeposTag.style.left = videoPlayerTag.volume * volumebarTotalWidth - volumeposTagWidth / 2 + 'px';
 	},
 
-	muteToggle: function(videoPlayerId) {
+	muteToggle: function(videoPlayerId, justUnmute = false) {
 		var player = fluidPlayerClass.getInstanceById(videoPlayerId);
 		var videoPlayerTag = document.getElementById(videoPlayerId);
 
-		if (videoPlayerTag.volume && !videoPlayerTag.muted) {
+		if (videoPlayerTag.volume && !videoPlayerTag.muted && !justUnmute) {
 			videoPlayerTag.volume = 0;
 			videoPlayerTag.muted = true;
-		} else {
+		}else{
 			videoPlayerTag.volume = player.latestVolume;
 			videoPlayerTag.muted = false;
 		}

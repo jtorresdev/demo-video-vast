@@ -117,8 +117,8 @@
     }
 
     var playerIn = function () {
-        video.muteToggle('video-id')
-        //document.getElementById('video-id').muted = false
+        video.muteToggle('video-id', true)
+        video.play()
         var video_wrapper = document.getElementById('fluid_video_wrapper_video-id')
         video_wrapper.style.width = newWidth
         video_wrapper.style.height = newHeight
