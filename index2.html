@@ -1,0 +1,33 @@
+<head>
+    <link href="https://vjs.zencdn.net/5.20/video-js.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://mailonline.github.io/videojs-vast-vpaid/styles/videojs.vast.vpaid.css">
+
+    <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
+    <script src="https://vjs.zencdn.net/ie8/ie8-version/videojs-ie8.min.js"></script>
+</head>
+
+<body>
+    <video id='my-video' class='video-js' controls preload='auto' width='640' height='264' data-setup='{
+        "plugins": {
+        "vastClient": {
+          "adTagUrl": "https://v.lkqd.net/ad?pid=430&sid=418429&output=vastvpaid&support=html5&execution=any&placement=&playinit=auto&volume=100&width=[WIDTH]&height=[HEIGHT]&dnt=[DO_NOT_TRACK]&gdpr=[GDPR]&gdprcs=[GDPRCS]&pageurl=[PAGEURL]&contentid=[CONTENT_ID]&contenttitle=[CONTENT_TITLE]&contentlength=[CONTENT_LENGTH]&contenturl=[CONTENT_URL]&rnd=[CACHEBUSTER]",
+          "adCancelTimeout": 5000,
+          "adsEnabled": true
+          }
+        }
+      }'>
+        <source src=' video.mp4' type='video/mp4'>
+        <p class='vjs-no-js'>
+            To view this video please enable JavaScript, and consider upgrading to a web browser that
+            <a href='https://videojs.com/html5-video-support/' target='_blank'>supports HTML5 video</a>
+        </p>
+    </video>
+
+    <script src='https://vjs.zencdn.net/5.20/video.js'></script>
+
+
+    <script type="text/javascript" src="http://mailonline.github.io/videojs-vast-vpaid/scripts/es5-shim.js"></script>
+    <script src="http://mailonline.github.io/videojs-vast-vpaid/scripts/videojs_5.vast.vpaid.js"></script>
+
+
+</body>
