@@ -26,7 +26,7 @@
 
 <div class="wrapper" id="wrapper" style="width:970px;height:550px;position: relative;">
     <div class="big-video">
-        <video id="video-id">
+        <video id="video-id" current-video="1">
             <source src="https://iab-publicfiles.s3.amazonaws.com/vast/VAST-4.0-Short-Intro.mp4" type="video/mp4" />
         </video>
     </div>
@@ -161,6 +161,13 @@
     })
 
     video.on('ended', function () {
+        var videoPlayer = document.getElementById('video-id')
+        var nextVideo = parseInt(videoPlayer.getAttribute("current-video")) + 1
+        if(nextVideo <= document.getElementsByClassName('thumb-video').length){
+            videoPlayer.src =  document.getElementById('thumb-video-' + nextVideo).getAttribute('data-src');
+            videoPlayer.setAttribute('current-video', nextVideo) 
+            videoPlayer.play();
+        }
         removeAllListener();
         playerIn();
     })
