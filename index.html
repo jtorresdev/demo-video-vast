@@ -1,16 +1,16 @@
 <link rel="stylesheet" href="https://cdn.fluidplayer.com/v2/current/fluidplayer.min.css" type="text/css" />
-<script src="https://cdn.fluidplayer.com/v2/current/fluidplayer.min.js"></script>
+<script src="fluidplayer.js"></script>
 <style>
     .fluid_video_wrapper {
-        -webkit-transition: width 3s, height 3s;
+        -webkit-transition: width 3s, height 3s, margin 3s;
         /* Safari */
-        transition: width 3s, height 3s;
+        transition: width 3s, height 3s, margin 3s;
     }
 </style>
 
-<div class="wrapper" id="wrapper" style="width:600px;height:400px;">
+<div class="wrapper" id="wrapper" style="width:970px;height:550px;">
     <video id="video-id">
-        <source src="video.mp4" type="video/mp4" />
+        <source src="https://iab-publicfiles.s3.amazonaws.com/vast/VAST-4.0-Short-Intro.mp4" type="video/mp4" />
     </video>
 </div>
 
@@ -19,7 +19,16 @@
     var completedTransition = false
     var completedAd = false
 
+    var width = "970px"
+    var height = "550px"
+
+    var newWidth = "640px"
+    var newHeight = "360px"
+
+    var marginTop = "60px"
+
     var destroyPlayer = function (idVideoPlayer) {
+        document.getElementById('fluid_video_wrapper_' + idVideoPlayer).remove();
         for (var i = 0; i < fluidPlayerClass.instances.length; i++) {
             if (fluidPlayerClass.instances[i].videoPlayerId === idVideoPlayer) {
                 var videoWrapper = document.getElementById('fluid_video_wrapper_' + idVideoPlayer);
@@ -72,24 +81,26 @@
         var video_wrapper = document.getElementById('fluid_video_wrapper_video-id')
         // si no ha terminado la transicion, vuelve al tamaño inicial
         if (!completedTransition) {
-            video_wrapper.style.width = "600px"
-            video_wrapper.style.height = "400px"
+            video_wrapper.style.width = width
+            video_wrapper.style.height = height
+            video_wrapper.style.marginTop = "0px"
         }
     }
 
     var playerIn = function () {
         var video_wrapper = document.getElementById('fluid_video_wrapper_video-id')
-        video_wrapper.style.width = "300px"
-        video_wrapper.style.height = "200px"
+        video_wrapper.style.width = newWidth
+        video_wrapper.style.height = newHeight
+        video_wrapper.style.marginTop = marginTop
     }
 
     var options = {
         vastOptions: {
-            adList: [{
+            /*adList: [{
                 roll: "preRoll",
                 vastTag: "vast.xml",
                 adClickable: false
-            }],
+            }]*/
             vastAdvanced: {
                 vastLoadedCallback: (function () {
                     // quitamos los botones que no necesitamos
@@ -98,19 +109,22 @@
                 noVastVideoCallback: (function () {}),
                 vastVideoSkippedCallback: (function () {}),
                 vastVideoEndedCallback: (function () {
-                    if (completedTransition) {
-                        destroyPlayer('video-id')
-                        resetPlayer()
-                    } else {
-                        removeAllListener()
-                        showPlayerButtons()
-                        completedAd = true
-                    }
+                    var video_wrapper = document.getElementById('fluid_video_wrapper_video-id')
+                    video_wrapper.style = "position: absolute;width: " + newWidth + ";height: " + newHeight + ";"
+                    completedAd = true
+                    /* if (completedTransition) {
+                         destroyPlayer('video-id')
+                         resetPlayer()
+                     } else {
+                         removeAllListener()
+                         showPlayerButtons()
+                         completedAd = true
+                     }*/
                 })
             }
         },
         layoutControls: {
-            autoPlay: true
+            autoPlay: false
         },
         layoutControls: {
             playerInitCallback: (function () {
@@ -119,15 +133,15 @@
 
                 // si el reproductor ya se achicó en el siguiente bucle mantendra el tamaño
                 if (!completedTransition) {
-                    video_wrapper.style = "position: absolute;width: 600px;height: 400px;"
+                    video_wrapper.style = "position: absolute;width: " + width +";height: " + height + ";"
                 } else {
-                    video_wrapper.style = "position: absolute;width: 300px;height: 200px;"
+                    video_wrapper.style = "position: absolute;width: " + newWidth + ";height: " + newHeight + ";"
                 }
 
                 // si el primer bucle, agregamos el HTML del fondo
                 if (firstPlay) {
                     var background = document.createElement('div')
-                    background.style = "background:gray;width:600px;height:400px"
+                    background.style = "background:gray;width:" + width +";height:" + height + ""
                     wrapper.appendChild(background)
                 }
 
@@ -161,5 +175,10 @@
             // agregamos el listener para cuando el mouse este dentro de reproductor
             wrapper.addEventListener("mouseenter", playerIn);
         }
+    })
+
+    video.on('ended', function(){
+        removeAllListener();
+        playerIn();
     })
 </script>
