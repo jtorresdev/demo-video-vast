@@ -129,6 +129,8 @@
         layoutControls: {
             mute: true,
             playerInitCallback: (function () {
+                
+                hidePlayerButtons()
 
                 // obtenemos el contenedor del reproductor
                 var video_wrapper = document.getElementById('fluid_video_wrapper_video-id')
@@ -199,8 +201,20 @@
 
     for (let elem of videoThumbs) {
         elem.addEventListener('click', function (e) {
+
             var videoPlayer = document.getElementById('video-id')
+
+            var nextVideo = parseInt(e.target.id.substr(-1))
+            var prevVideo = parseInt(videoPlayer.getAttribute("current-video"))
+
+            document.getElementById('thumb-video-' + nextVideo).classList.remove('stopped')
+            document.getElementById('thumb-video-' + prevVideo).classList.add('stopped')
+            
+            arrow.style.left = parseFloat((nextVideo - 1) + '.5') * 190
+
             videoPlayer.src = elem.getAttribute("data-src")
+            videoPlayer.setAttribute('current-video', nextVideo)
+
             video.play()
         })
     }
