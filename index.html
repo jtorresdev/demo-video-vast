@@ -117,8 +117,8 @@
     }
 
     var playerIn = function () {
-        video.setVolume(1)
-        document.getElementById('video-id').muted = false
+        video.muteToggle('video-id')
+        //document.getElementById('video-id').muted = false
         var video_wrapper = document.getElementById('fluid_video_wrapper_video-id')
         video_wrapper.style.width = newWidth
         video_wrapper.style.height = newHeight
@@ -127,7 +127,8 @@
 
     var options = {
         layoutControls: {
-            mute: true,
+            autoPlay: true,
+		    mute: true,
             playerInitCallback: (function () {
                 
                 hidePlayerButtons()
@@ -155,7 +156,7 @@
                 video_wrapper.addEventListener("transitionend", function (event) {
                     if (event.propertyName === "width") {
                         if (event.elapsedTime > 2.8) {
-                            completedTransition = true
+                           // completedTransition = true
                         }
                     }
                 });
