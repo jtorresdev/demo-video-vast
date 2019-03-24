@@ -1,33 +1,184 @@
-<head>
-    <link href="https://vjs.zencdn.net/5.20/video-js.css" rel="stylesheet">
-    <link rel="stylesheet" href="http://mailonline.github.io/videojs-vast-vpaid/styles/videojs.vast.vpaid.css">
+<link rel="stylesheet" href="https://cdn.fluidplayer.com/v2/current/fluidplayer.min.css" type="text/css" />
+<script src="fluidplayer.js"></script>
+<style>
+    .fluid_video_wrapper {
+        -webkit-transition: width 3s, height 3s, margin 3s;
+        /* Safari */
+        transition: width 3s, height 3s, margin 3s;
+    }
+</style>
 
-    <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
-    <script src="https://vjs.zencdn.net/ie8/ie8-version/videojs-ie8.min.js"></script>
-</head>
-
-<body>
-    <video id='my-video' class='video-js' controls preload='auto' width='640' height='264' data-setup='{
-        "plugins": {
-        "vastClient": {
-          "adTagUrl": "https://v.lkqd.net/ad?pid=430&sid=418429&output=vastvpaid&support=html5&execution=any&placement=&playinit=auto&volume=100&width=[WIDTH]&height=[HEIGHT]&dnt=[DO_NOT_TRACK]&gdpr=[GDPR]&gdprcs=[GDPRCS]&pageurl=[PAGEURL]&contentid=[CONTENT_ID]&contenttitle=[CONTENT_TITLE]&contentlength=[CONTENT_LENGTH]&contenturl=[CONTENT_URL]&rnd=[CACHEBUSTER]",
-          "adCancelTimeout": 5000,
-          "adsEnabled": true
-          }
-        }
-      }'>
-        <source src=' video.mp4' type='video/mp4'>
-        <p class='vjs-no-js'>
-            To view this video please enable JavaScript, and consider upgrading to a web browser that
-            <a href='https://videojs.com/html5-video-support/' target='_blank'>supports HTML5 video</a>
-        </p>
+<div class="wrapper" id="wrapper" style="width:970px;height:550px;">
+    <video id="video-id">
+        <source src="https://iab-publicfiles.s3.amazonaws.com/vast/VAST-4.0-Short-Intro.mp4" type="video/mp4" />
     </video>
+</div>
 
-    <script src='https://vjs.zencdn.net/5.20/video.js'></script>
+<script>
+    var firstPlay = true
+    var completedTransition = false
+    var completedAd = false
 
+    var width = "970px"
+    var height = "550px"
 
-    <script type="text/javascript" src="http://mailonline.github.io/videojs-vast-vpaid/scripts/es5-shim.js"></script>
-    <script src="http://mailonline.github.io/videojs-vast-vpaid/scripts/videojs_5.vast.vpaid.js"></script>
+    var newWidth = "640px"
+    var newHeight = "360px"
 
+    var marginTop = "60px"
 
-</body>
+    var destroyPlayer = function (idVideoPlayer) {
+        document.getElementById('fluid_video_wrapper_' + idVideoPlayer).remove();
+        for (var i = 0; i < fluidPlayerClass.instances.length; i++) {
+            if (fluidPlayerClass.instances[i].videoPlayerId === idVideoPlayer) {
+                var videoWrapper = document.getElementById('fluid_video_wrapper_' + idVideoPlayer);
+                var oldPlayer = document.getElementById(idVideoPlayer);
+                var newPlayer = oldPlayer.cloneNode(true);
+                videoWrapper.innerHTML = '';
+                newPlayer.removeAttribute('src');
+                videoWrapper.parentNode.replaceChild(newPlayer, videoWrapper);
+                videoWrapper = null;
+                oldPlayer = null;
+
+                //Kill instance
+                fluidPlayerClass.instances[i] = {
+                    videoPlayerId: '83748374hjkehwkfjrweqh8724983278983k'
+                };
+
+                break;
+            }
+        }
+    };
+
+    var hidePlayerButtons = function () {
+        var hide = "display:none"
+
+        var fullscreen = document.getElementById('video-id_fluid_control_fullscreen')
+        fullscreen.style = hide
+        var theatre = document.getElementById('video-id_fluid_control_theatre')
+        theatre.style = hide
+        var progress = document.getElementById('video-id_fluid_control_duration')
+        progress.style = hide
+    }
+
+    var showPlayerButtons = function () {
+        var show = "display:block"
+
+        var fullscreen = document.getElementById('video-id_fluid_control_fullscreen')
+        fullscreen.style = show
+        var theatre = document.getElementById('video-id_fluid_control_theatre')
+        theatre.style = show
+        var progress = document.getElementById('video-id_fluid_control_duration')
+        progress.style = show
+    }
+
+    var removeAllListener = function () {
+        wrapper.removeEventListener("mouseleave", playerOut)
+        wrapper.removeEventListener("mouseenter", playerIn)
+    }
+
+    var playerOut = function () {
+        var video_wrapper = document.getElementById('fluid_video_wrapper_video-id')
+        // si no ha terminado la transicion, vuelve al tamaño inicial
+        if (!completedTransition) {
+            video_wrapper.style.width = width
+            video_wrapper.style.height = height
+            video_wrapper.style.marginTop = "0px"
+        }
+    }
+
+    var playerIn = function () {
+        var video_wrapper = document.getElementById('fluid_video_wrapper_video-id')
+        video_wrapper.style.width = newWidth
+        video_wrapper.style.height = newHeight
+        video_wrapper.style.marginTop = marginTop
+    }
+
+    var options = {
+        vastOptions: {
+            /*adList: [{
+                roll: "preRoll",
+                vastTag: "vast.xml",
+                adClickable: false
+            }]*/
+            vastAdvanced: {
+                vastLoadedCallback: (function () {
+                    // quitamos los botones que no necesitamos
+                    hidePlayerButtons()
+                }),
+                noVastVideoCallback: (function () {}),
+                vastVideoSkippedCallback: (function () {}),
+                vastVideoEndedCallback: (function () {
+                    var video_wrapper = document.getElementById('fluid_video_wrapper_video-id')
+                    video_wrapper.style = "position: absolute;width: " + newWidth + ";height: " + newHeight + ";"
+                    completedAd = true
+                    /* if (completedTransition) {
+                         destroyPlayer('video-id')
+                         resetPlayer()
+                     } else {
+                         removeAllListener()
+                         showPlayerButtons()
+                         completedAd = true
+                     }*/
+                })
+            }
+        },
+        layoutControls: {
+            autoPlay: false
+        },
+        layoutControls: {
+            playerInitCallback: (function () {
+                // obtenemos el contenedor del reproductor
+                var video_wrapper = document.getElementById('fluid_video_wrapper_video-id')
+
+                // si el reproductor ya se achicó en el siguiente bucle mantendra el tamaño
+                if (!completedTransition) {
+                    video_wrapper.style = "position: absolute;width: " + width +";height: " + height + ";"
+                } else {
+                    video_wrapper.style = "position: absolute;width: " + newWidth + ";height: " + newHeight + ";"
+                }
+
+                // si el primer bucle, agregamos el HTML del fondo
+                if (firstPlay) {
+                    var background = document.createElement('div')
+                    background.style = "background:gray;width:" + width +";height:" + height + ""
+                    wrapper.appendChild(background)
+                }
+
+                // agregamos el listener para cuando termine de achicarse
+                video_wrapper.addEventListener("transitionend", function (event) {
+                    if (event.propertyName === "width") {
+                        if (event.elapsedTime > 2.8) {
+                            completedTransition = true
+                        }
+                    }
+                });
+
+                // agregamos el listener para cuando el mouse salga del reproductor
+                wrapper.addEventListener("mouseleave", playerOut)
+
+                firstPlay = false
+            })
+        }
+    }
+
+    var video = fluidPlayer("video-id", options);
+
+    var resetPlayer = function () {
+        // iniciamos una nueva instancia del reproductor
+        fluidPlayer('video-id', options);
+    };
+
+    video.on('play', function () {
+        if (!completedAd) {
+            var video_wrapper = document.getElementById('fluid_video_wrapper_video-id')
+            // agregamos el listener para cuando el mouse este dentro de reproductor
+            wrapper.addEventListener("mouseenter", playerIn);
+        }
+    })
+
+    video.on('ended', function(){
+        removeAllListener();
+        playerIn();
+    })
+</script>
