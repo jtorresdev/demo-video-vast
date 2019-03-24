@@ -46,7 +46,7 @@
 
 <div class="wrapper" id="wrapper" style="width:970px;height:550px;position: relative;">
     <div class="big-video">
-        <video id="video-id" current-video="1">
+        <video id="video-id" current-video="1" autoplay muted>
             <source src="https://iab-publicfiles.s3.amazonaws.com/vast/VAST-4.0-Short-Intro.mp4" type="video/mp4" />
         </video>
     </div>
@@ -76,6 +76,8 @@
     var newHeight = "360px"
 
     var marginTop = "60px"
+
+    var muted = true
 
     var hidePlayerButtons = function () {
         var hide = "display:none"
@@ -115,16 +117,19 @@
     }
 
     var playerIn = function () {
+        video.setVolume(1)
+        document.getElementById('video-id').muted = false
         var video_wrapper = document.getElementById('fluid_video_wrapper_video-id')
         video_wrapper.style.width = newWidth
         video_wrapper.style.height = newHeight
         video_wrapper.style.marginTop = marginTop
     }
 
-
     var options = {
         layoutControls: {
+            mute: true,
             playerInitCallback: (function () {
+
                 // obtenemos el contenedor del reproductor
                 var video_wrapper = document.getElementById('fluid_video_wrapper_video-id')
 
@@ -163,11 +168,6 @@
 
 
     var video = fluidPlayer("video-id", options);
-
-    var resetPlayer = function () {
-        // iniciamos una nueva instancia del reproductor
-        fluidPlayer('video-id', options);
-    };
 
     video.on('play', function () {
         if (!completedAd) {
