@@ -3,7 +3,6 @@
 <style>
     .fluid_video_wrapper {
         -webkit-transition: width 3s, height 3s, margin 3s;
-        /* Safari */
         transition: width 3s, height 3s, margin 3s;
     }
 
@@ -20,7 +19,28 @@
         height: 100px;
         width: 180px;
         background: red;
-        cursor: pointer
+        cursor: pointer;
+        overflow: hidden;
+    }
+
+
+    .stopped::after{
+        content: url(play.png);
+        margin: 10px auto;
+        display: block;
+        width: 80px;
+        height: 80px;
+    }
+
+    .arrow{
+        position: absolute;
+        bottom: 120px;
+        width: 0;
+        height: 0;
+        border-left: 20px solid transparent;
+        border-right: 20px solid transparent;
+        border-top: 20px solid #fff;
+        transition: all 1s;
     }
 </style>
 
@@ -30,18 +50,15 @@
             <source src="https://iab-publicfiles.s3.amazonaws.com/vast/VAST-4.0-Short-Intro.mp4" type="video/mp4" />
         </video>
     </div>
-
+    <div class="arrow" id="arrow" style="left: 95px;"></div>
     <div class="thumbnail-videos">
         <div class="thumb-video" id="thumb-video-1"
-            data-src="https://iab-publicfiles.s3.amazonaws.com/vast/VAST-4.0-Short-Intro.mp4">
-            <!-- thumb -->
+            data-src="https://iab-publicfiles.s3.amazonaws.com/vast/VAST-4.0-Short-Intro.mp4" style="background-image:url('thumb1.png')">
         </div>
-        <div class="thumb-video" id="thumb-video-2" data-src="video.mp4">
-            <!-- thumb -->
+        <div class="thumb-video stopped" id="thumb-video-2" data-src="video.mp4" style="background-image:url('thumb2.png')">
         </div>
-        <div class="thumb-video" id="thumb-video-3"
-            data-src="https://iab-publicfiles.s3.amazonaws.com/vast/VAST-4.0-Short-Intro.mp4">
-            <!-- thumb -->
+        <div class="thumb-video stopped" id="thumb-video-3"
+            data-src="https://iab-publicfiles.s3.amazonaws.com/vast/VAST-4.0-Short-Intro.mp4" style="background-image:url('thumb3.png')">
         </div>
     </div>
 
@@ -123,7 +140,7 @@
                 // si el primer bucle, agregamos el HTML del fondo
                 if (firstPlay) {
                     var background = document.createElement('div')
-                    background.style = "background:gray;width:" + width + ";height:" + height + ""
+                    background.style = "background-image:url('background.png');width:" + width + ";height:" + height + ""
                     wrapper.appendChild(background)
                 }
 
@@ -163,7 +180,13 @@
     video.on('ended', function () {
         var videoPlayer = document.getElementById('video-id')
         var nextVideo = parseInt(videoPlayer.getAttribute("current-video")) + 1
+        var arrow = document.getElementById('arrow')
         if(nextVideo <= document.getElementsByClassName('thumb-video').length){
+
+            document.getElementById('thumb-video-' + nextVideo).classList.remove('stopped')
+            document.getElementById('thumb-video-' + (nextVideo - 1)).classList.add('stopped')
+
+            arrow.style.left = parseInt(arrow.style.left.replace('px', '')) + 190
             videoPlayer.src =  document.getElementById('thumb-video-' + nextVideo).getAttribute('data-src');
             videoPlayer.setAttribute('current-video', nextVideo) 
             videoPlayer.play();
