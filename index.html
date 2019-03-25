@@ -1,225 +1,408 @@
-<link rel="stylesheet" href="https://cdn.fluidplayer.com/v2/current/fluidplayer.min.css" type="text/css" />
-<script src="fluidplayer.js"></script>
-<style>
-    .fluid_video_wrapper {
-        -webkit-transition: width 3s, height 3s, margin 3s;
-        transition: width 3s, height 3s, margin 3s;
-    }
+<!DOCTYPE html>
+<html lang="en">
 
-    .thumbnail-videos {
-        position: absolute;
-        bottom: 10px;
-        left: 20px;
-        height: 105px;
-    }
-
-    .thumb-video {
-        float: left;
-        margin: 0 5px;
-        height: 100px;
-        width: 180px;
-        background: red;
-        cursor: pointer;
-        overflow: hidden;
-    }
-
-
-    .stopped::after{
-        content: url(play.png);
-        margin: 10px auto;
-        display: block;
-        width: 80px;
-        height: 80px;
-    }
-
-    .arrow{
-        position: absolute;
-        bottom: 120px;
-        width: 0;
-        height: 0;
-        border-left: 20px solid transparent;
-        border-right: 20px solid transparent;
-        border-top: 20px solid #fff;
-        transition: all 1s;
-    }
-</style>
-
-<div class="wrapper" id="wrapper" style="width:970px;height:550px;position: relative;">
-    <div class="big-video">
-        <video id="video-id" current-video="1" autoplay muted>
-            <source src="https://iab-publicfiles.s3.amazonaws.com/vast/VAST-4.0-Short-Intro.mp4" type="video/mp4" />
-        </video>
-    </div>
-    <div class="arrow" id="arrow" style="left: 95px;"></div>
-    <div class="thumbnail-videos">
-        <div class="thumb-video" id="thumb-video-1"
-            data-src="https://iab-publicfiles.s3.amazonaws.com/vast/VAST-4.0-Short-Intro.mp4" style="background-image:url('thumb1.png')">
-        </div>
-        <div class="thumb-video stopped" id="thumb-video-2" data-src="video.mp4" style="background-image:url('thumb2.png')">
-        </div>
-        <div class="thumb-video stopped" id="thumb-video-3"
-            data-src="https://iab-publicfiles.s3.amazonaws.com/vast/VAST-4.0-Short-Intro.mp4" style="background-image:url('thumb3.png')">
-        </div>
-    </div>
-
-</div>
-
-<script>
-    var firstPlay = true
-    var completedTransition = false
-    var completedAd = false
-
-    var width = "970px"
-    var height = "550px"
-
-    var newWidth = "640px"
-    var newHeight = "360px"
-
-    var marginTop = "60px"
-
-    var muted = true
-
-    var hidePlayerButtons = function () {
-        var hide = "display:none"
-
-        var fullscreen = document.getElementById('video-id_fluid_control_fullscreen')
-        fullscreen.style = hide
-        var theatre = document.getElementById('video-id_fluid_control_theatre')
-        theatre.style = hide
-        var progress = document.getElementById('video-id_fluid_control_duration')
-        progress.style = hide
-    }
-
-    var showPlayerButtons = function () {
-        var show = "display:block"
-
-        var fullscreen = document.getElementById('video-id_fluid_control_fullscreen')
-        fullscreen.style = show
-        var theatre = document.getElementById('video-id_fluid_control_theatre')
-        theatre.style = show
-        var progress = document.getElementById('video-id_fluid_control_duration')
-        progress.style = show
-    }
-
-    var removeAllListener = function () {
-        wrapper.removeEventListener("mouseleave", playerOut)
-        wrapper.removeEventListener("mouseenter", playerIn)
-    }
-
-    var playerOut = function () {
-        var video_wrapper = document.getElementById('fluid_video_wrapper_video-id')
-        // si no ha terminado la transicion, vuelve al tamaño inicial
-        if (!completedTransition) {
-            video_wrapper.style.width = width
-            video_wrapper.style.height = height
-            video_wrapper.style.marginTop = "0px"
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.fluidplayer.com/v2/current/fluidplayer.min.css" type="text/css" />
+    <script src="fluidplayer.js"></script>
+    <style>
+        .fluid_video_wrapper {
+            -webkit-transition: width 3s, height 3s, margin 3s;
+            transition: width 3s, height 3s, margin 3s;
         }
-    }
 
-    var playerIn = function () {
-        video.muteToggle('video-id', true)
-        video.play()
-        var video_wrapper = document.getElementById('fluid_video_wrapper_video-id')
-        video_wrapper.style.width = newWidth
-        video_wrapper.style.height = newHeight
-        video_wrapper.style.marginTop = marginTop
-    }
-
-    var options = {
-        layoutControls: {
-            persistentSettings: {
-                volume:  false
-            },
-            autoPlay: true,
-		    mute: true,
-            playerInitCallback: (function () {
-                
-                hidePlayerButtons()
-
-                // obtenemos el contenedor del reproductor
-                var video_wrapper = document.getElementById('fluid_video_wrapper_video-id')
-
-                // si el reproductor ya se achicó en el siguiente bucle mantendra el tamaño
-                if (!completedTransition) {
-                    video_wrapper.style = "position: absolute;width: " + width + ";height: " + height +
-                        ";z-index: 10;"
-                } else {
-                    video_wrapper.style = "position: absolute;width: " + newWidth + ";height: " +
-                        newHeight + ";z-index: 10;"
-                }
-
-                // si el primer bucle, agregamos el HTML del fondo
-                if (firstPlay) {
-                    var background = document.createElement('div')
-                    background.style = "background-image:url('background.png');width:" + width + ";height:" + height + ""
-                    wrapper.appendChild(background)
-                }
-
-                // agregamos el listener para cuando termine de achicarse
-                video_wrapper.addEventListener("transitionend", function (event) {
-                    if (event.propertyName === "width") {
-                        if (event.elapsedTime > 2.8) {
-                           // completedTransition = true
-                        }
-                    }
-                });
-
-                // agregamos el listener para cuando el mouse salga del reproductor
-                wrapper.addEventListener("mouseleave", playerOut)
-
-                firstPlay = false
-            })
+        #menu ul {
+            font-size: 24px;
+            font-family: steelfishEb;
+            list-style-type: none;
+            display: inline;
         }
-    }
 
+        #menu ul li {
+            float: left;
+            margin: 0px 10px;
+            padding: 0 10px 5px 10px;
+            text-align: center;
+        }
 
-    var video = fluidPlayer("video-id", options);
+        #menu ul li a {
+            color: #ffe200;
+            text-decoration: none
+        }
 
-    video.on('play', function () {
-        if (!completedAd) {
+        #menu ul li.active {
+            border-bottom: 5px solid #ffe200;
+        }
+
+        @font-face {
+            font-family: steelfishEb;
+            src: url(assets/steelfish_eb.otf);
+        }
+
+        @font-face {
+            font-family: bahnschrift;
+            src: url(assets/bahnschrift.ttf);
+        }
+
+        .thumbnail-videos {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            height: 105px;
+        }
+
+        .thumb-video {
+            float: left;
+            margin: 0 5px;
+            height: 80px;
+            width: 140px;
+            background: red;
+            cursor: pointer;
+            overflow: hidden;
+            outline: 1px solid #ffffff;
+        }
+
+        .stopped::after {
+            content: url(assets/play.png);
+            margin: 20px auto;
+            display: block;
+            width: 40px;
+            height: 40px;
+        }
+
+        .currentVideo {
+            outline: 3px solid #b29813 !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrapper" id="wrapper" style="width:970px;height:550px;position: relative;">
+        <div class="big-video">
+            <video id="video-id" current-video="1" autoplay muted>
+                <source src="https://iab-publicfiles.s3.amazonaws.com/vast/VAST-4.0-Short-Intro.mp4" type="video/mp4" />
+            </video>
+        </div>
+        <div class="thumbnail-videos" id="thumbnail-videos">
+            <div class="thumb-video currentVideo" id="thumb-video-1"
+                data-src="https://iab-publicfiles.s3.amazonaws.com/vast/VAST-4.0-Short-Intro.mp4"
+                style="background-image:url('assets/thumb1.png')">
+            </div>
+            <div class="thumb-video stopped" id="thumb-video-2" data-src="video.mp4"
+                style="background-image:url('assets/thumb2.png')">
+            </div>
+            <div class="thumb-video stopped" id="thumb-video-3"
+                data-src="https://iab-publicfiles.s3.amazonaws.com/vast/VAST-4.0-Short-Intro.mp4"
+                style="background-image:url('assets/thumb3.png')">
+            </div>
+        </div>
+        <img src="assets/paper.png" id="paper" style="position: absolute; bottom: 0px; right: 0px; z-index: 99;">
+    </div>
+
+    <script>
+        var firstPlay = true
+        var completedTransition = false
+        var completedAd = false
+
+        var width = "970px"
+        var height = "550px"
+
+        var newWidth = "640px"
+        var newHeight = "360px"
+
+        var marginTop = "60px"
+        var marginLeft = '10px'
+        var muted = true
+
+        var hidePlayerButtons = function () {
+            var hide = "display:none"
+
+            var fullscreen = document.getElementById('video-id_fluid_control_fullscreen')
+            fullscreen.style = hide
+            var theatre = document.getElementById('video-id_fluid_control_theatre')
+            theatre.style = hide
+            var progress = document.getElementById('video-id_fluid_control_duration')
+            progress.style = hide
+        }
+
+        var showPlayerButtons = function () {
+            var show = "display:block"
+
+            var fullscreen = document.getElementById('video-id_fluid_control_fullscreen')
+            fullscreen.style = show
+            var theatre = document.getElementById('video-id_fluid_control_theatre')
+            theatre.style = show
+            var progress = document.getElementById('video-id_fluid_control_duration')
+            progress.style = show
+        }
+
+        var removeAllListener = function () {
+            wrapper.removeEventListener("mouseleave", playerOut)
+            wrapper.removeEventListener("mouseenter", playerIn)
+        }
+
+        var playerOut = function () {
             var video_wrapper = document.getElementById('fluid_video_wrapper_video-id')
-            // agregamos el listener para cuando el mouse este dentro de reproductor
-            wrapper.addEventListener("mouseenter", playerIn);
+            // si no ha terminado la transicion, vuelve al tamaño inicial
+            if (!completedTransition) {
+                video_wrapper.style.width = width
+                video_wrapper.style.height = height
+                video_wrapper.style.marginTop = "0px"
+                video_wrapper.style.marginLeft = '0px'
+            }
         }
-    })
 
-    video.on('ended', function () {
-        var videoPlayer = document.getElementById('video-id')
-        var nextVideo = parseInt(videoPlayer.getAttribute("current-video")) + 1
-        var arrow = document.getElementById('arrow')
-        if(nextVideo <= document.getElementsByClassName('thumb-video').length){
-
-            document.getElementById('thumb-video-' + nextVideo).classList.remove('stopped')
-            document.getElementById('thumb-video-' + (nextVideo - 1)).classList.add('stopped')
-
-            arrow.style.left = parseInt(arrow.style.left.replace('px', '')) + 190
-            videoPlayer.src =  document.getElementById('thumb-video-' + nextVideo).getAttribute('data-src');
-            videoPlayer.setAttribute('current-video', nextVideo) 
-            videoPlayer.play();
+        var playerIn = function () {
+            document.getElementById('paper').style.display = 'none'
+            document.getElementById('video-id_fluid_controls_container').style.display = 'block'
+            video.muteToggle('video-id', true)
+            //video.play()
+            var video_wrapper = document.getElementById('fluid_video_wrapper_video-id')
+            video_wrapper.style.width = newWidth
+            video_wrapper.style.height = newHeight
+            video_wrapper.style.marginTop = marginTop
+            video_wrapper.style.marginLeft = marginLeft
         }
-        removeAllListener();
-        playerIn();
-    })
 
-    var videoThumbs = document.getElementsByClassName('thumb-video')
+        var options = {
+            layoutControls: {
+                primaryColor: "#d9c408",
+                persistentSettings: {
+                    volume: false
+                },
+                autoPlay: true,
+                mute: true,
+                playerInitCallback: (function () {
 
-    for (let elem of videoThumbs) {
-        elem.addEventListener('click', function (e) {
+                    hidePlayerButtons()
 
+                    // obtenemos el contenedor del reproductor
+                    var video_wrapper = document.getElementById('fluid_video_wrapper_video-id')
+                    document.getElementById('video-id_fluid_controls_container').style.display = 'none'
+
+                    // si el reproductor ya se achicó en el siguiente bucle mantendra el tamaño
+                    if (!completedTransition) {
+                        video_wrapper.style = "position: absolute;width: " + width + ";height: " + height +
+                            ";z-index: 10;"
+                    } else {
+                        video_wrapper.style = "position: absolute;width: " + newWidth + ";height: " +
+                            newHeight + ";z-index: 10;"
+                    }
+
+                    // si el primer bucle, agregamos el HTML del fondo
+                    if (firstPlay) {
+                        var background = document.createElement('div')
+                        var bannerRight = document.createElement('div')
+                        var logo = document.createElement('img')
+                        var logoTop = document.createElement('img')
+                        var date = document.createElement('img')
+                        var powered = document.createElement('img')
+                        var close = document.createElement('img')
+                        var rrss = document.createElement('div')
+                        var rrss_img = document.createElement('img')
+                        var menu = document.createElement('div')
+
+                        background.style = "background-image:url('assets/background.png');width:" + width +
+                            ";height:" + height + ";background-repeat: no-repeat;"
+
+                        logo.src = 'assets/logo.png'
+                        logoTop.src = 'assets/logo.png'
+                        logoTop.style = 'position:absolute;top:10px;left:10px;width: 100px;'
+
+                        date.src = 'assets/date.png'
+                        date.style = 'margin-top: 20px;'
+
+                        close.src = 'assets/close.png'
+                        close.style = 'position:absolute;top:10px;right:10px;cursor: pointer;'
+                        close.id = 'closeButton'
+
+                        bannerRight.style =
+                            'position: absolute;right: 50px;bottom: 130px;width: 220px;text-align: center;'
+
+                        powered.src = 'assets/powered.png'
+                        powered.style = 'position:absolute;bottom:10px;right:10px'
+
+                        rrss.innerHTML = '#HELLBOY'
+                        rrss.style =
+                            '    position: absolute;top: 6px;left: 130px;letter-spacing: 5px;color: rgb(255, 226, 0);font-family: steelfishEb;font-size: 20px;width: 100px;text-align: center;'
+                        rrss_img.src = 'assets/rrss.png'
+                        rrss_img.style = 'margin: 2px 0px 0px -5px;'
+
+                        rrss.appendChild(rrss_img)
+                        bannerRight.appendChild(logo)
+                        bannerRight.appendChild(date)
+
+                        menu.style = 'position:absolute;right:20px;top:10px'
+
+                        var menuHTML = ''
+
+                        menuHTML = '<ul>'
+                        menuHTML += '<li class="active" id="videosItem"><a href="#">Videos</a></li>'
+                        menuHTML += '<li id="saveCalendarItem"><a href="#">Guardar en calendario</a></li>'
+                        menuHTML += '<li id="synopsisItem"><a href="#">Sinopsis</a></li>'
+                        menuHTML += '</ul>'
+
+                        menu.innerHTML = menuHTML
+                        menu.id = "menu"
+
+                        wrapper.appendChild(menu)
+                        wrapper.appendChild(rrss)
+                        wrapper.appendChild(logoTop)
+                        wrapper.appendChild(close)
+                        wrapper.appendChild(powered)
+                        wrapper.appendChild(bannerRight)
+                        wrapper.appendChild(background)
+
+                        document.getElementById('synopsisItem').addEventListener('click', function (e) {
+                            document.getElementById('video-id').pause()
+                            e.preventDefault()
+
+                            document.getElementsByClassName('active')[0].classList.remove('active')
+                            document.getElementById('synopsisItem').classList.add('active')
+
+                            video_wrapper.style.display = 'none'
+                            bannerRight.style.display = 'none'
+                            document.getElementById('thumbnail-videos').style.display = 'none'
+
+                            var synopsis = document.createElement('div')
+                            var VisitPageButton = document.createElement('a')
+                            var date1 = document.createElement('img')
+
+                            synopsis.style =
+                                'position: absolute;top: 80px;left: 50px;color: white;width: 600px;font-size: 14px;font-family: bahnschrift;text-transform: uppercase;line-height: 25px;'
+                            synopsis.id = 'synopsis'
+                            var synopsisHTML = ''
+                            synopsisHTML +=
+                                '<p style="font-size: 25px;margin-bottom: 0px;color: #ffe100;">Vuelve Hellboy,</p>'
+                            synopsisHTML +=
+                                "<p>el gran demonio de piel roja, con cola, cuernos y un brazo de piedra. Atrapado entre los mundos de lo sobrenatural y lo humano, el apodado como 'El más grande Investigador de lo Paranormal del Mundo' junto con la Agencia para la Investigación y Defensa Paranormal (A.I.D.P.) tendrán un nuevo y peligroso desafío. Su misión será enfrentarse a una nueva y poderosa amenaza: Nimue (Milla Jovovich), conocida como La Reina de la Sangre, un espíritu ancestral de la época del rey Arturo que ha vuelto a nuestro mundo llena de sed de venganza para sembrar el terror y destruir a la raza humana.</p>"
+                            synopsis.innerHTML = synopsisHTML
+
+                            VisitPageButton.style =
+                                'position: absolute;bottom: 60px;left: 60px;width: 200px;height: 45px;border: 1px solid #ffe100;color: #ffe100;font-size: 16px;font-family: bahnschrift;text-transform: uppercase;text-align: center;line-height: 45px;cursor: pointer;text-decoration: none;'
+
+                            VisitPageButton.innerText = 'Visitar pagina web'
+                            VisitPageButton.href = 'google.com'
+                            VisitPageButton.target = '_blank'
+                            VisitPageButton.id = 'visitPageButton'
+
+                            date1.src = 'assets/date.png'
+                            date1.style =
+                                'position: relative;bottom: 130px;margin: 0 auto;display: block;'
+                            date1.id = 'date'
+
+                            wrapper.appendChild(date1)
+                            wrapper.appendChild(VisitPageButton)
+                            wrapper.appendChild(synopsis)
+                        })
+
+                        document.getElementById('videosItem').addEventListener('click', function (e) {
+                            e.preventDefault()
+                            document.getElementsByClassName('active')[0].classList.remove('active')
+                            document.getElementById('videosItem').classList.add('active')
+
+                            document.getElementById('synopsis').remove()
+                            document.getElementById('date').remove()
+                            document.getElementById('visitPageButton').remove()
+
+                            video_wrapper.style.display = 'block'
+                            bannerRight.style.display = 'block'
+                            document.getElementById('thumbnail-videos').style.display = 'block'
+                        })
+
+                        document.getElementById('saveCalendarItem').addEventListener('click', function () {
+                            console.log('guardar en calendario')
+                        })
+                    }
+
+                    // agregamos el listener para cuando termine de achicarse
+                    video_wrapper.addEventListener("transitionend", function (event) {
+                        if (event.propertyName === "width") {
+                            if (event.elapsedTime < 3) {
+                                document.getElementById('paper').style.display = 'block'
+                            }
+                        }
+                    });
+
+                    // agregamos el listener para cuando el mouse salga del reproductor
+                    wrapper.addEventListener("mouseleave", playerOut)
+
+                    firstPlay = false
+                })
+            }
+        }
+
+
+        var video = fluidPlayer("video-id", options);
+
+        video.on('play', function () {
+            if (!completedAd) {
+                var video_wrapper = document.getElementById('fluid_video_wrapper_video-id')
+                // agregamos el listener para cuando el mouse este dentro de reproductor
+                wrapper.addEventListener("mouseenter", playerIn);
+            }
+        })
+
+        video.on('ended', function () {
             var videoPlayer = document.getElementById('video-id')
 
-            var nextVideo = parseInt(e.target.id.substr(-1))
-            var prevVideo = parseInt(videoPlayer.getAttribute("current-video"))
+            var nextVideo = document.getElementById('thumb-video-' + (parseInt(videoPlayer.getAttribute(
+                "current-video")) + 1))
+            var prevVideo = document.getElementById('thumb-video-' + parseInt(videoPlayer.getAttribute(
+                "current-video")))
 
-            document.getElementById('thumb-video-' + nextVideo).classList.remove('stopped')
-            document.getElementById('thumb-video-' + prevVideo).classList.add('stopped')
-            
-            arrow.style.left = parseFloat((nextVideo - 1) + '.5') * 190
 
-            videoPlayer.src = elem.getAttribute("data-src")
-            videoPlayer.setAttribute('current-video', nextVideo)
+            if ((parseInt(videoPlayer.getAttribute("current-video")) + 1) <= document.getElementsByClassName(
+                    'thumb-video').length) {
 
-            video.play()
+                nextVideo.classList.remove('stopped')
+                prevVideo.classList.add('stopped')
+
+                nextVideo.classList.add('currentVideo')
+                prevVideo.classList.remove('currentVideo')
+
+                videoPlayer.src = nextVideo.getAttribute('data-src');
+                videoPlayer.setAttribute('current-video', (parseInt(videoPlayer.getAttribute("current-video")) +
+                    1))
+                videoPlayer.play();
+                removeAllListener();
+                playerIn();
+            } else {
+                videoPlayer.pause()
+                removeAllListener();
+            }
+
         })
-    }
-</script>
+
+        var videoThumbs = document.getElementsByClassName('thumb-video')
+
+        for (let elem of videoThumbs) {
+            elem.addEventListener('click', function (e) {
+                var videoPlayer = document.getElementById('video-id')
+
+                var nextVideo = document.getElementById('thumb-video-' + parseInt(e.target.id.substr(-1)))
+                var prevVideo = document.getElementById('thumb-video-' + parseInt(videoPlayer.getAttribute(
+                    "current-video")))
+
+                nextVideo.classList.add('currentVideo')
+                prevVideo.classList.remove('currentVideo')
+
+                nextVideo.classList.remove('stopped')
+                prevVideo.classList.add('stopped')
+
+
+                videoPlayer.src = elem.getAttribute("data-src")
+                videoPlayer.setAttribute('current-video', parseInt(e.target.id.substr(-1)))
+
+                video.play()
+            })
+        }
+    </script>
+
+</body>
+
+</html>

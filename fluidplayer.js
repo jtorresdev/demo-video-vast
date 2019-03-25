@@ -3312,9 +3312,9 @@ var fluidPlayerClass = {
 			function(event) {
 				event.preventDefault();
 
-				divContextMenu.style.left = fluidPlayerClass.getEventOffsetX(event, videoPlayerTag) + 'px';
-				divContextMenu.style.top = fluidPlayerClass.getEventOffsetY(event, videoPlayerTag) + 'px';
-				divContextMenu.style.display = 'block';
+				//divContextMenu.style.left = fluidPlayerClass.getEventOffsetX(event, videoPlayerTag) + 'px';
+				//divContextMenu.style.top = fluidPlayerClass.getEventOffsetY(event, videoPlayerTag) + 'px';
+				//divContextMenu.style.display = 'block';
 			},
 			false
 		);
