@@ -83,69 +83,105 @@
 
     <script>
         var tapOnVideo = function () {
-            video.play()
-            var wrapper = document.getElementById('wrapper')
-            var player = document.getElementById('player')
-            var header = document.createElement('div')
-            var sidebarButton = document.createElement('div')
-            var closeButton = document.createElement('div')
-            var hamburgerLine = document.createElement('div')
-            var sidebar = document.createElement('div')
 
-            sidebar.style.height = '100%'
-            sidebar.style.position = 'absolute'
-            sidebar.style.width = '70%'
-            sidebar.style.background = 'blue'
-            sidebar.style.zIndex = '99'
-            //sidebar.style.display = 'none'
-            sidebar.style.left = '-255px'
-            sidebar.style.transition = 'left 1s ease-in-out, right 1s ease-in-out'
+            if (document.getElementById('sidebar') || document.getElementById('header')) {
+                console.log('ya existen las divs')
+            } else {
+                /*
+                #TODO:
+                    • Dejar Divs exactamente iguales al dar click en cerrar
+                    • Pasar todo esto a una funcion mas organizada
+                */
+                video.play()
+                var wrapper = document.getElementById('wrapper')
+                var player = document.getElementById('player')
+                var header = document.createElement('div')
+                var sidebarButton = document.createElement('div')
+                var closeButton = document.createElement('div')
+                var hamburgerLine = document.createElement('div')
+                var sidebar = document.createElement('div')
+                var logo = document.createElement('img')
 
-            sidebarButton.style.width = '30px'
-            sidebarButton.style.height = '30px'
-            sidebarButton.style.padding = '20px 0 0 15px'
-            sidebarButton.style.float = 'left'
+                sidebar.style =
+                    'height:100%;position:absolute;width:70%;background:black;z-index:99;left:-255px;transition:left 1s ease-in-out, right 1s ease-in-out'
+                sidebar.id = 'sidebar'
 
-            closeButton.style.float = 'right'
-            closeButton.style.width = '30px'
-            closeButton.style.height = '30px'
-            closeButton.style.background = 'black'
-            closeButton.style.margin = '15px'
+                sidebarButton.style = 'width:30px;height:30px;padding:20px 0 0 15px;float:left'
 
-            hamburgerLine.style.background = 'black'
-            hamburgerLine.style.height = '4px'
-            hamburgerLine.style.width = '100%'
-            hamburgerLine.style.marginBottom = '4px'
+                closeButton.style = 'float:right;width:30px;height:30px;background:red;margin:15px'
 
-            header.id = "header"
-            header.style.width = '100%'
-            header.style.height = '60px'
-            header.style.background = 'red'
+                hamburgerLine.style = 'background:red;height:4px;width:100%;margin-bottom:4px'
 
-            wrapper.style.position = 'absolute'
-            wrapper.style.background = 'black'
-            wrapper.style.height = '100%'
-            player.style.height = '100%'
+                header.id = "header"
+                header.style =
+                    'width:100%;height:60px;background:black;border-bottom: 1px solid red;text-align: center;'
 
-            player.style.height = '230px'
+                logo.src = 'capitana_marvel/logo.png'
+                logo.style = 'width:130px;margin-left: 20px;'
 
-            sidebarButton.appendChild(hamburgerLine)
-            sidebarButton.appendChild(hamburgerLine.cloneNode(true))
-            sidebarButton.appendChild(hamburgerLine.cloneNode(true))
+                wrapper.style = 'position:absolute;background:black;height:100%'
 
-            sidebarButton.addEventListener('click', function () {
-               // sidebar.style.display = 'block'
-                sidebar.style.left = '0px'
-            })
+                // efecto achicarse
+                player.style.height = '100%'
+                player.style.height = '230px'
 
-            closeButton.addEventListener('click', function () {
-                console.log('close')
-            })
+                sidebarButton.appendChild(hamburgerLine)
+                sidebarButton.appendChild(hamburgerLine.cloneNode(true))
+                sidebarButton.appendChild(hamburgerLine.cloneNode(true))
 
-            header.appendChild(closeButton)
-            header.appendChild(sidebarButton)
-            wrapper.insertBefore(sidebar, wrapper.firstChild)
-            wrapper.insertBefore(header, wrapper.firstChild);
+
+                // BANNERS
+
+                var banners_container = document.createElement('div')
+
+                var banner1 = document.createElement('div')
+                var banner1_image = document.createElement('img')
+                var banner1_button = document.createElement('img')
+
+                banner1.style = 'width:100%'
+                banner1_image.src = 'capitana_marvel/banner.png'
+                banner1_image.style = 'width:100%'
+
+                var banner1 = document.createElement('div')
+                var banner1_image = document.createElement('img')
+                var banner1_button = document.createElement('img')
+
+                banner1.style = 'width:100%'
+                banner1_image.src = 'capitana_marvel/banner.png'
+                banner1_image.style = 'width:100%'
+
+
+                banner1.appendChild(banner1_image)
+
+                banners_container.appendChild(banner1)
+
+                header.appendChild(closeButton)
+                header.appendChild(sidebarButton)
+                header.appendChild(logo)
+                wrapper.insertBefore(sidebar, wrapper.firstChild)
+                wrapper.insertBefore(header, wrapper.firstChild);
+                wrapper.appendChild(banners_container)
+
+                sidebarButton.addEventListener('click', function () {
+                    // show/hide sidebar
+                    if (sidebar.style.left === '0px') {
+                        sidebar.style.left = '-255px'
+                    } else {
+                        sidebar.style.left = '0px'
+                    }
+
+                })
+
+                closeButton.addEventListener('click', function () {
+                    // close everything
+                    sidebar.remove()
+                    header.remove()
+                    banners_container.remove()
+                    player.style = 'height:100%;width:100%'
+                    wrapper.style = 'width:100%'
+                })
+
+            }
 
         }
 
