@@ -100,7 +100,7 @@
                 style="background-image:url('assets/thumb3.png')">
             </div>
         </div>
-        <img src="assets/paper.png" id="paper" style="position: absolute; bottom: 0px; right: 0px; z-index: 99;">
+
     </div>
 
     <script>
@@ -158,7 +158,6 @@
 
         var playerIn = function () {
             document.getElementById('paper').style.display = 'none'
-            document.getElementById('video-id_fluid_controls_container').style.display = 'block'
             video.muteToggle('video-id', true)
             //video.play()
             var video_wrapper = document.getElementById('fluid_video_wrapper_video-id')
@@ -180,9 +179,14 @@
 
                     hidePlayerButtons()
 
+                    var paper = document.createElement('img')
+                    paper.src = 'assets/paper.png'
+                    paper.style = 'position: absolute;bottom: 0px;right: 0px;z-index: 99;'
+                    paper.id = 'paper'
+                    document.getElementById('fluid_video_wrapper_video-id').appendChild(paper)
+
                     // obtenemos el contenedor del reproductor
                     var video_wrapper = document.getElementById('fluid_video_wrapper_video-id')
-                    document.getElementById('video-id_fluid_controls_container').style.display = 'none'
 
                     // si el reproductor ya se achicó en el siguiente bucle mantendra el tamaño
                     if (!completedTransition) {
@@ -322,8 +326,11 @@
                     // agregamos el listener para cuando termine de achicarse
                     video_wrapper.addEventListener("transitionend", function (event) {
                         if (event.propertyName === "width") {
-                            if (event.elapsedTime < 3) {
+                            console.log(event.elapsedTime)
+                            if (event.elapsedTime <= 3&&video_wrapper.style.width === width) {
                                 document.getElementById('paper').style.display = 'block'
+                                //completedTransition = true
+                                console.log()
                             }
                         }
                     });
