@@ -159,6 +159,7 @@
         var playerIn = function () {
             document.getElementById('paper').style.display = 'none'
             video.muteToggle('video-id', true)
+            document.getElementById('video-id_fluid_controls_container').style.display = 'block'
             //video.play()
             var video_wrapper = document.getElementById('fluid_video_wrapper_video-id')
             video_wrapper.style.width = newWidth
@@ -178,6 +179,8 @@
                 playerInitCallback: (function () {
 
                     hidePlayerButtons()
+
+                    document.getElementById('video-id_fluid_controls_container').style.display = 'none'
 
                     var paper = document.createElement('img')
                     paper.src = 'assets/paper.png'
