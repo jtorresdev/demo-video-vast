@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.fluidplayer.com/v2/current/fluidplayer.min.css" type="text/css" />
+    <script src="fluidplayer.js"></script>
+</head>
+<style>
+    body {
+        margin: 0
+    }
+
+    .player {
+        -webkit-transition: width 3s, height 3s, margin 3s, left 2s;
+        transition: width 3s, height 3s, margin 3s, left 2s;
+    }
+
+    /* The device with borders */
+    .smartphone {
+        position: relative;
+        width: 360px;
+        height: 640px;
+        margin: auto;
+        border: 16px black solid;
+        border-top-width: 60px;
+        border-bottom-width: 60px;
+        border-radius: 36px;
+        overflow: hidden;
+    }
+
+    /* The horizontal line on the top of the device */
+    .smartphone:before {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 5px;
+        position: absolute;
+        top: -30px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #333;
+        border-radius: 10px;
+    }
+
+    /* The circle on the bottom of the device */
+    .smartphone:after {
+        content: '';
+        display: block;
+        width: 35px;
+        height: 35px;
+        position: absolute;
+        left: 50%;
+        bottom: -65px;
+        transform: translate(-50%, -50%);
+        background: #333;
+        border-radius: 50%;
+    }
+
+    /* The screen (or content) of the device */
+    .smartphone .content {
+        width: 360px;
+        height: 640px;
+        background: white;
+    }
+</style>
+
+<body>
+    <div class="smartphone">
+        <div class="content">
+            <div id="wrapper" style="width:100%">
+                <div id="player" class="player" style="width:100%;height:100%">
+                    <video id="video-id" autoplay muted>
+                        <source src="video.mp4" type="video/mp4" />
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var tapOnVideo = function () {
+            video.play()
+            var wrapper = document.getElementById('wrapper')
+            var player = document.getElementById('player')
+            var header = document.createElement('div')
+            var sidebarButton = document.createElement('div')
+            var closeButton = document.createElement('div')
+            var hamburgerLine = document.createElement('div')
+            var sidebar = document.createElement('div')
+
+            sidebar.style.height = '100%'
+            sidebar.style.position = 'absolute'
+            sidebar.style.width = '70%'
+            sidebar.style.background = 'blue'
+            sidebar.style.zIndex = '99'
+            //sidebar.style.display = 'none'
+            sidebar.style.left = '-255px'
+            sidebar.style.transition = 'left 1s ease-in-out, right 1s ease-in-out'
+
+            sidebarButton.style.width = '30px'
+            sidebarButton.style.height = '30px'
+            sidebarButton.style.padding = '20px 0 0 15px'
+            sidebarButton.style.float = 'left'
+
+            closeButton.style.float = 'right'
+            closeButton.style.width = '30px'
+            closeButton.style.height = '30px'
+            closeButton.style.background = 'black'
+            closeButton.style.margin = '15px'
+
+            hamburgerLine.style.background = 'black'
+            hamburgerLine.style.height = '4px'
+            hamburgerLine.style.width = '100%'
+            hamburgerLine.style.marginBottom = '4px'
+
+            header.id = "header"
+            header.style.width = '100%'
+            header.style.height = '60px'
+            header.style.background = 'red'
+
+            wrapper.style.position = 'absolute'
+            wrapper.style.background = 'black'
+            wrapper.style.height = '100%'
+            player.style.height = '100%'
+
+            player.style.height = '230px'
+
+            sidebarButton.appendChild(hamburgerLine)
+            sidebarButton.appendChild(hamburgerLine.cloneNode(true))
+            sidebarButton.appendChild(hamburgerLine.cloneNode(true))
+
+            sidebarButton.addEventListener('click', function () {
+               // sidebar.style.display = 'block'
+                sidebar.style.left = '0px'
+            })
+
+            closeButton.addEventListener('click', function () {
+                console.log('close')
+            })
+
+            header.appendChild(closeButton)
+            header.appendChild(sidebarButton)
+            wrapper.insertBefore(sidebar, wrapper.firstChild)
+            wrapper.insertBefore(header, wrapper.firstChild);
+
+        }
+
+        var options = {
+            layoutControls: {
+                fillToContainer: true,
+                persistentSettings: {
+                    volume: false
+                },
+                autoPlay: true,
+                mute: true,
+                playerInitCallback: (function () {
+                    var videoPlayer = document.getElementById('video-id')
+                    videoPlayer.addEventListener('click', tapOnVideo)
+                })
+            }
+        }
+        var video = fluidPlayer("video-id", options);
+    </script>
+</body>
+
+</html>
