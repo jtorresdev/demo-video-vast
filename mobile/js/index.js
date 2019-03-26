@@ -38,7 +38,7 @@ function afterLoading() {
 		setTimeout(function() {
 			// do second thing
 			phone.className = 'phone view_2 rotate';
-			document.getElementById('loader').style.display = 'none';
+			//document.getElementById('loader').style.display = 'none';
 		}, 1000);
 	}, 1000);
 }

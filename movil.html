@@ -508,7 +508,6 @@
         document.getElementById('video-id').addEventListener('click', function (e) {
             tapOnVideo()
             video.muteToggle('video-id', true)
-            document.getElementById('video-id_fluid_controls_container').style.display = 'block'
             //video.play()
         })
 
@@ -552,6 +551,7 @@
 
         document.getElementById('player').addEventListener("transitionend", function (event) {
             if (document.getElementById('wrapper').style.height === '100%') {
+                document.getElementById('video-id_fluid_controls_container').style.display = 'block'
                 document.getElementById('thumbnail-videos').style.display = 'block'
                 document.getElementById('bottom_container').style.display = 'block'
                 document.getElementById('poweredbyvidoomy').style.display = 'block'
