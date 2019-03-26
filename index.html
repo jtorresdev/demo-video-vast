@@ -26,6 +26,7 @@
             margin: 0px 10px;
             padding: 0 10px 5px 10px;
             text-align: center;
+            cursor: pointer;
         }
 
         #menu ul li a {
@@ -45,6 +46,21 @@
         @font-face {
             font-family: bahnschrift;
             src: url(assets/bahnschrift.ttf);
+        }
+
+        .dropdown-link {
+            float: left;
+            width: 100%;
+            color: #ffe200;
+            text-decoration: none;
+            font-size: 24px;
+            font-family: steelfishEb;
+            text-align: center;
+            padding: 10px 0px;
+            border: 1px solid;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
         }
 
         .thumbnail-videos {
@@ -76,31 +92,79 @@
         .currentVideo {
             outline: 3px solid #b29813 !important;
         }
+
+        .header-container {
+            height: 60px;
+            border-bottom: 1px solid #e6ebf0;
+            padding: 0 45px;
+        }
+
+        .header {
+            width: 1260px;
+            height: 100%;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .header img {
+            padding: 10px 0 0 0
+        }
+
+        .container {
+            padding: 20px 0px;
+            position: relative;
+            margin: 0 auto;
+            width: 1260px;
+            display: block;
+        }
+
+        body {
+            margin: 0
+        }
+
+        .wareframe-right {
+            background: #e6ebf0;
+            width: 270px;
+            height: 550px;
+            float: left;
+            margin: 10px 0 0 0;
+        }
     </style>
 </head>
 
 <body>
-
-    <div class="wrapper" id="wrapper" style="width:970px;height:550px;position: relative;">
-        <div class="big-video">
-            <video id="video-id" current-video="1" autoplay muted>
-                <source src="https://iab-publicfiles.s3.amazonaws.com/vast/VAST-4.0-Short-Intro.mp4" type="video/mp4" />
-            </video>
+    <div class="header-container">
+        <div class="header">
+            <img src="assets/demo/vidoomy.png">
         </div>
-        <div class="thumbnail-videos" id="thumbnail-videos">
-            <div class="thumb-video currentVideo" id="thumb-video-1"
-                data-src="https://iab-publicfiles.s3.amazonaws.com/vast/VAST-4.0-Short-Intro.mp4"
-                style="background-image:url('assets/thumb1.png')">
+    </div>
+    <div class="container">
+        <div class="title">
+            <img src="assets/demo/wareframe-title.png" alt="">
+        </div>
+        <div class="wrapper" id="wrapper" style="width:970px;height:550px;position: relative;margin: 10px 10px 10px 0px;
+        float: left;">
+            <div class="big-video">
+                <video id="video-id" current-video="1" muted>
+                    <source src="assets/videos/video1.mp4" type="video/mp4" />
+                </video>
             </div>
-            <div class="thumb-video stopped" id="thumb-video-2" data-src="video.mp4"
-                style="background-image:url('assets/thumb2.png')">
-            </div>
-            <div class="thumb-video stopped" id="thumb-video-3"
-                data-src="https://iab-publicfiles.s3.amazonaws.com/vast/VAST-4.0-Short-Intro.mp4"
-                style="background-image:url('assets/thumb3.png')">
+            <div class="thumbnail-videos" id="thumbnail-videos">
+                <div class="thumb-video currentVideo" id="thumb-video-1" data-src="assets/videos/video1.mp4"
+                    style="background-image:url('assets/thumb1.png')">
+                </div>
+                <div class="thumb-video stopped" id="thumb-video-2" data-src="assets/videos/video2.mp4"
+                    style="background-image:url('assets/thumb2.png')">
+                </div>
+                <div class="thumb-video stopped" id="thumb-video-3" data-src="assets/videos/video3.mp4"
+                    style="background-image:url('assets/thumb3.png')">
+                </div>
             </div>
         </div>
-
+        <div class="wareframe-right"></div>
+        <div class="wareframe-bottom">
+            <img src="assets/demo/wareframe-bottom.png">
+        </div>
     </div>
 
     <script>
@@ -147,6 +211,9 @@
 
         var playerOut = function () {
             var video_wrapper = document.getElementById('fluid_video_wrapper_video-id')
+            removeIfExists(['saveCalendarDropdown'])
+            document.getElementsByClassName('active')[0].classList.remove('active')
+            document.getElementById('videosItem').classList.add('active')
             // si no ha terminado la transicion, vuelve al tamaño inicial
             if (!completedTransition) {
                 video_wrapper.style.width = width
@@ -168,19 +235,39 @@
             video_wrapper.style.marginLeft = marginLeft
         }
 
+        var removeIfExists = function (ids) {
+            ids.map(id => {
+                document.getElementById(id) ? document.getElementById(id).remove() : null
+            })
+        }
+
         var options = {
             layoutControls: {
                 primaryColor: "#d9c408",
+                posterImage: "assets/poster.png",
+                playButtonShowing: true,
                 persistentSettings: {
                     volume: false
                 },
-                autoPlay: true,
+                autoPlay: false,
                 mute: true,
                 playerInitCallback: (function () {
 
                     hidePlayerButtons()
 
                     document.getElementById('video-id_fluid_controls_container').style.display = 'none'
+
+                    document.getElementById('video-id_fluid_initial_play').style =
+                        'cursor:none;display:none'
+
+                    var unmuteButton = document.createElement('div')
+
+                    unmuteButton.innerHTML = '<img src="assets/unmute.png">'
+                    unmuteButton.id = 'video-id_fluid_initial_play'
+
+                    var initial_play = document.getElementById('video-id_fluid_initial_play_button')
+
+                    initial_play.insertBefore(unmuteButton, initial_play.firstChild)
 
                     var paper = document.createElement('img')
                     paper.src = 'assets/paper.png'
@@ -266,7 +353,10 @@
 
                         document.getElementById('synopsisItem').addEventListener('click', function (e) {
                             document.getElementById('video-id').pause()
+
                             e.preventDefault()
+
+                            removeIfExists(['saveCalendarDropdown'])
 
                             document.getElementsByClassName('active')[0].classList.remove('active')
                             document.getElementById('synopsisItem').classList.add('active')
@@ -275,65 +365,83 @@
                             bannerRight.style.display = 'none'
                             document.getElementById('thumbnail-videos').style.display = 'none'
 
-                            var synopsis = document.createElement('div')
-                            var VisitPageButton = document.createElement('a')
-                            var date1 = document.createElement('img')
+                            if (!document.getElementById('synopsis')) {
 
-                            synopsis.style =
-                                'position: absolute;top: 80px;left: 50px;color: white;width: 600px;font-size: 14px;font-family: bahnschrift;text-transform: uppercase;line-height: 25px;'
-                            synopsis.id = 'synopsis'
-                            var synopsisHTML = ''
-                            synopsisHTML +=
-                                '<p style="font-size: 25px;margin-bottom: 0px;color: #ffe100;">Vuelve Hellboy,</p>'
-                            synopsisHTML +=
-                                "<p>el gran demonio de piel roja, con cola, cuernos y un brazo de piedra. Atrapado entre los mundos de lo sobrenatural y lo humano, el apodado como 'El más grande Investigador de lo Paranormal del Mundo' junto con la Agencia para la Investigación y Defensa Paranormal (A.I.D.P.) tendrán un nuevo y peligroso desafío. Su misión será enfrentarse a una nueva y poderosa amenaza: Nimue (Milla Jovovich), conocida como La Reina de la Sangre, un espíritu ancestral de la época del rey Arturo que ha vuelto a nuestro mundo llena de sed de venganza para sembrar el terror y destruir a la raza humana.</p>"
-                            synopsis.innerHTML = synopsisHTML
+                                var synopsis = document.createElement('div')
+                                var VisitPageButton = document.createElement('a')
+                                var date1 = document.createElement('img')
 
-                            VisitPageButton.style =
-                                'position: absolute;bottom: 60px;left: 60px;width: 200px;height: 45px;border: 1px solid #ffe100;color: #ffe100;font-size: 16px;font-family: bahnschrift;text-transform: uppercase;text-align: center;line-height: 45px;cursor: pointer;text-decoration: none;'
+                                synopsis.style =
+                                    'position: absolute;top: 80px;left: 50px;color: white;width: 600px;font-size: 14px;font-family: bahnschrift;text-transform: uppercase;line-height: 25px;'
+                                synopsis.id = 'synopsis'
+                                var synopsisHTML = ''
+                                synopsisHTML +=
+                                    '<p style="font-size: 25px;margin-bottom: 0px;color: #ffe100;">Vuelve Hellboy,</p>'
+                                synopsisHTML +=
+                                    "<p>el gran demonio de piel roja, con cola, cuernos y un brazo de piedra. Atrapado entre los mundos de lo sobrenatural y lo humano, el apodado como 'El más grande Investigador de lo Paranormal del Mundo' junto con la Agencia para la Investigación y Defensa Paranormal (A.I.D.P.) tendrán un nuevo y peligroso desafío. Su misión será enfrentarse a una nueva y poderosa amenaza: Nimue (Milla Jovovich), conocida como La Reina de la Sangre, un espíritu ancestral de la época del rey Arturo que ha vuelto a nuestro mundo llena de sed de venganza para sembrar el terror y destruir a la raza humana.</p>"
+                                synopsis.innerHTML = synopsisHTML
 
-                            VisitPageButton.innerText = 'Visitar pagina web'
-                            VisitPageButton.href = 'google.com'
-                            VisitPageButton.target = '_blank'
-                            VisitPageButton.id = 'visitPageButton'
+                                VisitPageButton.style =
+                                    'position: absolute;bottom: 60px;left: 60px;width: 200px;height: 45px;border: 1px solid #ffe100;color: #ffe100;font-size: 16px;font-family: bahnschrift;text-transform: uppercase;text-align: center;line-height: 45px;cursor: pointer;text-decoration: none;'
 
-                            date1.src = 'assets/date.png'
-                            date1.style =
-                                'position: relative;bottom: 130px;margin: 0 auto;display: block;'
-                            date1.id = 'date'
+                                VisitPageButton.innerText = 'Visitar pagina web'
+                                VisitPageButton.href = 'google.com'
+                                VisitPageButton.target = '_blank'
+                                VisitPageButton.id = 'visitPageButton'
 
-                            wrapper.appendChild(date1)
-                            wrapper.appendChild(VisitPageButton)
-                            wrapper.appendChild(synopsis)
+                                date1.src = 'assets/date.png'
+                                date1.style =
+                                    'position: relative;bottom: 130px;margin: 0 auto;display: block;'
+                                date1.id = 'date'
+
+                                wrapper.appendChild(date1)
+                                wrapper.appendChild(VisitPageButton)
+                                wrapper.appendChild(synopsis)
+
+                                removeAllListener()
+                            }
                         })
 
                         document.getElementById('videosItem').addEventListener('click', function (e) {
+
                             e.preventDefault()
                             document.getElementsByClassName('active')[0].classList.remove('active')
                             document.getElementById('videosItem').classList.add('active')
 
-                            document.getElementById('synopsis').remove()
-                            document.getElementById('date').remove()
-                            document.getElementById('visitPageButton').remove()
+                            removeIfExists(['saveCalendarDropdown', 'synopsis', 'date',
+                                'visitPageButton'
+                            ])
 
                             video_wrapper.style.display = 'block'
                             bannerRight.style.display = 'block'
                             document.getElementById('thumbnail-videos').style.display = 'block'
                         })
 
-                        document.getElementById('saveCalendarItem').addEventListener('click', function () {
-                            console.log('guardar en calendario')
+                        document.getElementById('saveCalendarItem').addEventListener('click', function (e) {
+                            e.preventDefault()
+                            document.getElementsByClassName('active')[0].classList.remove('active')
+                            document.getElementById('saveCalendarItem').classList.add('active')
+
+                            var dropdown = document.createElement('div')
+                            dropdown.style =
+                                '    background: rgb(0, 0, 0);width: 300px;height: 153px;position: absolute;top: 60px;right: 80px;z-index: 99;'
+                            dropdown.id = "saveCalendarDropdown"
+                            dropdownHTML = ''
+                            dropdownHTML += '<a href="#" class="dropdown-link">Google Calendar</a>'
+                            dropdownHTML += '<a href="#" class="dropdown-link">Apple iCal</a>'
+                            dropdownHTML +=
+                                '<a href="#" class="dropdown-link">Microsoft Outlook</a>'
+                            dropdown.innerHTML = dropdownHTML
+                            wrapper.appendChild(dropdown)
                         })
                     }
 
                     // agregamos el listener para cuando termine de achicarse
                     video_wrapper.addEventListener("transitionend", function (event) {
                         if (event.propertyName === "width") {
-                            console.log(event.elapsedTime)
-                            if (event.elapsedTime <= 3&&video_wrapper.style.width === width) {
+                            if (event.elapsedTime <= 3 && video_wrapper.style.width === width) {
                                 document.getElementById('paper').style.display = 'block'
                                 //completedTransition = true
-                                console.log()
                             }
                         }
                     });
@@ -348,6 +456,16 @@
 
 
         var video = fluidPlayer("video-id", options);
+
+        video.on('pause', function () {
+            var unmute = document.getElementById('video-id_fluid_initial_play')
+            if (unmute.classList[0] != 'fluid_initial_play') {
+                unmute.remove()
+                console.log(document.getElementById('video-id_fluid_initial_play'))
+                document.getElementById('video-id_fluid_initial_play').style =
+                    'display:block;background:#d9c408'
+            }
+        })
 
         video.on('play', function () {
             if (!completedAd) {
