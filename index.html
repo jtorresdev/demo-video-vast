@@ -29,6 +29,10 @@
             cursor: pointer;
         }
 
+        #menu ul li:hover{
+            border-bottom: 5px solid #ffe200;
+        }
+
         #menu ul li a {
             color: #ffe200;
             text-decoration: none
@@ -273,10 +277,11 @@
                     paper.src = 'assets/paper.png'
                     paper.style = 'position: absolute;bottom: 0px;right: 0px;z-index: 99;cursor:pointer'
                     paper.id = 'paper'
-                    paper.addEventListener('click', function(){
+                    paper.addEventListener('click', function () {
                         document.getElementById('paper').style.display = 'none'
                         video.muteToggle('video-id', true)
-                        document.getElementById('video-id_fluid_controls_container').style.display = 'block'
+                        document.getElementById('video-id_fluid_controls_container').style.display =
+                            'block'
                         video.play()
                         var video_wrapper = document.getElementById('fluid_video_wrapper_video-id')
                         video_wrapper.style.width = newWidth
@@ -431,20 +436,42 @@
 
                         document.getElementById('saveCalendarItem').addEventListener('click', function (e) {
                             e.preventDefault()
-                            document.getElementsByClassName('active')[0].classList.remove('active')
-                            document.getElementById('saveCalendarItem').classList.add('active')
 
-                            var dropdown = document.createElement('div')
-                            dropdown.style =
-                                '    background: rgb(0, 0, 0);width: 300px;height: 153px;position: absolute;top: 60px;right: 80px;z-index: 99;'
-                            dropdown.id = "saveCalendarDropdown"
-                            dropdownHTML = ''
-                            dropdownHTML += '<a href="#" class="dropdown-link">Google Calendar</a>'
-                            dropdownHTML += '<a href="#" class="dropdown-link">Apple iCal</a>'
-                            dropdownHTML +=
-                                '<a href="#" class="dropdown-link">Microsoft Outlook</a>'
-                            dropdown.innerHTML = dropdownHTML
-                            wrapper.appendChild(dropdown)
+                            if (!document.getElementById('saveCalendarDropdown')) {
+                                document.getElementsByClassName('active')[0].classList.remove(
+                                    'active')
+                                document.getElementById('saveCalendarItem').classList.add('active')
+
+                                var dropdown = document.createElement('div')
+                                dropdown.style =
+                                    'background: rgb(0, 0, 0);width: 260px;height: 153px;position: absolute;top: 60px;right: 100px;z-index: 99;'
+                                dropdown.id = "saveCalendarDropdown"
+                                dropdownHTML = ''
+                                dropdownHTML +=
+                                    '<a href="#" class="dropdown-link">Google Calendar</a>'
+                                dropdownHTML += '<a href="#" class="dropdown-link">Apple iCal</a>'
+                                dropdownHTML +=
+                                    '<a href="#" class="dropdown-link">Microsoft Outlook</a>'
+                                dropdown.innerHTML = dropdownHTML
+                                wrapper.appendChild(dropdown)
+                            } else {
+                                document.getElementById('saveCalendarDropdown').remove()
+
+                                document.getElementById('saveCalendarItem').classList.remove(
+                                    'active')
+
+                                if (document.getElementById('synopsis')) {
+                                    document.getElementById('fluid_video_wrapper_video-id').style
+                                        .display
+
+                                    document.getElementById('synopsisItem').classList.add(
+                                        'active')
+
+                                } else {
+                                    document.getElementById('videosItem').classList.add(
+                                        'active')
+                                }
+                            }
                         })
                     }
 
