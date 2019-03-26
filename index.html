@@ -271,8 +271,20 @@
 
                     var paper = document.createElement('img')
                     paper.src = 'assets/paper.png'
-                    paper.style = 'position: absolute;bottom: 0px;right: 0px;z-index: 99;'
+                    paper.style = 'position: absolute;bottom: 0px;right: 0px;z-index: 99;cursor:pointer'
                     paper.id = 'paper'
+                    paper.addEventListener('click', function(){
+                        document.getElementById('paper').style.display = 'none'
+                        video.muteToggle('video-id', true)
+                        document.getElementById('video-id_fluid_controls_container').style.display = 'block'
+                        video.play()
+                        var video_wrapper = document.getElementById('fluid_video_wrapper_video-id')
+                        video_wrapper.style.width = newWidth
+                        video_wrapper.style.height = newHeight
+                        video_wrapper.style.marginTop = marginTop
+                        video_wrapper.style.marginLeft = marginLeft
+                        removeAllListener()
+                    })
                     document.getElementById('fluid_video_wrapper_video-id').appendChild(paper)
 
                     // obtenemos el contenedor del reproductor
@@ -461,7 +473,6 @@
             var unmute = document.getElementById('video-id_fluid_initial_play')
             if (unmute.classList[0] != 'fluid_initial_play') {
                 unmute.remove()
-                console.log(document.getElementById('video-id_fluid_initial_play'))
                 document.getElementById('video-id_fluid_initial_play').style =
                     'display:block;background:#d9c408'
             }
