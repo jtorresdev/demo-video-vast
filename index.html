@@ -260,7 +260,6 @@
                     hidePlayerButtons()
 
                     document.getElementById('video-id_fluid_controls_container').style.display = 'none'
-
                     document.getElementById('video-id_fluid_initial_play').style =
                         'cursor:none;display:none'
 
@@ -379,7 +378,13 @@
                         wrapper.appendChild(background)
 
                         close.addEventListener('click', function(){
-                            console.log('cerrar')
+                            //removeIfExists(['header', 'visitPageButton', 'poweredbyvidoomy', 'bottom_container','menu'])
+                            playerOut()
+                            removeAllListener()
+                            document.getElementById('video-id_fluid_controls_container').style.display = 'none'
+                            document.getElementById('video-id_fluid_initial_play').style =
+                        'cursor:none;display:none'
+                            video.pause()
                         })
 
                         document.getElementById('synopsisItem').addEventListener('click', function (e) {

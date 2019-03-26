@@ -428,14 +428,16 @@
                 })
 
                 closeButton.addEventListener('click', function () {
-                    removeIfExists(['header', 'visitPageButton', 'poweredbyvidoomy', 'bottom_container',
-                        'menu'
-                    ])
+                    removeIfExists(['header', 'visitPageButton', 'poweredbyvidoomy', 'bottom_container','menu'])
                     document.getElementById('thumbnail-videos').style.display = 'none'
                     document.getElementById('player').style = 'width:100%;height:100%'
                     document.getElementById('wrapper').style = 'width: 100%;margin-top: 10px;'
                     document.getElementById('container').style.padding = '0px 10px'
                     document.getElementById('video-id').pause()
+
+                    document.getElementById('video-id_fluid_controls_container').style.display = 'none'
+                    document.getElementById('video-id_fluid_initial_play').style =
+                        'cursor:none;display:none'
 
                     makePaper()
 
@@ -530,7 +532,6 @@
                 videoPlayer.setAttribute('current-video', (parseInt(videoPlayer.getAttribute("current-video")) +
                     1))
                 videoPlayer.play();
-                playerIn();
             } else {
                 videoPlayer.pause()
             }
