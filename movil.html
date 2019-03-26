@@ -12,7 +12,7 @@
 <style>
     body {
         margin: 0;
-        background:white
+        background: white
     }
 
     .player {
@@ -76,7 +76,7 @@
     .thumbnail-videos {
         height: 60px;
         padding: 15px;
-        margin-top: 15px;
+        margin-top: 10px;
         display: none
     }
 
@@ -217,6 +217,12 @@
     </div>
 
     <script>
+        var removeIfExists = function (ids) {
+            ids.map(id => {
+                document.getElementById(id) ? document.getElementById(id).remove() : null
+            })
+        }
+
         var tapOnVideo = function () {
 
             if (document.getElementById('sidebar') || document.getElementById('header')) {
@@ -253,7 +259,7 @@
 
                 document.getElementById('paper').remove()
 
-                closeButton.style = 'float:right;width:10px;height:10px;margin:5px;'
+                closeButton.style = 'float:right;width:10px;height:10px;margin:5px;cursor: pointer;'
                 closeButton.src = 'assets/close.png'
 
                 header.id = "header"
@@ -264,7 +270,7 @@
                 logo.style = 'width:100px;float:left;margin: 10px;'
 
                 wrapper.style =
-                    'position: fixed;background-image: url(assets/background-mobile.png);height: 100%;top: 0px;background-size: cover;background-repeat: no-repeat;'
+                    'position: fixed;background-image: url(assets/background-mobile.png);height: 100%;top: 0px;background-size: cover;background-repeat: no-repeat;width: 100%;'
 
                 /* demo */
 
@@ -282,13 +288,14 @@
                 var bottom_container = document.createElement('div')
                 var bottom_left = document.createElement('div')
                 var bottom_right = document.createElement('div')
-                var VisitPageButton = document.createElement('div')
+                var VisitPageButton = document.createElement('a')
                 var powered = document.createElement('img')
 
                 powered.src = 'assets/powered.png'
                 powered.style = 'position:absolute;bottom: 10px; right: 10px;'
 
-                bottom_container.style = 'width: 330px;height: 120px;margin: 0 auto;display: block;'
+                bottom_container.style =
+                    'width: 330px;margin: 0px auto; bottom: 130px;position: absolute;left: 0;right: 0;'
 
                 bottom_left.style =
                     'letter-spacing: 5px;color: rgb(255, 226, 0);font-family: steelfishEb;font-size: 20px;width: 100px;text-align: center;margin: 15px;float: left;margin-right: 20px;'
@@ -326,9 +333,9 @@
                 bottom_container.appendChild(bottom_left)
                 bottom_container.appendChild(bottom_right)
 
-                bottom_container.appendChild(VisitPageButton)
+                wrapper.appendChild(VisitPageButton)
 
-                bottom_container.appendChild(powered)
+                wrapper.appendChild(powered)
 
                 header.appendChild(closeButton)
                 header.appendChild(logo)
@@ -337,6 +344,86 @@
                 wrapper.appendChild(menu)
 
                 document.getElementById('thumbnail-videos').style.display = 'block'
+
+                var video_wrapper = document.getElementById('fluid_video_wrapper_video-id')
+
+                document.getElementById('synopsisItem').addEventListener('click', function (e) {
+
+                    var player = document.getElementById('player')
+
+                    e.preventDefault()
+                    document.getElementById('video-id').pause()
+                    removeIfExists(['saveCalendarDropdown'])
+                    document.getElementsByClassName('active')[0].classList.remove('active')
+                    document.getElementById('synopsisItem').classList.add('active')
+
+                    video_wrapper.style.display = 'none'
+                    document.getElementById('thumbnail-videos').style.display = 'none'
+
+                    var synopsis = document.createElement('div')
+
+                    synopsis.style =
+                        'color: #fef9d1;width: 90%;padding: 10px;font-size: 12px;font-family: bahnschrift;text-transform: uppercase;line-height: 22px;'
+                    synopsis.id = 'synopsis'
+                    var synopsisHTML = ''
+                    synopsisHTML +=
+                        '<p style="font-size: 25px;margin-bottom: 0px;color: #ffe100;">Vuelve Hellboy,</p>'
+                    synopsisHTML +=
+                        "<p>el gran demonio de piel roja, con cola, cuernos y un brazo de piedra. Atrapado entre los mundos de lo sobrenatural y lo humano, el apodado como 'El más grande Investigador de lo Paranormal del Mundo' junto con la Agencia para la Investigación y Defensa Paranormal (A.I.D.P.) tendrán un nuevo y peligroso desafío. Su misión será enfrentarse a una nueva y poderosa amenaza: Nimue (Milla Jovovich), conocida como La Reina de la Sangre, un espíritu ancestral de la época del rey Arturo que ha vuelto a nuestro mundo llena de sed de venganza para sembrar el terror y destruir a la raza humana.</p>"
+                    synopsis.innerHTML = synopsisHTML
+
+                    player.appendChild(synopsis)
+                })
+
+                document.getElementById('videosItem').addEventListener('click', function (e) {
+                    e.preventDefault()
+                    document.getElementById('video-id').pause()
+                    removeIfExists(['saveCalendarDropdown', 'synopsis'])
+                    document.getElementsByClassName('active')[0].classList.remove('active')
+                    document.getElementById('videosItem').classList.add('active')
+
+                    video_wrapper.style.display = 'block'
+                    document.getElementById('thumbnail-videos').style.display = 'block'
+                })
+
+                document.getElementById('saveCalendarItem').addEventListener('click', function (e) {
+                    e.preventDefault()
+                    if (!document.getElementById('saveCalendarDropdown')) {
+                        document.getElementsByClassName('active')[0].classList.remove(
+                            'active')
+                        document.getElementById('saveCalendarItem').classList.add('active')
+
+                        var dropdown = document.createElement('div')
+                        dropdown.style =
+                            'background: rgb(0, 0, 0);width: 260px;height: 153px;position: absolute;top: 60px;right: 5px;z-index: 99;'
+                        dropdown.id = "saveCalendarDropdown"
+                        dropdownHTML = ''
+                        dropdownHTML +=
+                            '<a href="#" class="dropdown-link">Google Calendar</a>'
+                        dropdownHTML += '<a href="#" class="dropdown-link">Apple iCal</a>'
+                        dropdownHTML +=
+                            '<a href="#" class="dropdown-link">Microsoft Outlook</a>'
+                        dropdown.innerHTML = dropdownHTML
+                        wrapper.appendChild(dropdown)
+                    } else {
+                        document.getElementById('saveCalendarDropdown').remove()
+
+                        document.getElementById('saveCalendarItem').classList.remove(
+                            'active')
+
+                        if (document.getElementById('synopsis')) {
+                            document.getElementById('fluid_video_wrapper_video-id').style
+                                .display
+
+                            document.getElementById('synopsisItem').classList.add(
+                                'active')
+
+                        } else {
+                            document.getElementById('videosItem').classList.add(
+                                'active')
+                        }
+                    }
+                })
 
                 closeButton.addEventListener('click', function () {
                     console.log('close')
