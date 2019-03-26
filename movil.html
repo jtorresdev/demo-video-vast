@@ -93,7 +93,7 @@
 
     .stopped::after {
         content: url(assets/play.png);
-        margin: 5px auto;
+        margin: 10px auto;
         display: block;
         width: 40px;
         height: 40px;
@@ -189,12 +189,12 @@
                 <img src="assets/demo/vidoomy.png">
             </div>
         </div>
-        <div class="title">
+        <div class="title" style="margin-top: 10px;">
             <img src="assets/demo/wireframe-title.png" width="200px">
         </div>
         <div id="wrapper" style="width:100%;margin-top:10px">
             <div id="player" class="player" style="width:100%;height:100%">
-                <video id="video-id" muted>
+                <video id="video-id" current-video="1" muted>
                     <source src="assets/videos/video1.mp4" type="video/mp4" />
                 </video>
             </div>
@@ -293,7 +293,9 @@
 
                 powered.src = 'assets/powered.png'
                 powered.style = 'position:absolute;bottom: 10px; right: 10px;'
+                powered.id = 'poweredbyvidoomy'
 
+                bottom_container.id = "bottom_container"
                 bottom_container.style =
                     'width: 330px;margin: 0px auto; bottom: 130px;position: absolute;left: 0;right: 0;'
 
@@ -426,11 +428,33 @@
                 })
 
                 closeButton.addEventListener('click', function () {
-                    console.log('close')
+                    removeIfExists(['header', 'visitPageButton', 'poweredbyvidoomy', 'bottom_container',
+                        'menu'
+                    ])
+                    document.getElementById('thumbnail-videos').style.display = 'none'
+                    document.getElementById('player').style = 'width:100%;height:100%'
+                    document.getElementById('wrapper').style = 'width: 100%;margin-top: 10px;'
+                    document.getElementById('container').style.padding = '0px 10px'
+                    document.getElementById('video-id').pause()
+
+                    makePaper()
+
                 })
 
             }
 
+        }
+
+        var makePaper = function () {
+            var paper = document.createElement('img')
+            paper.src = 'assets/paper.png'
+            paper.style =
+                'position: absolute;bottom: 0px;right: 0px;z-index: 99;cursor:pointer;width: 120px;'
+            paper.id = 'paper'
+
+            paper.addEventListener('click', tapOnVideo)
+
+            document.getElementById('fluid_video_wrapper_video-id').appendChild(paper)
         }
 
         var hidePlayerButtons = function () {
@@ -470,14 +494,7 @@
                     initial_play.insertBefore(unmuteButton, initial_play.firstChild)
 
 
-                    var paper = document.createElement('img')
-                    paper.src = 'assets/paper.png'
-                    paper.style =
-                        'position: absolute;bottom: 0px;right: 0px;z-index: 99;cursor:pointer;width: 120px;'
-                    paper.id = 'paper'
-
-                    paper.addEventListener('click', tapOnVideo)
-                    document.getElementById('fluid_video_wrapper_video-id').appendChild(paper)
+                    makePaper()
 
                     var videoPlayer = document.getElementById('video-id')
                     //videoPlayer.addEventListener('click', tapOnVideo)
@@ -485,6 +502,80 @@
             }
         }
         var video = fluidPlayer("video-id", options);
+
+        video.on('play', function(){
+            video.muteToggle('video-id', true)
+            document.getElementById('video-id_fluid_controls_container').style.display = 'block'
+        })
+
+        video.on('ended', function () {
+            var videoPlayer = document.getElementById('video-id')
+
+            var nextVideo = document.getElementById('thumb-video-' + (parseInt(videoPlayer.getAttribute(
+                "current-video")) + 1))
+            var prevVideo = document.getElementById('thumb-video-' + parseInt(videoPlayer.getAttribute(
+                "current-video")))
+
+
+            if ((parseInt(videoPlayer.getAttribute("current-video")) + 1) <= document.getElementsByClassName(
+                    'thumb-video').length) {
+
+                nextVideo.classList.remove('stopped')
+                prevVideo.classList.add('stopped')
+
+                nextVideo.classList.add('currentVideo')
+                prevVideo.classList.remove('currentVideo')
+
+                videoPlayer.src = nextVideo.getAttribute('data-src');
+                videoPlayer.setAttribute('current-video', (parseInt(videoPlayer.getAttribute("current-video")) +
+                    1))
+                videoPlayer.play();
+                playerIn();
+            } else {
+                videoPlayer.pause()
+            }
+        })
+
+        video.on('pause', function () {
+            var unmute = document.getElementById('video-id_fluid_initial_play')
+            if (unmute.classList[0] != 'fluid_initial_play') {
+                unmute.remove()
+                document.getElementById('video-id_fluid_initial_play').style =
+                    'display:block;background:#d9c408'
+            }
+        })
+
+        var videoThumbs = document.getElementsByClassName('thumb-video')
+
+        for (let elem of videoThumbs) {
+            elem.addEventListener('click', function (e) {
+
+                var unmute = document.getElementById('video-id_fluid_initial_play')
+                if (unmute.classList[0] != 'fluid_initial_play') {
+                    unmute.remove()
+                    document.getElementById('video-id_fluid_initial_play').style =
+                        'display:block;background:#d9c408'
+                }
+
+                var videoPlayer = document.getElementById('video-id')
+
+                var nextVideo = document.getElementById('thumb-video-' + parseInt(e.target.id.substr(-1)))
+                var prevVideo = document.getElementById('thumb-video-' + parseInt(videoPlayer.getAttribute(
+                    "current-video")))
+
+                nextVideo.classList.add('currentVideo')
+                prevVideo.classList.remove('currentVideo')
+
+                nextVideo.classList.remove('stopped')
+                prevVideo.classList.add('stopped')
+
+
+                videoPlayer.src = elem.getAttribute("data-src")
+                videoPlayer.setAttribute('current-video', parseInt(e.target.id.substr(-1)))
+
+                video.play()
+            })
+        }
     </script>
 </body>
 
