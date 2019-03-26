@@ -29,7 +29,7 @@
             cursor: pointer;
         }
 
-        #menu ul li:hover{
+        #menu ul li:hover {
             border-bottom: 5px solid #ffe200;
         }
 
@@ -126,7 +126,7 @@
             margin: 0
         }
 
-        .wareframe-right {
+        .wireframe-right {
             background: #e6ebf0;
             width: 270px;
             height: 550px;
@@ -144,7 +144,7 @@
     </div>
     <div class="container">
         <div class="title">
-            <img src="assets/demo/wareframe-title.png" alt="">
+            <img src="assets/demo/wireframe-title.png" alt="">
         </div>
         <div class="wrapper" id="wrapper" style="width:970px;height:550px;position: relative;margin: 10px 10px 10px 0px;
         float: left;">
@@ -165,9 +165,9 @@
                 </div>
             </div>
         </div>
-        <div class="wareframe-right"></div>
-        <div class="wareframe-bottom">
-            <img src="assets/demo/wareframe-bottom.png">
+        <div class="wireframe-right"></div>
+        <div class="wireframe-bottom">
+            <img src="assets/demo/wireframe-bottom.png">
         </div>
     </div>
 
@@ -314,7 +314,7 @@
                         var powered = document.createElement('img')
                         var close = document.createElement('img')
                         var rrss = document.createElement('div')
-                        var rrss_img = document.createElement('img')
+                        var rrss_links = document.createElement('div')
                         var menu = document.createElement('div')
 
                         background.style = "background-image:url('assets/background.png');width:" + width +
@@ -340,10 +340,20 @@
                         rrss.innerHTML = '#HELLBOY'
                         rrss.style =
                             '    position: absolute;top: 6px;left: 130px;letter-spacing: 5px;color: rgb(255, 226, 0);font-family: steelfishEb;font-size: 20px;width: 100px;text-align: center;'
-                        rrss_img.src = 'assets/rrss.png'
-                        rrss_img.style = 'margin: 2px 0px 0px -5px;'
 
-                        rrss.appendChild(rrss_img)
+                        rrssHTML = ''
+                        rrssHTML +=
+                            '<a href="https://www.facebook.com/hellboymovie/" style="float:left" target="_blank"><img src="assets/fb.png"/></a>'
+                        rrssHTML +=
+                            '<a href="https://twitter.com/hellboymovie" style="float:left;margin: 0px 20px;" target="_blank"><img src="assets/tw.png"/></a>'
+                        rrssHTML +=
+                            '<a href="https://www.instagram.com/hellboymovie" style="float:left" target="_blank"><img src="assets/ig.png"/></a>'
+
+                        rrss_links.style.marginLeft = '5px'
+                        rrss_links.innerHTML = rrssHTML
+
+                        rrss.appendChild(rrss_links)
+
                         bannerRight.appendChild(logo)
                         bannerRight.appendChild(date)
 
@@ -367,6 +377,10 @@
                         wrapper.appendChild(powered)
                         wrapper.appendChild(bannerRight)
                         wrapper.appendChild(background)
+
+                        close.addEventListener('click', function(){
+                            console.log('cerrar')
+                        })
 
                         document.getElementById('synopsisItem').addEventListener('click', function (e) {
                             document.getElementById('video-id').pause()
@@ -402,7 +416,7 @@
                                     'position: absolute;bottom: 60px;left: 60px;width: 200px;height: 45px;border: 1px solid #ffe100;color: #ffe100;font-size: 16px;font-family: bahnschrift;text-transform: uppercase;text-align: center;line-height: 45px;cursor: pointer;text-decoration: none;'
 
                                 VisitPageButton.innerText = 'Visitar pagina web'
-                                VisitPageButton.href = 'google.com'
+                                VisitPageButton.href = 'https://www.hellboy.movie/'
                                 VisitPageButton.target = '_blank'
                                 VisitPageButton.id = 'visitPageButton'
 
@@ -548,6 +562,14 @@
 
         for (let elem of videoThumbs) {
             elem.addEventListener('click', function (e) {
+
+                var unmute = document.getElementById('video-id_fluid_initial_play')
+                if (unmute.classList[0] != 'fluid_initial_play') {
+                    unmute.remove()
+                    document.getElementById('video-id_fluid_initial_play').style =
+                        'display:block;background:#d9c408'
+                }
+
                 var videoPlayer = document.getElementById('video-id')
 
                 var nextVideo = document.getElementById('thumb-video-' + parseInt(e.target.id.substr(-1)))

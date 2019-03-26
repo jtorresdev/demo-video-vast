@@ -11,12 +11,96 @@
 </head>
 <style>
     body {
-        margin: 0
+        margin: 0;
+        background:white
     }
 
     .player {
         -webkit-transition: width 3s, height 3s, margin 3s, left 2s;
         transition: width 3s, height 3s, margin 3s, left 2s;
+    }
+
+    #menu ul {
+        font-size: 20px;
+        font-family: steelfishEb;
+        list-style-type: none;
+        display: inline;
+    }
+
+    #menu ul li {
+        float: left;
+        margin: 0px 0px;
+        padding: 0 5px 5px 5px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    #menu ul li:hover {
+        border-bottom: 5px solid #ffe200;
+    }
+
+    #menu ul li a {
+        color: #ffe200;
+        text-decoration: none
+    }
+
+    #menu ul li.active {
+        border-bottom: 5px solid #ffe200;
+    }
+
+    @font-face {
+        font-family: steelfishEb;
+        src: url(assets/steelfish_eb.otf);
+    }
+
+    @font-face {
+        font-family: bahnschrift;
+        src: url(assets/bahnschrift.ttf);
+    }
+
+    .dropdown-link {
+        float: left;
+        width: 100%;
+        color: #ffe200;
+        text-decoration: none;
+        font-size: 24px;
+        font-family: steelfishEb;
+        text-align: center;
+        padding: 10px 0px;
+        border: 1px solid;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+    }
+
+    .thumbnail-videos {
+        height: 60px;
+        padding: 15px;
+        margin-top: 15px;
+        display: none
+    }
+
+    .thumb-video {
+        float: left;
+        margin: 0 5px;
+        height: 60px;
+        width: 100px;
+        background: red;
+        cursor: pointer;
+        overflow: hidden;
+        outline: 1px solid #ffffff;
+    }
+
+    .stopped::after {
+        content: url(assets/play.png);
+        margin: 5px auto;
+        display: block;
+        width: 40px;
+        height: 40px;
+    }
+
+    .currentVideo {
+        outline: 3px solid #b29813 !important;
     }
 
     /* The device with borders */
@@ -66,18 +150,69 @@
         height: 640px;
         background: white;
     }
+
+    /* demo*/
+
+    .header-container {
+        height: 60px;
+        border-bottom: 1px solid #e6ebf0;
+        padding: 0 10px;
+    }
+
+    .header {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        margin: 0 auto;
+    }
+
+    .header img {
+        padding: 10px 0 0 0
+    }
+
+    .container {
+        padding: 0px 10px;
+        position: relative;
+        margin: 0 auto;
+
+        display: block;
+    }
 </style>
 
 <body>
-    <div class="smartphone">
-        <div class="content">
-            <div id="wrapper" style="width:100%">
-                <div id="player" class="player" style="width:100%;height:100%">
-                    <video id="video-id" autoplay muted>
-                        <source src="video.mp4" type="video/mp4" />
-                    </video>
+    <div class="googlechrome">
+        <img src="assets/demo/googlechrome.png" width="100%">
+    </div>
+    <div class="container" id="container">
+        <div class="header-container">
+            <div class="header">
+                <img src="assets/demo/vidoomy.png">
+            </div>
+        </div>
+        <div class="title">
+            <img src="assets/demo/wireframe-title.png" width="200px">
+        </div>
+        <div id="wrapper" style="width:100%;margin-top:10px">
+            <div id="player" class="player" style="width:100%;height:100%">
+                <video id="video-id" muted>
+                    <source src="assets/videos/video1.mp4" type="video/mp4" />
+                </video>
+            </div>
+            <div class="thumbnail-videos" id="thumbnail-videos">
+                <div class="thumb-video currentVideo" id="thumb-video-1" data-src="assets/videos/video1.mp4"
+                    style="background-image:url('assets/thumb1.png');background-size: 110px;">
+                </div>
+                <div class="thumb-video stopped" id="thumb-video-2" data-src="assets/videos/video2.mp4"
+                    style="background-image:url('assets/thumb2.png');background-size: 110px;">
+                </div>
+                <div class="thumb-video stopped" id="thumb-video-3" data-src="assets/videos/video3.mp4"
+                    style="background-image:url('assets/thumb3.png');background-size: 110px;">
                 </div>
             </div>
+        </div>
+        <div class="bottom">
+            <img src="assets/demo/wireframe-bottom-mobile.png" style="width: 330px;
+                    margin-top: 15px;">
         </div>
     </div>
 
@@ -93,109 +228,172 @@
                     • Pasar todo esto a una funcion mas organizada
                 */
                 video.play()
+
+                document.getElementById('video-id').style.background = 'transparent'
+
                 var wrapper = document.getElementById('wrapper')
                 var player = document.getElementById('player')
                 var header = document.createElement('div')
-                var sidebarButton = document.createElement('div')
-                var closeButton = document.createElement('div')
-                var hamburgerLine = document.createElement('div')
-                var sidebar = document.createElement('div')
+                var closeButton = document.createElement('img')
                 var logo = document.createElement('img')
+                var menu = document.createElement('div')
 
-                sidebar.style =
-                    'height:100%;position:absolute;width:70%;background:black;z-index:99;left:-255px;transition:left 1s ease-in-out, right 1s ease-in-out'
-                sidebar.id = 'sidebar'
+                menu.style = 'position: absolute;right: -15px;top: 15px;'
 
-                sidebarButton.style = 'width:30px;height:30px;padding:20px 0 0 15px;float:left'
+                var menuHTML = ''
 
-                closeButton.style = 'float:right;width:30px;height:30px;background:red;margin:15px'
+                menuHTML = '<ul>'
+                menuHTML += '<li class="active" id="videosItem"><a href="#">Videos</a></li>'
+                menuHTML += '<li id="saveCalendarItem"><a href="#">Guardar en calendario</a></li>'
+                menuHTML += '<li id="synopsisItem"><a href="#">Sinopsis</a></li>'
+                menuHTML += '</ul>'
 
-                hamburgerLine.style = 'background:red;height:4px;width:100%;margin-bottom:4px'
+                menu.innerHTML = menuHTML
+                menu.id = "menu"
+
+                document.getElementById('paper').remove()
+
+                closeButton.style = 'float:right;width:10px;height:10px;margin:5px;'
+                closeButton.src = 'assets/close.png'
 
                 header.id = "header"
                 header.style =
-                    'width:100%;height:60px;background:black;border-bottom: 1px solid red;text-align: center;'
+                    'width:100%;height:40px;text-align: center;'
 
-                logo.src = 'capitana_marvel/logo.png'
-                logo.style = 'width:130px;margin-left: 20px;'
+                logo.src = 'assets/logo.png'
+                logo.style = 'width:100px;float:left;margin: 10px;'
 
-                wrapper.style = 'position:absolute;background:black;height:100%'
+                wrapper.style =
+                    'position: fixed;background-image: url(assets/background-mobile.png);height: 100%;top: 0px;background-size: cover;background-repeat: no-repeat;'
+
+                /* demo */
+
+                document.getElementById('container').style.padding = '20px 0px'
+
+                /* demo */
 
                 // efecto achicarse
                 player.style.height = '100%'
                 player.style.height = '230px'
 
-                sidebarButton.appendChild(hamburgerLine)
-                sidebarButton.appendChild(hamburgerLine.cloneNode(true))
-                sidebarButton.appendChild(hamburgerLine.cloneNode(true))
-
 
                 // BANNERS
 
-                var banners_container = document.createElement('div')
+                var bottom_container = document.createElement('div')
+                var bottom_left = document.createElement('div')
+                var bottom_right = document.createElement('div')
+                var VisitPageButton = document.createElement('div')
+                var powered = document.createElement('img')
 
-                var banner1 = document.createElement('div')
-                var banner1_image = document.createElement('img')
-                var banner1_button = document.createElement('img')
+                powered.src = 'assets/powered.png'
+                powered.style = 'position:absolute;bottom: 10px; right: 10px;'
 
-                banner1.style = 'width:100%'
-                banner1_image.src = 'capitana_marvel/banner.png'
-                banner1_image.style = 'width:100%'
+                bottom_container.style = 'width: 330px;height: 120px;margin: 0 auto;display: block;'
 
-                var banner1 = document.createElement('div')
-                var banner1_image = document.createElement('img')
-                var banner1_button = document.createElement('img')
+                bottom_left.style =
+                    'letter-spacing: 5px;color: rgb(255, 226, 0);font-family: steelfishEb;font-size: 20px;width: 100px;text-align: center;margin: 15px;float: left;margin-right: 20px;'
+                bottom_right.style =
+                    'float: left;width: 150px;text-align: center;margin: 10px 15px;padding: 5px 0;border-top: 3px solid #f9f9cd;border-bottom: 3px solid #f9f9cd;'
 
-                banner1.style = 'width:100%'
-                banner1_image.src = 'capitana_marvel/banner.png'
-                banner1_image.style = 'width:100%'
+                var bottom_left_HTML = ''
+
+                bottom_left_HTML += '<img src="assets/logo.png" width="100px"/>'
+                bottom_left_HTML += '<span>#HELLBOY</span>'
+                bottom_left_HTML +=
+                    '<a href="https://www.facebook.com/hellboymovie/" style="float:left;margin-left: 5px;" target="_blank"><img src="assets/fb.png"/></a>'
+                bottom_left_HTML +=
+                    '<a href="https://twitter.com/hellboymovie" style="float:left;margin: 0px 20px;" target="_blank"><img src="assets/tw.png"/></a>'
+                bottom_left_HTML +=
+                    '<a href="https://www.instagram.com/hellboymovie" style="float:left" target="_blank"><img src="assets/ig.png"/></a>'
+
+                bottom_left.innerHTML = bottom_left_HTML
+
+                var bottom_right_HTML = ''
+
+                bottom_right_HTML = '<img src="assets/date.png" width="150px" />'
+
+                bottom_right.innerHTML = bottom_right_HTML
+
+                VisitPageButton.style =
+                    'position: absolute;bottom: 70px;margin: 0 auto;display: block;width: 200px;left: 0;right: 0;height: 45px;border: 1px solid rgb(255, 225, 0);color: rgb(255, 225, 0);font-size: 16px;font-family: bahnschrift;text-transform: uppercase;text-align: center;line-height: 45px;cursor: pointer;text-decoration: none;'
+
+                VisitPageButton.innerText = 'Visitar pagina web'
+                VisitPageButton.href = 'https://www.hellboy.movie/'
+                VisitPageButton.target = '_blank'
+                VisitPageButton.id = 'visitPageButton'
 
 
-                banner1.appendChild(banner1_image)
+                bottom_container.appendChild(bottom_left)
+                bottom_container.appendChild(bottom_right)
 
-                banners_container.appendChild(banner1)
+                bottom_container.appendChild(VisitPageButton)
+
+                bottom_container.appendChild(powered)
 
                 header.appendChild(closeButton)
-                header.appendChild(sidebarButton)
                 header.appendChild(logo)
-                wrapper.insertBefore(sidebar, wrapper.firstChild)
                 wrapper.insertBefore(header, wrapper.firstChild);
-                wrapper.appendChild(banners_container)
+                wrapper.appendChild(bottom_container)
+                wrapper.appendChild(menu)
 
-                sidebarButton.addEventListener('click', function () {
-                    // show/hide sidebar
-                    if (sidebar.style.left === '0px') {
-                        sidebar.style.left = '-255px'
-                    } else {
-                        sidebar.style.left = '0px'
-                    }
-
-                })
+                document.getElementById('thumbnail-videos').style.display = 'block'
 
                 closeButton.addEventListener('click', function () {
-                    // close everything
-                    sidebar.remove()
-                    header.remove()
-                    banners_container.remove()
-                    player.style = 'height:100%;width:100%'
-                    wrapper.style = 'width:100%'
+                    console.log('close')
                 })
 
             }
 
         }
 
+        var hidePlayerButtons = function () {
+            var hide = "display:none"
+
+            var fullscreen = document.getElementById('video-id_fluid_control_fullscreen')
+            fullscreen.style = hide
+            var theatre = document.getElementById('video-id_fluid_control_theatre')
+            theatre.style = hide
+            var progress = document.getElementById('video-id_fluid_control_duration')
+            progress.style = hide
+        }
+
         var options = {
             layoutControls: {
+                primaryColor: "#d9c408",
                 fillToContainer: true,
+                posterImage: "assets/poster.png",
                 persistentSettings: {
                     volume: false
                 },
-                autoPlay: true,
+                autoPlay: false,
                 mute: true,
                 playerInitCallback: (function () {
+                    hidePlayerButtons()
+                    document.getElementById('video-id_fluid_controls_container').style.display = 'none'
+                    document.getElementById('video-id_fluid_initial_play').style =
+                        'cursor:none;display:none'
+
+                    var unmuteButton = document.createElement('div')
+
+                    unmuteButton.innerHTML = '<img src="assets/unmute.png" width="80px">'
+                    unmuteButton.id = 'video-id_fluid_initial_play'
+
+                    var initial_play = document.getElementById('video-id_fluid_initial_play_button')
+
+                    initial_play.insertBefore(unmuteButton, initial_play.firstChild)
+
+
+                    var paper = document.createElement('img')
+                    paper.src = 'assets/paper.png'
+                    paper.style =
+                        'position: absolute;bottom: 0px;right: 0px;z-index: 99;cursor:pointer;width: 120px;'
+                    paper.id = 'paper'
+
+                    paper.addEventListener('click', tapOnVideo)
+                    document.getElementById('fluid_video_wrapper_video-id').appendChild(paper)
+
                     var videoPlayer = document.getElementById('video-id')
-                    videoPlayer.addEventListener('click', tapOnVideo)
+                    //videoPlayer.addEventListener('click', tapOnVideo)
                 })
             }
         }
