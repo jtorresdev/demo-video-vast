@@ -85,7 +85,7 @@
         margin: 0 5px;
         height: 60px;
         width: 100px;
-        background: red;
+        background: white;
         cursor: pointer;
         overflow: hidden;
         outline: 1px solid #ffffff;
@@ -226,13 +226,11 @@
         var tapOnVideo = function () {
 
             if (document.getElementById('sidebar') || document.getElementById('header')) {
-                console.log('ya existen las divs')
+                    // nothing...
             } else {
-                /*
-                #TODO:
-                    • Dejar Divs exactamente iguales al dar click en cerrar
-                    • Pasar todo esto a una funcion mas organizada
-                */
+
+                document.getElementById('unmuteButton').remove()
+                video.muteToggle('video-id', true)
                 video.play()
                 document.getElementById('thumbnail-videos').style.display = 'block'
 
@@ -271,7 +269,7 @@
                 logo.style = 'width:100px;float:left;margin: 10px;'
 
                 wrapper.style =
-                    'position: fixed;background-image: url(assets/background-mobile.png);height: 100%;top: 0px;background-size: cover;background-repeat: no-repeat;width: 100%;'
+                    'position: fixed;background-image: url(assets/background-mobile.png);height: 100%;top: 0px;background-size: cover;background-repeat: no-repeat;width: 100%;background-color: black;'
 
                 /* demo */
 
@@ -447,12 +445,25 @@
                     document.getElementById('video-id_fluid_initial_play').style =
                         'cursor:none;display:none'
 
+                     makeUnmuteButton()
+
                     makePaper()
 
                 })
 
             }
 
+        }
+
+        var makeUnmuteButton = function(){
+            var unmuteButton = document.createElement('div')
+                unmuteButton.style = "position: absolute;top: 70px;width: 100%;text-align: center;display: block;"
+                unmuteButton.innerHTML = '<img src="assets/unmute.png" width="80px">'
+                unmuteButton.id = 'unmuteButton'
+
+                document.getElementById('fluid_video_wrapper_video-id').appendChild(unmuteButton)
+
+                unmuteButton.addEventListener('click', tapOnVideo)
         }
 
         var makePaper = function () {
@@ -493,20 +504,12 @@
                     document.getElementById('video-id_fluid_controls_container').style.display = 'none'
                     document.getElementById('video-id_fluid_initial_play').style =
                         'cursor:none;display:none'
-
-                    var unmuteButton = document.createElement('div')
-
-                    unmuteButton.innerHTML = '<img src="assets/unmute.png" width="80px">'
-                    unmuteButton.id = 'video-id_fluid_initial_play'
-
-                    var initial_play = document.getElementById('video-id_fluid_initial_play_button')
-
-                    initial_play.insertBefore(unmuteButton, initial_play.firstChild)
+                        
+                    makeUnmuteButton()
 
                     makePaper()
 
-                    var videoPlayer = document.getElementById('video-id')
-                    //videoPlayer.addEventListener('click', tapOnVideo)
+                    var videoPlayer = document.getElementById('video-id',)
                 })
             }
         }
