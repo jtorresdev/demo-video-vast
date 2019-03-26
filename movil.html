@@ -77,7 +77,7 @@
         height: 60px;
         padding: 15px;
         margin-top: 10px;
-        display: none
+        display:none;
     }
 
     .thumb-video {
@@ -234,6 +234,7 @@
                     • Pasar todo esto a una funcion mas organizada
                 */
                 video.play()
+                document.getElementById('thumbnail-videos').style.display = 'block'
 
                 document.getElementById('video-id').style.background = 'transparent'
 
@@ -297,7 +298,7 @@
 
                 bottom_container.id = "bottom_container"
                 bottom_container.style =
-                    'width: 330px;margin: 0px auto; bottom: 130px;position: absolute;left: 0;right: 0;display:none'
+                    'width: 330px;margin: 0px auto; bottom: 130px;left: 0;right: 0;'
 
                 bottom_left.style =
                     'letter-spacing: 5px;color: rgb(255, 226, 0);font-family: steelfishEb;font-size: 20px;width: 100px;text-align: center;margin: 15px;float: left;margin-right: 20px;'
@@ -324,25 +325,29 @@
                 bottom_right.innerHTML = bottom_right_HTML
 
                 VisitPageButton.style =
-                    'position: absolute;bottom: 70px;margin: 0 auto;display: block;width: 200px;left: 0;right: 0;height: 45px;border: 1px solid rgb(255, 225, 0);color: rgb(255, 225, 0);font-size: 16px;font-family: bahnschrift;text-transform: uppercase;text-align: center;line-height: 45px;cursor: pointer;text-decoration: none;display:none'
+                    'bottom: 70px;margin: 0 auto;display: table;width: 200px;left: 0;right: 0;height: 45px;border: 1px solid rgb(255, 225, 0);color: rgb(255, 225, 0);font-size: 16px;font-family: bahnschrift;text-transform: uppercase;text-align: center;line-height: 45px;cursor: pointer;text-decoration: none;'
 
                 VisitPageButton.innerText = 'Visitar pagina web'
                 VisitPageButton.href = 'https://www.hellboy.movie/'
                 VisitPageButton.target = '_blank'
                 VisitPageButton.id = 'visitPageButton'
 
+               var vpbutton_container = document.createElement('div')
+                vpbutton_container.style.width = '100%'
+                vpbutton_container.appendChild(VisitPageButton)
+
 
                 bottom_container.appendChild(bottom_left)
                 bottom_container.appendChild(bottom_right)
-
-                wrapper.appendChild(VisitPageButton)
-
-                wrapper.appendChild(powered)
+                bottom_container.appendChild(vpbutton_container)
+        
 
                 header.appendChild(closeButton)
                 header.appendChild(logo)
                 wrapper.insertBefore(header, wrapper.firstChild);
                 wrapper.appendChild(bottom_container)
+                //wrapper.appendChild(VisitPageButton)
+                wrapper.appendChild(powered)
                 wrapper.appendChild(menu)
 
                 var video_wrapper = document.getElementById('fluid_video_wrapper_video-id')
@@ -356,6 +361,8 @@
                     removeIfExists(['saveCalendarDropdown'])
                     document.getElementsByClassName('active')[0].classList.remove('active')
                     document.getElementById('synopsisItem').classList.add('active')
+
+                    document.getElementById('bottom_container').style.marginTop = '100px'
 
                     video_wrapper.style.display = 'none'
                     document.getElementById('thumbnail-videos').style.display = 'none'
@@ -377,6 +384,7 @@
 
                 document.getElementById('videosItem').addEventListener('click', function (e) {
                     e.preventDefault()
+                    document.getElementById('bottom_container').style.marginTop = '0px'
                     document.getElementById('video-id').pause()
                     removeIfExists(['saveCalendarDropdown', 'synopsis'])
                     document.getElementsByClassName('active')[0].classList.remove('active')
@@ -552,10 +560,7 @@
         document.getElementById('player').addEventListener("transitionend", function (event) {
             if (document.getElementById('wrapper').style.height === '100%') {
                 document.getElementById('video-id_fluid_controls_container').style.display = 'block'
-                document.getElementById('thumbnail-videos').style.display = 'block'
-                document.getElementById('bottom_container').style.display = 'block'
                 document.getElementById('poweredbyvidoomy').style.display = 'block'
-                document.getElementById('visitPageButton').style.display = 'block'
             }
 
         });
