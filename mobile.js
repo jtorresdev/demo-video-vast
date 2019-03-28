@@ -214,8 +214,11 @@ var tapOnVideo = function () {
 
         closeButton.addEventListener('click', function () {
             removeIfExists(['header', 'visitPageButton', 'poweredbyvidoomy', 'bottom_container',
-                'menu'
+                'menu', 'synopsis', 'saveCalendarDropdown'
             ])
+
+            document.getElementById('fluid_video_wrapper_video-id').style.display = 'block'
+
             document.getElementById('thumbnail-videos').style.display = 'none'
             document.getElementById('player').style = 'width:100%;height:100%'
             document.getElementById('wrapper').style = 'width: 100%;margin-top: 10px;'
@@ -226,7 +229,7 @@ var tapOnVideo = function () {
             document.getElementById('video-id_fluid_initial_play').style =
                 'cursor:none;display:none'
 
-             makeUnmuteButton()
+            makeUnmuteButton()
 
             makePaper()
 
