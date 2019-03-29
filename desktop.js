@@ -1,10 +1,10 @@
 var firstPlay = true;
 
-var width = document.currentScript.getAttribute('playerWidth')||'970px';
-var height = document.currentScript.getAttribute('playerHeight')||'550px';
-
-var newWidth = document.currentScript.getAttribute('shortPlayerWidth')||'640px';
-var newHeight = document.currentScript.getAttribute('shortPlayerHeight')||'360px';
+var width = getParamValue('playerWidth')||'970px';
+var height = parseInt(width.replace('px', '')) * 0.5625 + 'px';
+var fontSize = getParamValue('fontSize')||'16px';
+var newWidth = getParamValue('shortPlayerWidth')||'640px';
+var newHeight = parseInt(newWidth.replace('px', '')) * 0.5625 + 'px';
 
 var marginTop = '60px';
 var marginLeft = '10px';
@@ -148,12 +148,7 @@ var options = {
 				var rrss_links = document.createElement('div');
 				var menu = document.createElement('div');
 
-				background.style =
-					"background-image:url('assets/background.png');width:" +
-					width +
-					';height:' +
-					height +
-					';background-repeat: no-repeat;';
+				background.style = "background-image:url('assets/background.png');width:" + width + ';height:' + height +';background-repeat: no-repeat;';
 
 				logo.src = 'assets/logo.png';
 				logoTop.src = 'assets/logo.png';
@@ -247,7 +242,7 @@ var options = {
 						var date1 = document.createElement('img');
 
 						synopsis.style =
-							'position: absolute;top: 80px;left: 50px;color: white;width: 600px;font-size: 14px;font-family: bahnschrift;text-transform: uppercase;line-height: 25px;';
+							'position: absolute;top: 12%;left: 50px;color: white;width: 600px;font-size: ' + fontSize + ';font-family: bahnschrift;text-transform: uppercase;line-height: 25px;';
 						synopsis.id = 'synopsis';
 						var synopsisHTML = '';
 						synopsisHTML +=
@@ -257,7 +252,7 @@ var options = {
 						synopsis.innerHTML = synopsisHTML;
 
 						VisitPageButton.style =
-							'position: absolute;bottom: 60px;left: 60px;width: 25%;height: 45px;border: 1px solid #ffe100;color: #ffe100;font-size: 16px;font-family: bahnschrift;text-transform: uppercase;text-align: center;line-height: 45px;cursor: pointer;text-decoration: none;';
+							'position: absolute;bottom: 12%;left: 60px;width: 25%;height: 45px;border: 1px solid #ffe100;color: #ffe100;font-size: 16px;font-family: bahnschrift;text-transform: uppercase;text-align: center;line-height: 45px;cursor: pointer;text-decoration: none;';
 
 						VisitPageButton.innerText = 'Visitar pagina web';
 						VisitPageButton.href = 'https://www.hellboy.movie/';
@@ -265,7 +260,7 @@ var options = {
 						VisitPageButton.id = 'visitPageButton';
 
 						date1.src = 'assets/date.png';
-						date1.style = 'position: relative;bottom: 130px;margin: 0 auto;display: block;';
+						date1.style = 'position: relative;bottom: 25%;margin: 0px auto;display: block;width: 20%;';
 						date1.id = 'date';
 
 						wrapper.appendChild(date1);
