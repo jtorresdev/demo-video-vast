@@ -1,16 +1,14 @@
 var firstPlay = true;
-var completedTransition = false;
-var completedAd = false;
 
-var width = '970px';
-var height = '550px';
+var width = document.currentScript.getAttribute('playerWidth')||'970px';
+var height = document.currentScript.getAttribute('playerHeight')||'550px';
 
-var newWidth = '640px';
-var newHeight = '360px';
+var newWidth = document.currentScript.getAttribute('shortPlayerWidth')||'640px';
+var newHeight = document.currentScript.getAttribute('shortPlayerHeight')||'360px';
 
 var marginTop = '60px';
 var marginLeft = '10px';
-var muted = true;
+
 
 var hidePlayerButtons = function() {
 	var hide = 'display:none';
@@ -45,19 +43,16 @@ var playerOut = function() {
 	document.getElementsByClassName('active')[0].classList.remove('active');
 	document.getElementById('videosItem').classList.add('active');
 	// si no ha terminado la transicion, vuelve al tamaño inicial
-	if (!completedTransition) {
-		video_wrapper.style.width = width;
-		video_wrapper.style.height = height;
-		video_wrapper.style.marginTop = '0px';
-		video_wrapper.style.marginLeft = '0px';
-	}
+	video_wrapper.style.width = width;
+	video_wrapper.style.height = height;
+	video_wrapper.style.marginTop = '0px';
+	video_wrapper.style.marginLeft = '0px';
 };
 
 var playerIn = function() {
 	document.getElementById('paper').style.display = 'none';
 	video.muteToggle('video-id', true);
 	document.getElementById('video-id_fluid_controls_container').style.display = 'block';
-	//video.play()
 	var video_wrapper = document.getElementById('fluid_video_wrapper_video-id');
 	video_wrapper.style.width = newWidth;
 	video_wrapper.style.height = newHeight;
@@ -69,6 +64,50 @@ var removeIfExists = function(ids) {
 	ids.map((id) => {
 		document.getElementById(id) ? document.getElementById(id).remove() : null;
 	});
+};
+
+var hideControlBar = function() {
+	document.getElementById('video-id_fluid_controls_container').style.display = 'none';
+	document.getElementById('video-id_fluid_initial_play').style = 'cursor:none;display:none';
+};
+
+var playOnClick = function() {
+	document.getElementById('video-id').addEventListener('click', function() {
+		playerIn();
+	});
+};
+
+var makeUnmuteButton = function() {
+	var unmuteButton = document.createElement('div');
+
+	unmuteButton.innerHTML = '<img src="assets/unmute.png">';
+	unmuteButton.id = 'video-id_fluid_initial_play';
+
+	var initial_play = document.getElementById('video-id_fluid_initial_play_button');
+
+	initial_play.insertBefore(unmuteButton, initial_play.firstChild);
+
+	unmuteButton.addEventListener('click', playerIn);
+};
+
+var makePaper = function() {
+	var paper = document.createElement('img');
+	paper.src = 'assets/paper.png';
+	paper.style = 'position: absolute;bottom: 0px;right: 0px;z-index: 99;cursor:pointer';
+	paper.id = 'paper';
+	paper.addEventListener('click', function() {
+		document.getElementById('paper').style.display = 'none';
+		video.muteToggle('video-id', true);
+		document.getElementById('video-id_fluid_controls_container').style.display = 'block';
+		video.play();
+		var video_wrapper = document.getElementById('fluid_video_wrapper_video-id');
+		video_wrapper.style.width = newWidth;
+		video_wrapper.style.height = newHeight;
+		video_wrapper.style.marginTop = marginTop;
+		video_wrapper.style.marginLeft = marginLeft;
+		removeAllListener();
+	});
+	document.getElementById('fluid_video_wrapper_video-id').appendChild(paper);
 };
 
 var options = {
@@ -83,51 +122,18 @@ var options = {
 		mute: true,
 		playerInitCallback: function() {
 			hidePlayerButtons();
+			hideControlBar();
 
-			document.getElementById('video-id_fluid_controls_container').style.display = 'none';
-			document.getElementById('video-id_fluid_initial_play').style = 'cursor:none;display:none';
+			playOnClick();
 
-			document.getElementById('video-id').addEventListener('click', function() {
-				playerIn();
-			});
-
-			var unmuteButton = document.createElement('div');
-
-			unmuteButton.innerHTML = '<img src="assets/unmute.png">';
-			unmuteButton.id = 'video-id_fluid_initial_play';
-
-			var initial_play = document.getElementById('video-id_fluid_initial_play_button');
-
-			initial_play.insertBefore(unmuteButton, initial_play.firstChild);
-
-			var paper = document.createElement('img');
-			paper.src = 'assets/paper.png';
-			paper.style = 'position: absolute;bottom: 0px;right: 0px;z-index: 99;cursor:pointer';
-			paper.id = 'paper';
-			paper.addEventListener('click', function() {
-				document.getElementById('paper').style.display = 'none';
-				video.muteToggle('video-id', true);
-				document.getElementById('video-id_fluid_controls_container').style.display = 'block';
-				video.play();
-				var video_wrapper = document.getElementById('fluid_video_wrapper_video-id');
-				video_wrapper.style.width = newWidth;
-				video_wrapper.style.height = newHeight;
-				video_wrapper.style.marginTop = marginTop;
-				video_wrapper.style.marginLeft = marginLeft;
-				removeAllListener();
-			});
-			document.getElementById('fluid_video_wrapper_video-id').appendChild(paper);
+			makeUnmuteButton();
+			makePaper();
 
 			// obtenemos el contenedor del reproductor
 			var video_wrapper = document.getElementById('fluid_video_wrapper_video-id');
 
 			// si el reproductor ya se achicó en el siguiente bucle mantendra el tamaño
-			if (!completedTransition) {
-				video_wrapper.style = 'position: absolute;width: ' + width + ';height: ' + height + ';z-index: 10;';
-			} else {
-				video_wrapper.style =
-					'position: absolute;width: ' + newWidth + ';height: ' + newHeight + ';z-index: 10;';
-			}
+			video_wrapper.style = 'position: absolute;width: ' + width + ';height: ' + height + ';z-index: 10;';
 
 			// si el primer bucle, agregamos el HTML del fondo
 			if (firstPlay) {
@@ -160,7 +166,7 @@ var options = {
 				close.style = 'position:absolute;top:10px;right:10px;cursor: pointer;';
 				close.id = 'closeButton';
 
-				bannerRight.style = 'position: absolute;right: 50px;bottom: 130px;width: 220px;text-align: center;';
+				bannerRight.style = 'position: absolute;right: 5%;bottom: 130px;width: 220px;text-align: center;';
 
 				powered.src = 'assets/powered.png';
 				powered.style = 'position:absolute;bottom:10px;right:10px';
@@ -251,7 +257,7 @@ var options = {
 						synopsis.innerHTML = synopsisHTML;
 
 						VisitPageButton.style =
-							'position: absolute;bottom: 60px;left: 60px;width: 200px;height: 45px;border: 1px solid #ffe100;color: #ffe100;font-size: 16px;font-family: bahnschrift;text-transform: uppercase;text-align: center;line-height: 45px;cursor: pointer;text-decoration: none;';
+							'position: absolute;bottom: 60px;left: 60px;width: 25%;height: 45px;border: 1px solid #ffe100;color: #ffe100;font-size: 16px;font-family: bahnschrift;text-transform: uppercase;text-align: center;line-height: 45px;cursor: pointer;text-decoration: none;';
 
 						VisitPageButton.innerText = 'Visitar pagina web';
 						VisitPageButton.href = 'https://www.hellboy.movie/';
@@ -323,7 +329,6 @@ var options = {
 				if (event.propertyName === 'width') {
 					if (event.elapsedTime <= 3 && video_wrapper.style.width === width) {
 						document.getElementById('paper').style.display = 'block';
-						//completedTransition = true
 					}
 				}
 			});
@@ -347,11 +352,7 @@ video.on('pause', function() {
 });
 
 video.on('play', function() {
-	if (!completedAd) {
-		var video_wrapper = document.getElementById('fluid_video_wrapper_video-id');
-		// agregamos el listener para cuando el mouse este dentro de reproductor
-		wrapper.addEventListener('mouseenter', playerIn);
-	}
+	wrapper.addEventListener('mouseenter', playerIn);
 });
 
 video.on('ended', function() {

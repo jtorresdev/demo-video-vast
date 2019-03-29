@@ -93,57 +93,21 @@
             outline: 3px solid #b29813 !important;
         }
 
-        .header-container {
-            height: 60px;
-            border-bottom: 1px solid #e6ebf0;
-            padding: 0 45px;
-        }
-
-        .header {
-            width: 1260px;
-            height: 100%;
-            position: relative;
-            margin: 0 auto;
-        }
-
-        .header img {
-            padding: 10px 0 0 0
-        }
-
         .container {
-            padding: 20px 0px;
             position: relative;
             margin: 0 auto;
-            width: 1260px;
             display: block;
         }
 
         body {
             margin: 0
         }
-
-        .wireframe-right {
-            background: #e6ebf0;
-            width: 270px;
-            height: 550px;
-            float: left;
-            margin: 10px 0 0 0;
-        }
     </style>
 </head>
 
 <body>
-    <div class="header-container">
-        <div class="header">
-            <img src="assets/demo/vidoomy.png">
-        </div>
-    </div>
     <div class="container">
-        <div class="title">
-            <img src="assets/demo/wireframe-title.png" alt="">
-        </div>
-        <div class="wrapper" id="wrapper" style="width:970px;height:550px;position: relative;margin: 10px 10px 10px 0px;
-        float: left;">
+        <div class="wrapper" id="wrapper" style="width:720px;height:550px;position: relative;float: left;">
             <div class="big-video">
                 <video id="video-id" current-video="1" muted>
                     <source src="assets/videos/video1.mp4" type="video/mp4" />
@@ -161,11 +125,13 @@
                 </div>
             </div>
         </div>
-        <div class="wireframe-right"></div>
-        <div class="wireframe-bottom">
-            <img src="assets/demo/wireframe-bottom.png">
-        </div>
     </div>
-    <script src="desktop.js"></script>
+    <script 
+        src="desktop.js" 
+        playerWidth="720px" 
+        playerHeight="550px"
+        shortPlayerWidth="440px"
+        shortPlayerHeight="360px"
+        ></script>
 </body>
 </html>
