@@ -381,7 +381,7 @@ var options = {
 							next_dot.className = "dot dot-active"
 						})
 
-						navigation.style = "position: absolute;bottom: 0px;left: 20px;"
+						navigation.style = "position: absolute;bottom: 0px;left: 0px;right: 0px;margin: 0 auto;width: 50px;"
 						navigation.appendChild(prev_dot)
 						navigation.appendChild(next_dot)
 
