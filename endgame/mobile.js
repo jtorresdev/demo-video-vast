@@ -1,3 +1,5 @@
+var base_url = "https://www.vidoomy.com/hellboy_desktop"
+
 var removeIfExists = function (ids) {
     ids.map(id => {
         document.getElementById(id) ? document.getElementById(id).remove() : null
@@ -40,21 +42,21 @@ var tapOnVideo = function () {
         document.getElementById('paper').remove()
 
         closeButton.style = 'float:right;width:10px;height:10px;margin:5px;cursor: pointer;'
-        closeButton.src = 'assets/close.png'
+        closeButton.src = base_url + '/assets/close.png'
 
         header.id = "header"
         header.style =
             'width:100%;height:40px;text-align: center;'
 
-        logo.src = 'assets/logo.png'
+        logo.src = base_url + '/assets/logo.png'
         logo.style = 'width:100px;float:left;margin: 10px;'
 
         wrapper.style =
-            'position: fixed;background-image: url(assets/background-mobile.png);height: 100%;top: 0px;background-size: cover;background-repeat: no-repeat;width: 100%;background-color: black;'
+            'position: fixed;background-image: url(https://www.vidoomy.com/hellboy_desktop/assets/background-mobile.png);height: 100%;top: 0px;background-size: cover;background-repeat: no-repeat;width: 100%;background-color: black;left: 0;z-index: 999999999;'
 
         /* demo */
 
-        document.getElementById('container').style.padding = '20px 0px'
+        //document.getElementById('container').style.padding = '20px 0px'
 
         /* demo */
 
@@ -71,7 +73,7 @@ var tapOnVideo = function () {
         var VisitPageButton = document.createElement('a')
         var powered = document.createElement('img')
 
-        powered.src = 'assets/powered.png'
+        powered.src = base_url + '/assets/powered.png'
         powered.style = 'position:absolute;bottom: 10px; right: 10px;display:none'
         powered.id = 'poweredbyvidoomy'
 
@@ -86,20 +88,20 @@ var tapOnVideo = function () {
 
         var bottom_left_HTML = ''
 
-        bottom_left_HTML += '<img src="assets/logo.png" width="100px"/>'
+        bottom_left_HTML += '<img src="'+ base_url + '/assets/logo.png" width="100px"/>'
         bottom_left_HTML += '<span>#HELLBOY</span>'
         bottom_left_HTML +=
-            '<a href="https://www.facebook.com/hellboymovie/" style="float:left;margin-left: 5px;" target="_blank"><img src="assets/fb.png"/></a>'
+            '<a href="https://www.facebook.com/hellboymovie/" style="float:left;margin-left: 5px;" target="_blank"><img src="' + base_url + '/assets/fb.png"/></a>'
         bottom_left_HTML +=
-            '<a href="https://twitter.com/hellboymovie" style="float:left;margin: 0px 20px;" target="_blank"><img src="assets/tw.png"/></a>'
+            '<a href="https://twitter.com/hellboymovie" style="float:left;margin: 0px 20px;" target="_blank"><img src="' + base_url + '/assets/tw.png"/></a>'
         bottom_left_HTML +=
-            '<a href="https://www.instagram.com/hellboymovie" style="float:left" target="_blank"><img src="assets/ig.png"/></a>'
+            '<a href="https://www.instagram.com/hellboymovie" style="float:left" target="_blank"><img src="' + base_url + '/assets/ig.png"/></a>'
 
         bottom_left.innerHTML = bottom_left_HTML
 
         var bottom_right_HTML = ''
 
-        bottom_right_HTML = '<img src="assets/date.png" width="150px" />'
+        bottom_right_HTML = '<img src="' + base_url + '/assets/date.png" width="150px" />'
 
         bottom_right.innerHTML = bottom_right_HTML
 
@@ -242,7 +244,7 @@ var tapOnVideo = function () {
 var makeUnmuteButton = function(){
     var unmuteButton = document.createElement('div')
         unmuteButton.style = "position: absolute;top: 70px;width: 100%;text-align: center;display: block;"
-        unmuteButton.innerHTML = '<img src="assets/unmute.png" width="80px">'
+        unmuteButton.innerHTML = '<img src="' + base_url + '/assets/unmute.png" width="80px">'
         unmuteButton.id = 'unmuteButton'
 
         document.getElementById('fluid_video_wrapper_video-id').appendChild(unmuteButton)
@@ -252,7 +254,7 @@ var makeUnmuteButton = function(){
 
 var makePaper = function () {
     var paper = document.createElement('img')
-    paper.src = 'assets/paper.png'
+    paper.src = base_url + '/assets/paper.png'
     paper.style =
         'position: absolute;bottom: 0px;right: 0px;z-index: 99;cursor:pointer;width: 120px;'
     paper.id = 'paper'
@@ -277,7 +279,7 @@ var options = {
     layoutControls: {
         primaryColor: "#d9c408",
         fillToContainer: true,
-        posterImage: "assets/poster.png",
+        posterImage: "' + base_url + '/assets/poster.png",
         persistentSettings: {
             volume: false
         },

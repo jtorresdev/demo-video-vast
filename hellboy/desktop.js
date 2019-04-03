@@ -1,13 +1,25 @@
+function getParamValue(paramName) {
+	var url = window.location.search.substring(1); //get rid of "?" in querystring
+	var qArray = url.split('&'); //get key-value pairs
+	for (var i = 0; i < qArray.length; i++) {
+		var pArr = qArray[i].split('='); //split key and value
+		if (pArr[0] == paramName)
+			return pArr[1]; //return value
+	}
+}
+
 var firstPlay = true;
 
-var width = getParamValue('playerWidth')||'970px';
+var width = document.currentScript.getAttribute('playerWidth')||'970px';
 var height = parseInt(width.replace('px', '')) * 0.5625 + 'px';
-var fontSize = getParamValue('fontSize')||'16px';
-var newWidth = getParamValue('shortPlayerWidth')||'640px';
+var fontSize = document.currentScript.getAttribute('fontSize')||'16px';
+var newWidth = document.currentScript.getAttribute('shortPlayerWidth')||'640px';
 var newHeight = parseInt(newWidth.replace('px', '')) * 0.5625 + 'px';
 
 var marginTop = '60px';
 var marginLeft = '10px';
+
+var base_url = "https://www.vidoomy.com/hellboy_desktop"
 
 
 var hidePlayerButtons = function() {
@@ -80,7 +92,7 @@ var playOnClick = function() {
 var makeUnmuteButton = function() {
 	var unmuteButton = document.createElement('div');
 
-	unmuteButton.innerHTML = '<img src="assets/unmute.png">';
+	unmuteButton.innerHTML = '<img src="'+ base_url +'/assets/unmute.png">';
 	unmuteButton.id = 'video-id_fluid_initial_play';
 
 	var initial_play = document.getElementById('video-id_fluid_initial_play_button');
@@ -92,7 +104,7 @@ var makeUnmuteButton = function() {
 
 var makePaper = function() {
 	var paper = document.createElement('img');
-	paper.src = 'assets/paper.png';
+	paper.src = ''+ base_url +'/assets/paper.png';
 	paper.style = 'position: absolute;bottom: 0px;right: 0px;z-index: 99;cursor:pointer';
 	paper.id = 'paper';
 	paper.addEventListener('click', function() {
@@ -113,7 +125,7 @@ var makePaper = function() {
 var options = {
 	layoutControls: {
 		primaryColor: '#d9c408',
-		posterImage: 'assets/poster.png',
+		posterImage: ''+ base_url +'/assets/poster.png',
 		playButtonShowing: true,
 		persistentSettings: {
 			volume: false
@@ -148,22 +160,22 @@ var options = {
 				var rrss_links = document.createElement('div');
 				var menu = document.createElement('div');
 
-				background.style = "background-image:url('assets/background.png');width:" + width + ';height:' + height +';background-repeat: no-repeat;';
+				background.style = "background-image:url('" + base_url + "/assets/background.png');width:" + width + ';height:' + height +';background-repeat: no-repeat;';
 
-				logo.src = 'assets/logo.png';
-				logoTop.src = 'assets/logo.png';
+				logo.src = ''+ base_url +'/assets/logo.png';
+				logoTop.src = ''+ base_url +'/assets/logo.png';
 				logoTop.style = 'position:absolute;top:10px;left:10px;width: 100px;';
 
-				date.src = 'assets/date.png';
+				date.src = ''+ base_url +'/assets/date.png';
 				date.style = 'margin-top: 20px;';
 
-				close.src = 'assets/close.png';
+				close.src = ''+ base_url +'/assets/close.png';
 				close.style = 'position:absolute;top:10px;right:10px;cursor: pointer;';
 				close.id = 'closeButton';
 
 				bannerRight.style = 'position: absolute;right: 5%;bottom: 130px;width: 220px;text-align: center;';
 
-				powered.src = 'assets/powered.png';
+				powered.src = ''+ base_url +'/assets/powered.png';
 				powered.style = 'position:absolute;bottom:10px;right:10px';
 
 				rrss.innerHTML = '#HELLBOY';
@@ -172,11 +184,11 @@ var options = {
 
 				rrssHTML = '';
 				rrssHTML +=
-					'<a href="https://www.facebook.com/hellboymovie/" style="float:left" target="_blank"><img src="assets/fb.png"/></a>';
+					'<a href="https://www.facebook.com/hellboymovie/" style="float:left" target="_blank"><img src="'+ base_url +'/assets/fb.png"/></a>';
 				rrssHTML +=
-					'<a href="https://twitter.com/hellboymovie" style="float:left;margin: 0px 20px;" target="_blank"><img src="assets/tw.png"/></a>';
+					'<a href="https://twitter.com/hellboymovie" style="float:left;margin: 0px 20px;" target="_blank"><img src="'+ base_url +'/assets/tw.png"/></a>';
 				rrssHTML +=
-					'<a href="https://www.instagram.com/hellboymovie" style="float:left" target="_blank"><img src="assets/ig.png"/></a>';
+					'<a href="https://www.instagram.com/hellboymovie" style="float:left" target="_blank"><img src="'+ base_url +'/assets/ig.png"/></a>';
 
 				rrss_links.style.marginLeft = '5px';
 				rrss_links.innerHTML = rrssHTML;
@@ -242,7 +254,7 @@ var options = {
 						var date1 = document.createElement('img');
 
 						synopsis.style =
-							'position: absolute;top: 12%;left: 50px;color: white;width: 600px;font-size: ' + fontSize + ';font-family: bahnschrift;text-transform: uppercase;line-height: 25px;';
+							'position: absolute;top: 20%;left: 50px;color: white;width:90%;font-size: ' + fontSize + ';font-family: bahnschrift;text-transform: uppercase;line-height: 25px;';
 						synopsis.id = 'synopsis';
 						var synopsisHTML = '';
 						synopsisHTML +=
@@ -259,7 +271,7 @@ var options = {
 						VisitPageButton.target = '_blank';
 						VisitPageButton.id = 'visitPageButton';
 
-						date1.src = 'assets/date.png';
+						date1.src = ''+ base_url +'/assets/date.png';
 						date1.style = 'position: relative;bottom: 25%;margin: 0px auto;display: block;width: 20%;';
 						date1.id = 'date';
 
