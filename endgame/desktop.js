@@ -207,11 +207,11 @@ var options = {
 
 				rrssHTML = '';
 				rrssHTML +=
-					'<a href="https://www.facebook.com/hellboymovie/" style="float:left" target="_blank"><img src="'+ base_url +'/assets/fb.png"/></a>';
+					'<a href="https://www.facebook.com/avengers/" style="float:left" target="_blank"><img src="'+ base_url +'/assets/fb.png"/></a>';
 				rrssHTML +=
-					'<a href="https://twitter.com/hellboymovie" style="float:left;margin: 0px 30px;" target="_blank"><img src="'+ base_url +'/assets/tw.png"/></a>';
+					'<a href="https://twitter.com/avengers" style="float:left;margin: 0px 30px;" target="_blank"><img src="'+ base_url +'/assets/tw.png"/></a>';
 				rrssHTML +=
-					'<a href="https://www.instagram.com/hellboymovie" style="float:left" target="_blank"><img src="'+ base_url +'/assets/ig.png"/></a>';
+					'<a href="https://www.instagram.com/avengers" style="float:left" target="_blank"><img src="'+ base_url +'/assets/ig.png"/></a>';
 
 				rrss_links.style.marginLeft = '5px';
 				rrss_links.innerHTML = rrssHTML;
@@ -290,7 +290,7 @@ var options = {
 							'position: absolute;bottom: 12%;left: 60px;width: 25%;height: 50px;color: #fff;background: #eb0d0d;font-size: 16px;font-family: bahnschrift;text-transform: uppercase;text-align: center;line-height: 50px;cursor: pointer;text-decoration: none;-webkit-clip-path: polygon(9% 0, 100% 0, 100% 0, 100% 74%, 91% 100%, 0 100%, 0 100%, 0 29%);clip-path: polygon(9% 0, 100% 0, 100% 0, 100% 74%, 91% 100%, 0 100%, 0 100%, 0 29%);';
 
 						VisitPageButton.innerText = 'Visitar pagina web';
-						VisitPageButton.href = 'https://www.hellboy.movie/';
+						VisitPageButton.href = 'https://disney.es/peliculas/vengadores-endgame';
 						VisitPageButton.target = '_blank';
 						VisitPageButton.id = 'visitPageButton';
 
@@ -361,7 +361,7 @@ var options = {
 							avengersHTML += '<div class="avenger"><img src="' + base_url + '/assets/heroes/' + avenger.image + '"/><div class="avenger-text">' + avenger.hero + ' <div class="avenger-name">' + avenger.name + '</div></div></div></div>'
 						})
 
-						avengers.style = "position: absolute;top: 10px;left: 10px;height: 250px;overflow: hidden;width: 1620px; -webkit-transition: all 1s ease;-moz-transition: all 1s ease;-o-transition: all 1s ease;-ms-transition: all 1s ease;transition: all 1s ease;"
+						avengers.style = "position: absolute;top: 10px;left: 10px;height: 250px;overflow: hidden;width: 1620px; -webkit-transition: all 1s ease;-moz-transition: all 1s ease;-o-transition: all 1s ease;-ms-transition: all 1s ease;transition: all 1s ease;text-transform:uppercase"
 						avengers.innerHTML = avengersHTML
 						avengers_container.style = "width: 100%;height: 300px;position: absolute;top: 100px;overflow: hidden;"
 						avengers_container.id = "avengers_container"
