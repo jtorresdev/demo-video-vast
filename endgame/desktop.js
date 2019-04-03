@@ -262,7 +262,7 @@ var options = {
 
 					e.preventDefault();
 
-					removeIfExists([ 'saveCalendarDropdown' ]);
+					removeIfExists([ 'avengers_container' ]);
 
 					document.getElementsByClassName('active')[0].classList.remove('active');
 					document.getElementById('synopsisItem').classList.add('active');
@@ -311,7 +311,7 @@ var options = {
 					document.getElementsByClassName('active')[0].classList.remove('active');
 					document.getElementById('videosItem').classList.add('active');
 
-					removeIfExists(['synopsis', 'date', 'visitPageButton' ]);
+					removeIfExists(['synopsis', 'date', 'visitPageButton', 'avengers_container' ]);
 
 					video_wrapper.style.display = 'block';
 					bannerRight.style.display = 'block';
@@ -321,70 +321,74 @@ var options = {
 				document.getElementById('avengersItem').addEventListener('click', function(e) {
 					e.preventDefault();
 
-					document.getElementById('video-id').pause();
+					if(!document.getElementById('avengers_container')){
 
-					document.getElementsByClassName('active')[0].classList.remove('active');
-					document.getElementById('avengersItem').classList.add('active');
-					
-					removeIfExists(['synopsis', 'date', 'visitPageButton' ]);
+						document.getElementById('video-id').pause();
 
-					video_wrapper.style.display = 'none';
-					bannerRight.style.display = 'none';
-					document.getElementById('thumbnail-videos').style.display = 'none';
+						document.getElementsByClassName('active')[0].classList.remove('active');
+						document.getElementById('avengersItem').classList.add('active');
+						
+						removeIfExists(['synopsis', 'date', 'visitPageButton' ]);
 
-					var avengers_container = document.createElement('div')
-					var avengers = document.createElement('div')
-					var navigation = document.createElement('div')
-					var prev_dot = document.createElement('span')
-					var next_dot = document.createElement('span')
-					
-					var data = [
-						{hero : "Iron Man", name: "Tony Stark", url : "#", image : "ironman.png"},
-						{hero : "Captain America", name: "Steve Rogers", url : "#", image : "captainamerica.png"},
-						{hero : "Thor", name: "", url : "#", image : "thor.png"},
-						{hero : "Spider-man", name: "Peter Parker", url : "#", image : "spiderman.png"},
-						{hero : "Hulk", name: "Bruce Banner", url : "#", image : "hulk.png"},
-						{hero : "War Machine", name: "James Rhodes", url : "#", image : "warmachine.png"},
-						{hero : "Black Widow", name: "Natasha Romanoff", url : "#", image : "blackwidow.png"},
-						{hero : "Vision", name: "", url : "#", image : "vision.png"},
-						{hero : "Falcon", name: "Sam Wilson", url : "#", image : "falcon.png"},
-						{hero : "Hawkeye", name: "Clint Barton", url : "#", image : "hawkeye.png"},
-						{hero : "Scarlet Witch", name: "Wanda Maximoff", url : "#", image : "scarletwitch.png"},
-						{hero : "Black Panther", name: "T'challa", url : "#", image : "blackpanther.png"}
-					]
+						video_wrapper.style.display = 'none';
+						bannerRight.style.display = 'none';
+						document.getElementById('thumbnail-videos').style.display = 'none';
 
-					var avengersHTML = ''
+						var avengers_container = document.createElement('div')
+						var avengers = document.createElement('div')
+						var navigation = document.createElement('div')
+						var prev_dot = document.createElement('span')
+						var next_dot = document.createElement('span')
+						
+						var data = [
+							{hero : "Iron Man", name: "Tony Stark", url : "#", image : "ironman.png"},
+							{hero : "Captain America", name: "Steve Rogers", url : "#", image : "captainamerica.png"},
+							{hero : "Thor", name: "", url : "#", image : "thor.png"},
+							{hero : "Spider-man", name: "Peter Parker", url : "#", image : "spiderman.png"},
+							{hero : "Hulk", name: "Bruce Banner", url : "#", image : "hulk.png"},
+							{hero : "War Machine", name: "James Rhodes", url : "#", image : "warmachine.png"},
+							{hero : "Black Widow", name: "Natasha Romanoff", url : "#", image : "blackwidow.png"},
+							{hero : "Vision", name: "", url : "#", image : "vision.png"},
+							{hero : "Falcon", name: "Sam Wilson", url : "#", image : "falcon.png"},
+							{hero : "Hawkeye", name: "Clint Barton", url : "#", image : "hawkeye.png"},
+							{hero : "Scarlet Witch", name: "Wanda Maximoff", url : "#", image : "scarletwitch.png"},
+							{hero : "Black Panther", name: "T'challa", url : "#", image : "blackpanther.png"}
+						]
 
-					data.map(avenger => {
-						avengersHTML += '<div class="avenger"><img src="' + base_url + '/assets/heroes/' + avenger.image + '"/><div class="avenger-text">' + avenger.hero + ' <div class="avenger-name">' + avenger.name + '</div></div></div></div>'
-					})
+						var avengersHTML = ''
 
-					avengers.style = "position: absolute;top: 10px;left: 10px;height: 250px;overflow: hidden;width: 1620px; -webkit-transition: all 1s ease;-moz-transition: all 1s ease;-o-transition: all 1s ease;-ms-transition: all 1s ease;transition: all 1s ease;"
-					avengers.innerHTML = avengersHTML
-					avengers_container.style = "width: 100%;height: 300px;position: absolute;top: 100px;overflow: hidden;"
+						data.map(avenger => {
+							avengersHTML += '<div class="avenger"><img src="' + base_url + '/assets/heroes/' + avenger.image + '"/><div class="avenger-text">' + avenger.hero + ' <div class="avenger-name">' + avenger.name + '</div></div></div></div>'
+						})
 
-					prev_dot.className = "dot dot-active"
-					next_dot.className = "dot"
+						avengers.style = "position: absolute;top: 10px;left: 10px;height: 250px;overflow: hidden;width: 1620px; -webkit-transition: all 1s ease;-moz-transition: all 1s ease;-o-transition: all 1s ease;-ms-transition: all 1s ease;transition: all 1s ease;"
+						avengers.innerHTML = avengersHTML
+						avengers_container.style = "width: 100%;height: 300px;position: absolute;top: 100px;overflow: hidden;"
+						avengers_container.id = "avengers_container"
 
-					prev_dot.addEventListener('click', function(){
-						avengers.style.left = "10px"
 						prev_dot.className = "dot dot-active"
 						next_dot.className = "dot"
-					})
 
-					next_dot.addEventListener('click', function(){
-						avengers.style.left = "-710px"
-						prev_dot.className = "dot"
-						next_dot.className = "dot dot-active"
-					})
+						prev_dot.addEventListener('click', function(){
+							avengers.style.left = "10px"
+							prev_dot.className = "dot dot-active"
+							next_dot.className = "dot"
+						})
 
-					navigation.style = "position: absolute;bottom: 0px;left: 20px;"
-					navigation.appendChild(prev_dot)
-					navigation.appendChild(next_dot)
+						next_dot.addEventListener('click', function(){
+							avengers.style.left = "-710px"
+							prev_dot.className = "dot"
+							next_dot.className = "dot dot-active"
+						})
 
-					avengers_container.appendChild(avengers)
-					avengers_container.appendChild(navigation)
-					wrapper.appendChild(avengers_container)
+						navigation.style = "position: absolute;bottom: 0px;left: 20px;"
+						navigation.appendChild(prev_dot)
+						navigation.appendChild(next_dot)
+
+						avengers_container.appendChild(avengers)
+						avengers_container.appendChild(navigation)
+						wrapper.appendChild(avengers_container)
+					}
 
 				});
 			}
