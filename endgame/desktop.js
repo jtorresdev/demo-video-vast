@@ -19,7 +19,7 @@ var newHeight = parseInt(newWidth.replace('px', '')) * 0.5625 + 'px';
 var marginTop = '60px';
 var marginLeft = '10px';
 
-var base_url = "http://localwebapp/video/endgame"
+var base_url = "https://jtorresdev.github.io/demo-video-vast/endgame"
 
 
 var hidePlayerButtons = function() {
