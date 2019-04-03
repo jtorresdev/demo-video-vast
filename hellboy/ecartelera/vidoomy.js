@@ -79,7 +79,7 @@ function makeDesktop(){
         playerJs.onload = function(){
 
             var desktopScript = document.createElement('script')
-                desktopScript.src = "http://localwebapp/video/desktop.js"
+                desktopScript.src = "http://localwebapp/video/hellboy/desktop.js"
                 desktopScript.setAttribute('playerWidth', width)
                 desktopScript.setAttribute('fontSize', '12px')
                 desktopScript.setAttribute('shortPlayerWidth', parseInt(width.replace('px', '')) - 300 + 'px')

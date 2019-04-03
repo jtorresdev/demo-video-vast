@@ -19,8 +19,8 @@ var newHeight = parseInt(newWidth.replace('px', '')) * 0.5625 + 'px';
 var marginTop = '60px';
 var marginLeft = '10px';
 
-var base_url = "https://jtorresdev.github.io/demo-video-vast/endgame"
-
+//var base_url = "https://jtorresdev.github.io/demo-video-vast/endgame"
+var base_url = "http://localwebapp/video/endgame"
 
 var hidePlayerButtons = function() {
 	var hide = 'display:none';
@@ -171,25 +171,25 @@ var options = {
 				countdown.id = "countdown"
 
 				var deadline = new Date("Apr 26, 2019 00:00:00").getTime(); 
-				var x = setInterval(function() { 
+				//var x = setInterval(function() { 
 				var now = new Date().getTime(); 
 				var t = deadline - now; 
 				var days = Math.floor(t / (1000 * 60 * 60 * 24)); 
 				var hours = Math.floor((t%(1000 * 60 * 60 * 24))/(1000 * 60 * 60)); 
 				var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60)); 
 				var seconds = Math.floor((t % (1000 * 60)) / 1000); 
-				countdown.style = "font-size: 40px;font-family: steelfishEb;color: white;background: rgba(0, 0, 0, 0.5);height:55px;padding: 10px 10px;line-height: 30px;margin: 0 auto;display: table;"
+				countdown.style = 'font-size: 50px;color: white;background: rgba(0, 0, 0, 0.5);height: 55px;padding: 20px 10px 0px 10px;line-height: 20px;margin: 0px auto;display: table;font-family: Bahnschrift, "Adobe Blank";font-variation-settings: "wght" 600, "wdth" 80;'
 				var countdownHTML = ''
-					countdownHTML += '<div id="days" style="text-align:center;float: left;padding: 0 10px;"><div>'+ days +'</div><span style="color:#9c97ae;font-size: 20px;">DIAS</span></div>'
-					countdownHTML += '<div id="hours" style="text-align:center;float: left;padding: 0 10px;"><div>'+ hours +'</div><span style="color:#9c97ae;font-size: 20px;">HORAS</span></div>'
-					countdownHTML += '<div id="minutes" style="text-align:center;float: left;padding: 0 10px;"><div>'+ minutes +'</div><span style="color:#9c97ae;font-size: 20px;">MINUTOS</span></div>'
-					countdownHTML += '<div id="seconds" style="text-align:center;float: left;padding: 0 10px;"><div>'+ seconds +'</div><span style="color:#9c97ae;font-size: 20px;">SEGUNDOS</span></div>'
+					countdownHTML += '<div id="days" style="text-align:center;float: left;padding: 0 10px;"><div>'+ days +'</div><span style="color:#9c97ae;font-size: 20px;">DÍAS</span></div>'
+					countdownHTML += '<div id="hours" style="text-align:center;float: left;padding: 0 10px;"><div>'+ hours +'</div><span style="color:#9c97ae;font-size: 20px;">HRS</span></div>'
+					countdownHTML += '<div id="minutes" style="text-align:center;float: left;padding: 0 10px;"><div>'+ minutes +'</div><span style="color:#9c97ae;font-size: 20px;">MINS</span></div>'
+					countdownHTML += '<div id="seconds" style="text-align:center;float: left;padding: 0 10px;"><div>'+ seconds +'</div><span style="color:#9c97ae;font-size: 20px;">SEGS</span></div>'
 				countdown.innerHTML = countdownHTML; 
 					if (t < 0) {
 						clearInterval(x); 
 						countdown.innerHTML = "EXPIRED"; 
 					} 
-				}, 1000);
+				//}, 1000);
 			
 
 				close.src = ''+ base_url +'/assets/close.png';
@@ -277,7 +277,7 @@ var options = {
 						var date1 = document.createElement('img');
 
 						synopsis.style =
-							'position: absolute;top: 20%;left: 50px;color: white;width:90%;font-size: ' + fontSize + ';font-family: bahnschrift;text-transform: uppercase;line-height: 25px;';
+							'position: absolute;top: 15%;left: 50px;color: white;width: 70%;font-size: 16px;font-family: bahnschrift;text-transform: uppercase;line-height: 25px;font-variation-settings: "wght" 200, "wdth" 75;letter-spacing: 2px;';
 						synopsis.id = 'synopsis';
 						var synopsisHTML = '';
 						synopsisHTML +=
@@ -311,7 +311,7 @@ var options = {
 					document.getElementsByClassName('active')[0].classList.remove('active');
 					document.getElementById('videosItem').classList.add('active');
 
-					removeIfExists([ 'saveCalendarDropdown', 'synopsis', 'date', 'visitPageButton' ]);
+					removeIfExists(['synopsis', 'date', 'visitPageButton' ]);
 
 					video_wrapper.style.display = 'block';
 					bannerRight.style.display = 'block';
@@ -326,6 +326,65 @@ var options = {
 					document.getElementsByClassName('active')[0].classList.remove('active');
 					document.getElementById('avengersItem').classList.add('active');
 					
+					removeIfExists(['synopsis', 'date', 'visitPageButton' ]);
+
+					video_wrapper.style.display = 'none';
+					bannerRight.style.display = 'none';
+					document.getElementById('thumbnail-videos').style.display = 'none';
+
+					var avengers_container = document.createElement('div')
+					var avengers = document.createElement('div')
+					var navigation = document.createElement('div')
+					var prev_dot = document.createElement('span')
+					var next_dot = document.createElement('span')
+					
+					var data = [
+						{hero : "Iron Man", name: "Tony Stark", url : "#", image : "ironman.png"},
+						{hero : "Captain America", name: "Steve Rogers", url : "#", image : "captainamerica.png"},
+						{hero : "Thor", name: "", url : "#", image : "thor.png"},
+						{hero : "Spider-man", name: "Peter Parker", url : "#", image : "spiderman.png"},
+						{hero : "Hulk", name: "Bruce Banner", url : "#", image : "hulk.png"},
+						{hero : "War Machine", name: "James Rhodes", url : "#", image : "warmachine.png"},
+						{hero : "Black Widow", name: "Natasha Romanoff", url : "#", image : "blackwidow.png"},
+						{hero : "Vision", name: "", url : "#", image : "vision.png"},
+						{hero : "Falcon", name: "Sam Wilson", url : "#", image : "falcon.png"},
+						{hero : "Hawkeye", name: "Clint Barton", url : "#", image : "hawkeye.png"},
+						{hero : "Scarlet Witch", name: "Wanda Maximoff", url : "#", image : "scarletwitch.png"},
+						{hero : "Black Panther", name: "T'challa", url : "#", image : "blackpanther.png"}
+					]
+
+					var avengersHTML = ''
+
+					data.map(avenger => {
+						avengersHTML += '<div class="avenger"><img src="' + base_url + '/assets/heroes/' + avenger.image + '"/><div class="avenger-text">' + avenger.hero + ' <div class="avenger-name">' + avenger.name + '</div></div></div></div>'
+					})
+
+					avengers.style = "position: absolute;top: 10px;left: 10px;height: 250px;overflow: hidden;width: 1620px; -webkit-transition: all 1s ease;-moz-transition: all 1s ease;-o-transition: all 1s ease;-ms-transition: all 1s ease;transition: all 1s ease;"
+					avengers.innerHTML = avengersHTML
+					avengers_container.style = "width: 100%;height: 300px;position: absolute;top: 100px;overflow: hidden;"
+
+					prev_dot.className = "dot dot-active"
+					next_dot.className = "dot"
+
+					prev_dot.addEventListener('click', function(){
+						avengers.style.left = "10px"
+						prev_dot.className = "dot dot-active"
+						next_dot.className = "dot"
+					})
+
+					next_dot.addEventListener('click', function(){
+						avengers.style.left = "-710px"
+						prev_dot.className = "dot"
+						next_dot.className = "dot dot-active"
+					})
+
+					navigation.style = "position: absolute;bottom: 0px;left: 20px;"
+					navigation.appendChild(prev_dot)
+					navigation.appendChild(next_dot)
+
+					avengers_container.appendChild(avengers)
+					avengers_container.appendChild(navigation)
+					wrapper.appendChild(avengers_container)
 
 				});
 			}

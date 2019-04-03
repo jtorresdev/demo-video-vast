@@ -1,4 +1,4 @@
-var base_url = "https://www.vidoomy.com/hellboy_desktop"
+var base_url = "http://localwebapp/video/endgame"
 
 var removeIfExists = function (ids) {
     ids.map(id => {
@@ -31,8 +31,8 @@ var tapOnVideo = function () {
         var menuHTML = ''
 
         menuHTML = '<ul>'
-        menuHTML += '<li class="active" id="videosItem"><a href="#">Videos</a></li>'
-        menuHTML += '<li id="saveCalendarItem"><a href="#">Guardar en calendario</a></li>'
+        menuHTML += '<li class="active" id="videosItem"><a href="#">Trailers</a></li>'
+        menuHTML += '<li id="avengersItem"><a href="#">Vengadores</a></li>'
         menuHTML += '<li id="synopsisItem"><a href="#">Sinopsis</a></li>'
         menuHTML += '</ul>'
 
@@ -46,13 +46,13 @@ var tapOnVideo = function () {
 
         header.id = "header"
         header.style =
-            'width:100%;height:40px;text-align: center;'
+            'width:100%;height:55px;text-align: center;'
 
         logo.src = base_url + '/assets/logo.png'
         logo.style = 'width:100px;float:left;margin: 10px;'
 
         wrapper.style =
-            'position: fixed;background-image: url(https://www.vidoomy.com/hellboy_desktop/assets/background-mobile.png);height: 100%;top: 0px;background-size: cover;background-repeat: no-repeat;width: 100%;background-color: black;left: 0;z-index: 999999999;'
+            'position: fixed;background-image: url('+ base_url +'/assets/background-mobile.png);height: 100%;top: 0px;background-size: cover;background-repeat: no-repeat;width: 100%;background-color: black;left: 0;z-index: 999999999;'
 
         /* demo */
 
@@ -72,6 +72,31 @@ var tapOnVideo = function () {
         var bottom_right = document.createElement('div')
         var VisitPageButton = document.createElement('a')
         var powered = document.createElement('img')
+        var countdown = document.createElement('div')
+
+        countdown.id = "countdown"
+
+        var deadline = new Date("Apr 26, 2019 00:00:00").getTime(); 
+        var x = setInterval(function() { 
+        var now = new Date().getTime(); 
+        var t = deadline - now; 
+        var days = Math.floor(t / (1000 * 60 * 60 * 24)); 
+        var hours = Math.floor((t%(1000 * 60 * 60 * 24))/(1000 * 60 * 60)); 
+        var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60)); 
+        var seconds = Math.floor((t % (1000 * 60)) / 1000); 
+        countdown.style = "font-size: 24px;font-family: steelfishEb;color: white;background: rgba(0, 0, 0, 0.5);height:40px;padding: 5px;line-height: 20px;margin: 0 auto;display: table;"
+        var countdownHTML = ''
+            countdownHTML += '<div id="days" style="text-align:center;float: left;padding: 0 5px;"><div>'+ days +'</div><span style="color:#9c97ae;font-size: 14px;">DIAS</span></div>'
+            countdownHTML += '<div id="hours" style="text-align:center;float: left;padding: 0 5px;"><div>'+ hours +'</div><span style="color:#9c97ae;font-size: 14px;">HORAS</span></div>'
+            countdownHTML += '<div id="minutes" style="text-align:center;float: left;padding: 0 5px;"><div>'+ minutes +'</div><span style="color:#9c97ae;font-size: 14px;">MINUTOS</span></div>'
+            countdownHTML += '<div id="seconds" style="text-align:center;float: left;padding: 0 5px;"><div>'+ seconds +'</div><span style="color:#9c97ae;font-size: 14px;">SEGUNDOS</span></div>'
+        countdown.innerHTML = countdownHTML; 
+            if (t < 0) {
+                clearInterval(x); 
+                countdown.innerHTML = "EXPIRED"; 
+            } 
+        }, 1000);
+    
 
         powered.src = base_url + '/assets/powered.png'
         powered.style = 'position:absolute;bottom: 10px; right: 10px;display:none'
@@ -82,14 +107,14 @@ var tapOnVideo = function () {
             'width: 330px;margin: 0px auto; bottom: 130px;left: 0;right: 0;'
 
         bottom_left.style =
-            'letter-spacing: 5px;color: rgb(255, 226, 0);font-family: steelfishEb;font-size: 20px;width: 100px;text-align: center;margin: 15px;float: left;margin-right: 20px;'
+            'letter-spacing: 1px;color:#fff;font-family: steelfishEb;font-size: 20px;width: 100px;text-align: center;margin: 25px 20px 15px 15px;float: left;'
         bottom_right.style =
-            'float: left;width: 150px;text-align: center;margin: 10px 15px;padding: 5px 0;border-top: 3px solid #f9f9cd;border-bottom: 3px solid #f9f9cd;'
+            'float: left;width: 160px;text-align: center;margin: 10px 15px;padding: 5px 0'
 
         var bottom_left_HTML = ''
 
         bottom_left_HTML += '<img src="'+ base_url + '/assets/logo.png" width="100px"/>'
-        bottom_left_HTML += '<span>#HELLBOY</span>'
+        bottom_left_HTML += '<span style="margin-left:-10px">#AVENGERSENDGAME</span>'
         bottom_left_HTML +=
             '<a href="https://www.facebook.com/hellboymovie/" style="float:left;margin-left: 5px;" target="_blank"><img src="' + base_url + '/assets/fb.png"/></a>'
         bottom_left_HTML +=
@@ -101,12 +126,14 @@ var tapOnVideo = function () {
 
         var bottom_right_HTML = ''
 
-        bottom_right_HTML = '<img src="' + base_url + '/assets/date.png" width="150px" />'
-
+        bottom_right_HTML = '<img src="' + base_url + '/assets/date-mobile.png" width="150px" />'
+        
         bottom_right.innerHTML = bottom_right_HTML
 
+        bottom_right.appendChild(countdown)
+
         VisitPageButton.style =
-            'bottom: 70px;margin: 0 auto;display: table;width: 200px;left: 0;right: 0;height: 45px;border: 1px solid rgb(255, 225, 0);color: rgb(255, 225, 0);font-size: 16px;font-family: bahnschrift;text-transform: uppercase;text-align: center;line-height: 45px;cursor: pointer;text-decoration: none;'
+            'position: absolute;bottom: 12%;left: 60px;width: 65%;height: 50px;color: #fff;background: #eb0d0d;font-size: 16px;font-family: bahnschrift;text-transform: uppercase;text-align: center;line-height: 50px;cursor: pointer;text-decoration: none;-webkit-clip-path: polygon(9% 0, 100% 0, 100% 0, 100% 74%, 91% 100%, 0 100%, 0 100%, 0 29%);clip-path: polygon(9% 0, 100% 0, 100% 0, 100% 74%, 91% 100%, 0 100%, 0 100%, 0 29%);'
 
         VisitPageButton.innerText = 'Visitar pagina web'
         VisitPageButton.href = 'https://www.hellboy.movie/'
@@ -151,13 +178,13 @@ var tapOnVideo = function () {
             var synopsis = document.createElement('div')
 
             synopsis.style =
-                'color: #fef9d1;width: 90%;padding: 10px;font-size: 12px;font-family: bahnschrift;text-transform: uppercase;line-height: 22px;'
+                'color: #fef9d1;padding: 20px;font-size: 16px;font-family: bahnschrift;text-transform: uppercase;line-height: 22px;text-align:center'
             synopsis.id = 'synopsis'
             var synopsisHTML = ''
             synopsisHTML +=
-                '<p style="font-size: 25px;margin-bottom: 0px;color: #ffe100;">Vuelve Hellboy,</p>'
+                '<p style="font-size: 25px;margin-bottom: 0px;color: #fff;">Avengers end game</p>'
             synopsisHTML +=
-                "<p>el gran demonio de piel roja, con cola, cuernos y un brazo de piedra. Atrapado entre los mundos de lo sobrenatural y lo humano, el apodado como 'El más grande Investigador de lo Paranormal del Mundo' junto con la Agencia para la Investigación y Defensa Paranormal (A.I.D.P.) tendrán un nuevo y peligroso desafío. Su misión será enfrentarse a una nueva y poderosa amenaza: Nimue (Milla Jovovich), conocida como La Reina de la Sangre, un espíritu ancestral de la época del rey Arturo que ha vuelto a nuestro mundo llena de sed de venganza para sembrar el terror y destruir a la raza humana.</p>"
+                '<p>Después de los eventos devastadores de Avengers: Infinity War, el universo está en ruinas debido a las acciones de Thanos, el Titán Loco. Con la ayuda de los aliados que quedaron, los Vengadores deben reunirse una vez más para deshacer sus acciones y restaurar el orden en el universo de una vez por todas, si importar cuáles son las consecuencias. Cuarta entrega de la saga "Vengadores".</p>'
             synopsis.innerHTML = synopsisHTML
 
             player.appendChild(synopsis)
@@ -175,43 +202,9 @@ var tapOnVideo = function () {
             document.getElementById('thumbnail-videos').style.display = 'block'
         })
 
-        document.getElementById('saveCalendarItem').addEventListener('click', function (e) {
+        document.getElementById('avengersItem').addEventListener('click', function (e) {
             e.preventDefault()
-            if (!document.getElementById('saveCalendarDropdown')) {
-                document.getElementsByClassName('active')[0].classList.remove(
-                    'active')
-                document.getElementById('saveCalendarItem').classList.add('active')
-
-                var dropdown = document.createElement('div')
-                dropdown.style =
-                    'background: rgb(0, 0, 0);width: 260px;height: 153px;position: absolute;top: 60px;right: 5px;z-index: 99;'
-                dropdown.id = "saveCalendarDropdown"
-                dropdownHTML = ''
-                dropdownHTML +=
-                    '<a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Hellboy%3A%20Get%20Tickets&dates=20190412/20190413&details=Buy%20tickets%20now%20for%20Hellboy%20at%20http%3A%2F%2Fwww.hellboymovie.co.uk&sprop=&sprop=name:" class="dropdown-link" target="_blank">Google Calendar</a>'
-                dropdownHTML += '<a href="https://www.hellboymovie.co.uk/calendar.ics" class="dropdown-link">Apple iCal</a>'
-                dropdownHTML +=
-                    '<a href="data:text/calendar;charset=utf8,BEGIN%3AVCALENDAR%0D%0AVERSION%3A2.0%0D%0APRODID%3A-%2F%2Fpowster%2F%2FNONSGML%20v1.0%2F%2FEN%0D%0ABEGIN%3AVEVENT%0D%0AURL%3BVALUE%3DURI%3Ahttp%3A%2F%2Fwww.hellboymovie.co.uk%0D%0ADTSTART%3BVALUE%3DDATE%3A20190412%0D%0ADTEND%3A20190413%0D%0ASUMMARY%3AHellboy%3A%20Get%20Tickets%0D%0ADESCRIPTION%3ABuy%20tickets%20now%20for%20Hellboy%20at%20http%3A%2F%2Fwww.hellboymovie.co.uk%0D%0AEND%3AVEVENT%0D%0AEND%3AVCALENDAR%0D%0A" class="dropdown-link">Microsoft Outlook</a>'
-                dropdown.innerHTML = dropdownHTML
-                wrapper.appendChild(dropdown)
-            } else {
-                document.getElementById('saveCalendarDropdown').remove()
-
-                document.getElementById('saveCalendarItem').classList.remove(
-                    'active')
-
-                if (document.getElementById('synopsis')) {
-                    document.getElementById('fluid_video_wrapper_video-id').style
-                        .display
-
-                    document.getElementById('synopsisItem').classList.add(
-                        'active')
-
-                } else {
-                    document.getElementById('videosItem').classList.add(
-                        'active')
-                }
-            }
+            document.getElementById('video-id').pause()
         })
 
         closeButton.addEventListener('click', function () {
@@ -279,7 +272,7 @@ var options = {
     layoutControls: {
         primaryColor: "#d9c408",
         fillToContainer: true,
-        posterImage: "' + base_url + '/assets/poster.png",
+        posterImage: ''+ base_url +'/assets/poster.png',
         persistentSettings: {
             volume: false
         },
