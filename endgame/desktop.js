@@ -170,8 +170,12 @@ var options = {
 
 				countdown.id = "countdown"
 
+				function n(n){
+					return n > 9 ? "" + n: "0" + n;
+				}
+
 				var deadline = new Date("Apr 26, 2019 00:00:00").getTime(); 
-				//var x = setInterval(function() { 
+				var x = setInterval(function() { 
 				var now = new Date().getTime(); 
 				var t = deadline - now; 
 				var days = Math.floor(t / (1000 * 60 * 60 * 24)); 
@@ -180,16 +184,16 @@ var options = {
 				var seconds = Math.floor((t % (1000 * 60)) / 1000); 
 				countdown.style = 'font-size: 50px;color: white;background: rgba(0, 0, 0, 0.5);height: 55px;padding: 20px 10px 0px 10px;line-height: 20px;margin: 0px auto;display: table;font-family: Bahnschrift, "Adobe Blank";font-variation-settings: "wght" 600, "wdth" 80;'
 				var countdownHTML = ''
-					countdownHTML += '<div id="days" style="text-align:center;float: left;padding: 0 10px;"><div>'+ days +'</div><span style="color:#9c97ae;font-size: 20px;">DÍAS</span></div>'
-					countdownHTML += '<div id="hours" style="text-align:center;float: left;padding: 0 10px;"><div>'+ hours +'</div><span style="color:#9c97ae;font-size: 20px;">HRS</span></div>'
-					countdownHTML += '<div id="minutes" style="text-align:center;float: left;padding: 0 10px;"><div>'+ minutes +'</div><span style="color:#9c97ae;font-size: 20px;">MINS</span></div>'
-					countdownHTML += '<div id="seconds" style="text-align:center;float: left;padding: 0 10px;"><div>'+ seconds +'</div><span style="color:#9c97ae;font-size: 20px;">SEGS</span></div>'
+					countdownHTML += '<div id="days" style="text-align:center;float: left;padding: 0 10px;"><div>'+ n(days) +'</div><span style="color:#9c97ae;font-size: 20px;">DÍAS</span></div>'
+					countdownHTML += '<div id="hours" style="text-align:center;float: left;padding: 0 10px;"><div>'+ n(hours) +'</div><span style="color:#9c97ae;font-size: 20px;">HRS</span></div>'
+					countdownHTML += '<div id="minutes" style="text-align:center;float: left;padding: 0 10px;"><div>'+ n(minutes) +'</div><span style="color:#9c97ae;font-size: 20px;">MINS</span></div>'
+					countdownHTML += '<div id="seconds" style="text-align:center;float: left;padding: 0 10px;"><div>'+ n(seconds) +'</div><span style="color:#9c97ae;font-size: 20px;">SEGS</span></div>'
 				countdown.innerHTML = countdownHTML; 
 					if (t < 0) {
 						clearInterval(x); 
 						countdown.innerHTML = "EXPIRED"; 
 					} 
-				//}, 1000);
+				}, 1000);
 			
 
 				close.src = ''+ base_url +'/assets/close.png';
