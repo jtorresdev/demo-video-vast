@@ -233,24 +233,24 @@ var tapOnVideo = function () {
                 var next_dot = document.createElement('span')
                 
                 var data = [
-                    {hero : "Iron Man", name: "Tony Stark", url : "#", image : "ironman.png"},
-                    {hero : "Captain America", name: "Steve Rogers", url : "#", image : "captainamerica.png"},
-                    {hero : "Thor", name: "", url : "#", image : "thor.png"},
-                    {hero : "Spider-man", name: "Peter Parker", url : "#", image : "spiderman.png"},
-                    {hero : "Hulk", name: "Bruce Banner", url : "#", image : "hulk.png"},
-                    {hero : "War Machine", name: "James Rhodes", url : "#", image : "warmachine.png"},
-                    {hero : "Black Widow", name: "Natasha Romanoff", url : "#", image : "blackwidow.png"},
-                    {hero : "Vision", name: "", url : "#", image : "vision.png"},
-                    {hero : "Falcon", name: "Sam Wilson", url : "#", image : "falcon.png"},
-                    {hero : "Hawkeye", name: "Clint Barton", url : "#", image : "hawkeye.png"},
-                    {hero : "Scarlet Witch", name: "Wanda Maximoff", url : "#", image : "scarletwitch.png"},
-                    {hero : "Black Panther", name: "T'challa", url : "#", image : "blackpanther.png"}
+                    {hero : "Iron Man", name: "Tony Stark", url : "https://www.marvel.com/characters/iron-man-tony-stark", image : "ironman.png"},
+                    {hero : "Captain America", name: "Steve Rogers", url : "https://www.marvel.com/characters/captain-america-steve-rogers", image : "captainamerica.png"},
+                    {hero : "Thor", name: "", url : "https://www.marvel.com/characters/thor-thor-odinson", image : "thor.png"},
+                    {hero : "Spider-man", name: "Peter Parker", url : "https://www.marvel.com/characters/spider-man-peter-parker", image : "spiderman.png"},
+                    {hero : "Hulk", name: "Bruce Banner", url : "https://www.marvel.com/characters/hulk-bruce-banner", image : "hulk.png"},
+                    {hero : "War Machine", name: "James Rhodes", url : "https://www.marvel.com/characters/war-machine-james-rhodes", image : "warmachine.png"},
+                    {hero : "Black Widow", name: "Natasha Romanoff", url : "https://www.marvel.com/characters/black-widow-natasha-romanoff", image : "blackwidow.png"},
+                    {hero : "Vision", name: "", url : "https://www.marvel.com/characters/vision", image : "vision.png"},
+                    {hero : "Falcon", name: "Sam Wilson", url : "https://www.marvel.com/characters/falcon-sam-wilson", image : "falcon.png"},
+                    {hero : "Hawkeye", name: "Clint Barton", url : "https://www.marvel.com/characters/hawkeye-clint-barton", image : "hawkeye.png"},
+                    {hero : "Scarlet Witch", name: "Wanda Maximoff", url : "https://www.marvel.com/characters/scarlet-witch-wanda-maximoff", image : "scarletwitch.png"},
+                    {hero : "Black Panther", name: "T'challa", url : "https://www.marvel.com/characters/black-panther-t-challa", image : "blackpanther.png"}
                 ]
 
                 var avengersHTML = ''
 
                 data.map(avenger => {
-                    avengersHTML += '<div class="avenger"><img style="width:100%" src="' + base_url + '/assets/heroes/' + avenger.image + '"/><div class="avenger-text">' + avenger.hero + ' <div class="avenger-name">' + avenger.name + '</div></div></div></div>'
+                    avengersHTML += '<a class="avenger" href="'+ avenger.url +'" target="_blank"><img style="width:100%" src="' + base_url + '/assets/heroes/' + avenger.image + '"/><div class="avenger-text">' + avenger.hero + ' <div class="avenger-name">' + avenger.name + '</div></div></div></a>'
                 })
 
                 avengers.style = "position: absolute;top: 10px;left: 10px;height: 550px;overflow: hidden;width: 800px; -webkit-transition: all 1s ease;-moz-transition: all 1s ease;-o-transition: all 1s ease;-ms-transition: all 1s ease;transition: all 1s ease;text-transform:uppercase"
