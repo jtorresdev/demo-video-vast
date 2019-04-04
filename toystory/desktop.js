@@ -168,7 +168,7 @@ var options = {
 				
 				text.innerHTML = '<div style="font-family: FatFrank;font-size: 80px;color: #ffe65c;text-transform: uppercase;line-height: 65px;margin-top: -20px;z-index: 5;">¡ya en cines!</div>'
 
-				buytickets.innerHTML = '<a href="#" style="text-decoration: none"><div style="width: 250px;height: 60px;font-size: 16px;font-family: FatFrank;color: #ffd900;letter-spacing: 2px;text-transform: uppercase;line-height: 60px;position: relative;margin: 0 auto;background-image: url(assets/buytickets.png);background-repeat: no-repeat;"><span style="margin-right: 15px;">Comprar entradas</span><img style="position: absolute;top: 20px;right: 20px;" src="'+ base_url +'/assets/arrow-yellow.png"/></div></div></a>'
+				buytickets.innerHTML = '<a target="_blank" href="https://www.vidoomy.com/entradas_toystory.html" style="text-decoration: none"><div style="width: 250px;height: 60px;font-size: 16px;font-family: FatFrank;color: #ffd900;letter-spacing: 2px;text-transform: uppercase;line-height: 60px;position: relative;margin: 0 auto;background-image: url(assets/buytickets.png);background-repeat: no-repeat;"><span style="margin-right: 15px;">Comprar entradas</span><img style="position: absolute;top: 20px;right: 20px;" src="'+ base_url +'/assets/arrow-yellow.png"/></div></div></a>'
 
 				close.src = ''+ base_url +'/assets/close.png';
 				close.style = 'position:absolute;top:10px;right:10px;cursor: pointer;';
@@ -186,11 +186,11 @@ var options = {
 
 				rrssHTML = '';
 				rrssHTML +=
-					'<a href="https://www.facebook.com/avengers/" style="float:left" target="_blank"><img src="'+ base_url +'/assets/fb.png"/></a>';
+					'<a href="https://www.facebook.com/PixarToyStory/" style="float:left" target="_blank"><img src="'+ base_url +'/assets/fb.png"/></a>';
 				rrssHTML +=
-					'<a href="https://twitter.com/avengers" style="float:left;margin: 0px 30px;" target="_blank"><img src="'+ base_url +'/assets/tw.png"/></a>';
+					'<a href="https://twitter.com/toystory?lang=es" style="float:left;margin: 0px 30px;" target="_blank"><img src="'+ base_url +'/assets/tw.png"/></a>';
 				rrssHTML +=
-					'<a href="https://www.instagram.com/avengers" style="float:left" target="_blank"><img src="'+ base_url +'/assets/ig.png"/></a>';
+					'<a href="https://www.instagram.com/toystory/?hl=es" style="float:left" target="_blank"><img src="'+ base_url +'/assets/ig.png"/></a>';
 
 				rrss_links.style = 'margin-bottom: 5px;background: #e20025;clip-path: polygon(20% 0%, 100% 6%, 100% 6%, 100% 83%, 100% 84%, 0px 89%, 0px 91%, 3% 0px);  width: 120px;height: 30px;padding: 12px 0 0 10px;top: 15px;position: absolute;z-index: 2;';
 
@@ -203,7 +203,8 @@ var options = {
 				bannerRight.appendChild(buytickets);
 
 				menu.style = 'position:absolute;right:20px;top:15px';
-				menu.href = "#"
+				menu.href = "https://www.pixar.com/feature-films-toy-story-4"
+				menu.target = "_blank"
 
 				var menuHTML = '';
 

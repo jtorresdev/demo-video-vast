@@ -1,5 +1,5 @@
-//var base_url = "https://jtorresdev.github.io/demo-video-vast/endgame"
-var base_url = "http://localwebapp/video/endgame"
+//var base_url = "https://jtorresdev.github.io/demo-video-vast/toystory"
+var base_url = "http://localwebapp/video/toystory"
 
 var removeIfExists = function (ids) {
     ids.map(id => {
@@ -69,42 +69,6 @@ var tapOnVideo = function () {
         var bottom_right = document.createElement('div')
         var VisitPageButton = document.createElement('a')
         var powered = document.createElement('img')
-        var countdown = document.createElement('div')
-
-        countdown.id = "countdown"
-
-        var deadline = new Date("Apr 26, 2019 00:00:00").getTime(); 
-
-        function n(n){
-            return n > 9 ? "" + n: "0" + n;
-        }
-
-        var updateTime = function(){
-        var now = new Date().getTime(); 
-        var t = deadline - now; 
-        var days = Math.floor(t / (1000 * 60 * 60 * 24)); 
-        var hours = Math.floor((t%(1000 * 60 * 60 * 24))/(1000 * 60 * 60)); 
-        var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60)); 
-        var seconds = Math.floor((t % (1000 * 60)) / 1000); 
-        countdown.style = "font-size: 24px;font-family: steelfishEb;color: white;background: rgba(0, 0, 0, 0.5);height:40px;padding: 5px;line-height: 20px;margin: 0 auto;display: table;"
-        var countdownHTML = ''
-            countdownHTML += '<div id="days" style="text-align:center;float: left;padding: 0 5px;"><div>'+ n(days) +'</div><span style="color:#9c97ae;font-size: 14px;">DIAS</span></div>'
-            countdownHTML += '<div id="hours" style="text-align:center;float: left;padding: 0 5px;"><div>'+ n(hours) +'</div><span style="color:#9c97ae;font-size: 14px;">HORAS</span></div>'
-            countdownHTML += '<div id="minutes" style="text-align:center;float: left;padding: 0 5px;"><div>'+ n(minutes) +'</div><span style="color:#9c97ae;font-size: 14px;">MINUTOS</span></div>'
-            countdownHTML += '<div id="seconds" style="text-align:center;float: left;padding: 0 5px;"><div>'+ n(seconds) +'</div><span style="color:#9c97ae;font-size: 14px;">SEGUNDOS</span></div>'
-        countdown.innerHTML = countdownHTML; 
-            if (t < 0) {
-                clearInterval(x); 
-                countdown.innerHTML = "EXPIRED"; 
-            }
-        }
-
-        updateTime()
-
-        var x = setInterval(function() { 
-            updateTime()
-        }, 1000);
-    
 
         powered.src = base_url + '/assets/powered.png'
         powered.style = 'position:absolute;bottom: 10px; right: 10px;display:none'
@@ -137,8 +101,6 @@ var tapOnVideo = function () {
         bottom_right_HTML = '<img src="' + base_url + '/assets/date-mobile.png" width="150px" />'
         
         bottom_right.innerHTML = bottom_right_HTML
-
-        bottom_right.appendChild(countdown)
 
         VisitPageButton.style =
             'display: inline-block;width: 65%;width: 80%;margin: 10px 0px 0px 25px;height: 50px; color: rgb(255, 255, 255);background: rgb(235, 13, 13);font-size: 16px; font-family: bahnschrift;text-transform: uppercase;text-align: center; line-height: 50px;cursor: pointer;text-decoration: none;clip-path: polygon(9% 0px, 100% 0px, 100% 0px, 100% 74%, 91% 100%, 0px 100%, 0px 100%, 0px 29%);'

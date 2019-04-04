@@ -420,7 +420,7 @@ video.on('pause', function() {
 	var unmute = document.getElementById('video-id_fluid_initial_play');
 	if (unmute.classList[0] != 'fluid_initial_play') {
 		unmute.remove();
-		document.getElementById('video-id_fluid_initial_play').style = 'display:block;background:#d9c408';
+		document.getElementById('video-id_fluid_initial_play').style = 'display:block;background:#fff';
 	}
 });
 
@@ -462,7 +462,7 @@ for (let elem of videoThumbs) {
 		var unmute = document.getElementById('video-id_fluid_initial_play');
 		if (unmute.classList[0] != 'fluid_initial_play') {
 			unmute.remove();
-			document.getElementById('video-id_fluid_initial_play').style = 'display:block;background:#d9c408';
+			document.getElementById('video-id_fluid_initial_play').style = 'display:block;background:#fff';
 		}
 
 		var videoPlayer = document.getElementById('video-id');
