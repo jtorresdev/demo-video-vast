@@ -185,9 +185,7 @@ var tapOnVideo = function () {
 
             var synopsis = document.createElement('div')
 
-            synopsis.style =
-                'color: #fef9d1;padding: 20px;font-size: 16px;font-family: bahnschrift;text-transform: uppercase;line-height: 22px;text-align:center;font-variation-settings: "wght" 400, "wdth" 80;font-variation-settings: "wght" 400, "wdth" 80;
-                letter-spacing: 2px;letter-spacing: 2px;'
+            synopsis.style = 'color: #fef9d1;padding: 20px;font-size: 16px;font-family: bahnschrift;text-transform: uppercase;line-height: 22px;text-align:center;font-variation-settings: "wght" 400, "wdth" 80;font-variation-settings: "wght" 400, "wdth" 80;letter-spacing: 2px;letter-spacing: 2px;'
             synopsis.id = 'synopsis'
             var synopsisHTML = ''
             synopsisHTML +=
