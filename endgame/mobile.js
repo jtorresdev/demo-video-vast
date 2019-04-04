@@ -141,7 +141,7 @@ var tapOnVideo = function () {
         bottom_right.appendChild(countdown)
 
         VisitPageButton.style =
-            'display: inline-block;width: 65%;width: 80%;margin: 10px 0px 0px 25px;height: 50px; color: rgb(255, 255, 255);background: rgb(235, 13, 13);font-size: 16px; font-family: bahnschrift;text-transform: uppercase;text-align: center; line-height: 50px;cursor: pointer;text-decoration: none;clip-path: polygon(9% 0px, 100% 0px, 100% 0px, 100% 74%, 91% 100%, 0px 100%, 0px 100%, 0px 29%);'
+            'display: inline-block;width: 65%;width: 80%;margin: 10px 0px 0px 25px;height: 50px; color: rgb(255, 255, 255);background: rgb(235, 13, 13, 0.8);font-size: 16px; font-family: bahnschrift;text-transform: uppercase;text-align: center; line-height: 50px;cursor: pointer;text-decoration: none;clip-path: polygon(9% 0px, 100% 0px, 100% 0px, 100% 74%, 91% 100%, 0px 100%, 0px 100%, 0px 29%);'
 
         VisitPageButton.innerText = 'Visitar pagina web'
         VisitPageButton.href = 'https://disney.es/peliculas/vengadores-endgame'
@@ -186,7 +186,8 @@ var tapOnVideo = function () {
             var synopsis = document.createElement('div')
 
             synopsis.style =
-                'color: #fef9d1;padding: 20px;font-size: 16px;font-family: bahnschrift;text-transform: uppercase;line-height: 22px;text-align:center'
+                'color: #fef9d1;padding: 20px;font-size: 16px;font-family: bahnschrift;text-transform: uppercase;line-height: 22px;text-align:center;font-variation-settings: "wght" 400, "wdth" 80;font-variation-settings: "wght" 400, "wdth" 80;
+                letter-spacing: 2px;letter-spacing: 2px;'
             synopsis.id = 'synopsis'
             var synopsisHTML = ''
             synopsisHTML +=
