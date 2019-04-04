@@ -6,19 +6,24 @@
     <script src="fluidplayer.min.js"></script>
     <style>
         @font-face {
-            font-family: 'steelfishEb';
-            src: url(assets/steelfish_eb.otf);
+            font-family: 'FatFrank';
+            src: url(assets/FatFrank.otf);
         }
 
         @font-face {
-            font-family: 'steelfish';
-            src: url(assets/steelfish_rg.ttf);
+            font-family: 'Montserrat_Bold';
+            src: url(assets/Montserrat-Bold.otf);
+        }
+        
+        .circlebutton{
+            background: #ffd900;
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            margin: 0px 10px 10px 10px;
+            float: left;
         }
 
-        @font-face {
-            font-family: 'bahnschrift';
-            src: url(assets/bahnschrift.ttf);
-        }
 
         .fluid_video_wrapper {
             -webkit-transition: width 3s, height 3s, margin 3s;
@@ -115,7 +120,7 @@
             margin: 0 5px;
             height: 75px;
             width: 140px;
-            background: red;
+            background: transparent;
             cursor: pointer;
             overflow: hidden;
             outline: 1px solid #ffffff;
@@ -130,7 +135,7 @@
         }
 
         .currentVideo {
-            outline: 3px solid #ac282c !important;
+            outline: 3px solid #ffe65c !important;
         }
 
         .header-container {
