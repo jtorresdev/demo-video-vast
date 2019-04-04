@@ -185,7 +185,7 @@ var tapOnVideo = function () {
 
             var synopsis = document.createElement('div')
 
-            synopsis.style = 'color: #fef9d1;padding: 20px;font-size: 16px;font-family: bahnschrift;text-transform: uppercase;line-height: 22px;text-align:center;font-variation-settings: "wght" 400, "wdth" 80;font-variation-settings: "wght" 400, "wdth" 80;letter-spacing: 2px;letter-spacing: 2px;'
+            synopsis.style = 'color: #fff;padding: 20px;font-size: 16px;font-family: bahnschrift;text-transform: uppercase;line-height: 22px;text-align:center;font-variation-settings: "wght" 400, "wdth" 80;letter-spacing: 2px;letter-spacing: 2px;'
             synopsis.id = 'synopsis'
             var synopsisHTML = ''
             synopsisHTML +=
@@ -286,7 +286,7 @@ var tapOnVideo = function () {
 
         closeButton.addEventListener('click', function () {
             removeIfExists(['header', 'visitPageButton', 'poweredbyvidoomy', 'bottom_container',
-                'menu', 'synopsis', 'saveCalendarDropdown'
+                'menu', 'synopsis', 'saveCalendarDropdown', 'avengers_container'
             ])
 
             document.getElementById('fluid_video_wrapper_video-id').style.display = 'block'

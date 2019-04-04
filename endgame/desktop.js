@@ -51,7 +51,7 @@ var removeAllListener = function() {
 
 var playerOut = function() {
 	var video_wrapper = document.getElementById('fluid_video_wrapper_video-id');
-	removeIfExists([ 'saveCalendarDropdown' ]);
+	removeIfExists([ 'saveCalendarDropdown', 'avengers_container' ]);
 	document.getElementsByClassName('active')[0].classList.remove('active');
 	document.getElementById('videosItem').classList.add('active');
 	// si no ha terminado la transicion, vuelve al tamaño inicial
@@ -247,7 +247,7 @@ var options = {
 				wrapper.appendChild(background);
 
 				close.addEventListener('click', function() {
-					removeIfExists([ 'synopsis', 'visitPageButton', 'date' ]);
+					removeIfExists([ 'synopsis', 'visitPageButton', 'date', 'avengers_container' ]);
 
 					document.getElementById('fluid_video_wrapper_video-id').style.display = 'block';
 					document.getElementById('thumbnail-videos').style.display = 'block';

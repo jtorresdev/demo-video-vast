@@ -25,17 +25,44 @@ var tapOnVideo = function () {
         var header = document.createElement('div')
         var closeButton = document.createElement('img')
         var logo = document.createElement('img')
-        var menu = document.createElement('div')
+        var menu = document.createElement('a')
+        var rrss = document.createElement('div');
+        var rrss_links = document.createElement('div');
 
-        menu.style = 'position: absolute;right: -15px;top: 15px;'
+        rrss.innerHTML = '<span style="z-index: 5;position: relative;">#ToyStory4</span>';
+
+				rrss.style =
+					'position: relative;top: 6px;letter-spacing: -1px;color: #ffd900;font-family: Montserrat_Bold;font-size: 20px;width: 130px;text-align: center;margin: 0 auto;left: 0;right: 0;';
+
+				rrssHTML = '';
+				rrssHTML +=
+					'<a href="https://www.facebook.com/PixarToyStory/" style="float:left" target="_blank"><img src="'+ base_url +'/assets/fb.png"/></a>';
+				rrssHTML +=
+					'<a href="https://twitter.com/toystory?lang=es" style="float:left;margin: 0px 30px;" target="_blank"><img src="'+ base_url +'/assets/tw.png"/></a>';
+				rrssHTML +=
+					'<a href="https://www.instagram.com/toystory/?hl=es" style="float:left" target="_blank"><img src="'+ base_url +'/assets/ig.png"/></a>';
+
+				rrss_links.style = 'margin-bottom: 5px;background: #e20025;clip-path: polygon(20% 0%, 100% 6%, 100% 6%, 100% 83%, 100% 84%, 0px 89%, 0px 91%, 3% 0px);  width: 120px;height: 30px;padding: 12px 0 0 10px;top: 15px;position: absolute;z-index: 2;';
+
+				rrss_links.innerHTML = rrssHTML;
+
+				rrss.appendChild(rrss_links);
+
+        menu.style = 'position:absolute;right:20px;top:5px';
+        menu.href = "https://www.pixar.com/feature-films-toy-story-4"
+        menu.target = "_blank"
+
+        var menuHTML = '';
 
         var menuHTML = ''
 
-        menuHTML = '<ul>'
-        menuHTML += '<li class="active" id="videosItem"><a href="#">Trailers</a></li>'
-        menuHTML += '<li id="avengersItem"><a href="#">Vengadores</a></li>'
-        menuHTML += '<li id="synopsisItem"><a href="#">Sinopsis</a></li>'
-        menuHTML += '</ul>'
+		menuHTML += '<div style="color:#fff;font-family:FatFrank;text-transform: uppercase;line-height: 18px;text-align: center;">'
+		menuHTML += '<div style="float:left;margin-top: 5px;">'
+		menuHTML += '<div style="font-size: 26px;">Descubre la</div>'
+		menuHTML += '<div style="font-size: 18px;">nueva aventura</div>'
+	    menuHTML += '</div>'
+		menuHTML += '<div class="circlebutton"><img style="padding: 11px;" src="'+ base_url +'/assets/arrow-blue.png"/></div>'
+		menuHTML += '</div>';
 
         menu.innerHTML = menuHTML
         menu.id = "menu"
@@ -50,25 +77,16 @@ var tapOnVideo = function () {
             'width:100%;height:55px;text-align: center;'
 
         logo.src = base_url + '/assets/logo.png'
-        logo.style = 'width:100px;float:left;margin: 10px;'
+        logo.style = 'width:120px;float:left;margin: 10px;'
 
         wrapper.style =
             'position: fixed;background-image: url('+ base_url +'/assets/background-mobile.png);height: 100%;top: 0px;background-size: cover;background-repeat: no-repeat;width: 100%;background-color: black;left: 0;z-index: 999999999;'
 
-        /* demo */
-
-        //document.getElementById('container').style.padding = '20px 0px'
-
-        /* demo */
-
-
-        // BANNERS
-
         var bottom_container = document.createElement('div')
-        var bottom_left = document.createElement('div')
-        var bottom_right = document.createElement('div')
+        var bottom = document.createElement('div')
         var VisitPageButton = document.createElement('a')
         var powered = document.createElement('img')
+        var text = document.createElement('div')
 
         powered.src = base_url + '/assets/powered.png'
         powered.style = 'position:absolute;bottom: 10px; right: 10px;display:none'
@@ -78,45 +96,24 @@ var tapOnVideo = function () {
         bottom_container.style =
             'width: 330px;margin: 0px auto; bottom: 130px;left: 0;right: 0;'
 
-        bottom_left.style =
-            'letter-spacing: 1px;color:#fff;font-family: steelfishEb;font-size: 20px;width: 100px;text-align: center;margin: 25px 20px 15px 15px;float: left;'
-        bottom_right.style =
-            'float: left;width: 160px;text-align: center;margin: 10px 15px;padding: 5px 0'
+        bottom.style =
+            'letter-spacing: 1px;color:#fff;font-family: FatFrank;font-size: 20px;width: 100%;text-align: center;float: left;z-index: 5;position: relative;'
 
-        var bottom_left_HTML = ''
+        text.style.margin = "5px 0 0 20px"
 
-        bottom_left_HTML += '<img src="'+ base_url + '/assets/logo.png" width="100px"/>'
-        bottom_left_HTML += '<span style="margin-left:-10px">#AVENGERSENDGAME</span>'
-        bottom_left_HTML +=
-            '<a href="https://www.facebook.com/avengers/" style="float:left;margin-left: 5px;" target="_blank"><img src="' + base_url + '/assets/fb.png"/></a>'
-        bottom_left_HTML +=
-            '<a href="https://twitter.com/avengers?lang=es" style="float:left;margin: 0px 20px;" target="_blank"><img src="' + base_url + '/assets/tw.png"/></a>'
-        bottom_left_HTML +=
-            '<a href="https://www.instagram.com/avengers" style="float:left" target="_blank"><img src="' + base_url + '/assets/ig.png"/></a>'
+        text.innerHTML = '<img src="' + base_url + '/assets/logo1.png" style="float: left;margin-top: 30px;margin-right: -30px;"><div style="    font-family: FatFrank;font-size: 60px;color: #ffe65c;text-transform: uppercase;line-height: 50px;margin-top: 40px;z-index: 5;float: left;width: 240px;">¡ya en cines!</div>'
 
-        bottom_left.innerHTML = bottom_left_HTML
+        bottom.appendChild(rrss);
+        bottom.appendChild(text)
 
-        var bottom_right_HTML = ''
-
-        bottom_right_HTML = '<img src="' + base_url + '/assets/date-mobile.png" width="150px" />'
-        
-        bottom_right.innerHTML = bottom_right_HTML
-
-        VisitPageButton.style =
-            'display: inline-block;width: 65%;width: 80%;margin: 10px 0px 0px 25px;height: 50px; color: rgb(255, 255, 255);background: rgb(235, 13, 13);font-size: 16px; font-family: bahnschrift;text-transform: uppercase;text-align: center; line-height: 50px;cursor: pointer;text-decoration: none;clip-path: polygon(9% 0px, 100% 0px, 100% 0px, 100% 74%, 91% 100%, 0px 100%, 0px 100%, 0px 29%);'
-
-        VisitPageButton.innerText = 'Visitar pagina web'
-        VisitPageButton.href = 'https://disney.es/peliculas/vengadores-endgame'
-        VisitPageButton.target = '_blank'
-        VisitPageButton.id = 'visitPageButton'
+        VisitPageButton.innerHTML = '<a target="_blank" href="https://www.vidoomy.com/entradas_toystory.html" style="text-decoration: none"><div style="width: 250px;height: 60px;font-size: 16px;font-family: FatFrank;color: #ffd900;letter-spacing: 2px;text-transform: uppercase;line-height: 60px;position: absolute;bottom: 65px;left: 60px;text-align: center;background-image: url(assets/buytickets.png);background-repeat: no-repeat;z-index:2"><span style="margin-right: 15px;">Comprar entradas</span><img style="position: absolute;top: 20px;right: 20px;" src="'+ base_url +'/assets/arrow-yellow.png"/></div></div></a>'
 
        var vpbutton_container = document.createElement('div')
         vpbutton_container.style.width = '100%'
 
         vpbutton_container.appendChild(VisitPageButton)
         
-        bottom_container.appendChild(bottom_left)
-        bottom_container.appendChild(bottom_right)
+        bottom_container.appendChild(bottom)
        
         bottom_container.appendChild(vpbutton_container)
 
@@ -128,124 +125,6 @@ var tapOnVideo = function () {
         wrapper.appendChild(menu)
 
         var video_wrapper = document.getElementById('fluid_video_wrapper_video-id')
-
-        document.getElementById('synopsisItem').addEventListener('click', function (e) {
-
-            var player = document.getElementById('player')
-
-            e.preventDefault()
-            document.getElementById('video-id').pause()
-            removeIfExists(['avengers_container'])
-            document.getElementsByClassName('active')[0].classList.remove('active')
-            document.getElementById('synopsisItem').classList.add('active')
-
-            document.getElementById('bottom_container').style.marginTop = '100px'
-
-            video_wrapper.style.display = 'none'
-            document.getElementById('thumbnail-videos').style.display = 'none'
-            document.getElementById('bottom_container').style.display = 'block';
-
-            var synopsis = document.createElement('div')
-
-            synopsis.style =
-                'color: #fef9d1;padding: 20px;font-size: 16px;font-family: bahnschrift;text-transform: uppercase;line-height: 22px;text-align:center'
-            synopsis.id = 'synopsis'
-            var synopsisHTML = ''
-            synopsisHTML +=
-                '<p style="font-size: 25px;margin-bottom: 0px;color: #fff;">Avengers end game</p>'
-            synopsisHTML +=
-                '<p>Después de los eventos devastadores de Avengers: Infinity War, el universo está en ruinas debido a las acciones de Thanos, el Titán Loco. Con la ayuda de los aliados que quedaron, los Vengadores deben reunirse una vez más para deshacer sus acciones y restaurar el orden en el universo de una vez por todas, si importar cuáles son las consecuencias. Cuarta entrega de la saga "Vengadores".</p>'
-            synopsis.innerHTML = synopsisHTML
-
-            player.appendChild(synopsis)
-        })
-
-        document.getElementById('videosItem').addEventListener('click', function (e) {
-            e.preventDefault()
-            document.getElementById('bottom_container').style.marginTop = '0px'
-            document.getElementById('video-id').pause()
-            removeIfExists(['avengers_container', 'synopsis'])
-            document.getElementsByClassName('active')[0].classList.remove('active')
-            document.getElementById('videosItem').classList.add('active')
-
-            video_wrapper.style.display = 'block'
-            document.getElementById('thumbnail-videos').style.display = 'block'
-            document.getElementById('bottom_container').style.display = 'block';
-        })
-
-        document.getElementById('avengersItem').addEventListener('click', function(e) {
-            e.preventDefault();
-
-            if(!document.getElementById('avengers_container')){
-
-                document.getElementById('video-id').pause();
-
-                document.getElementsByClassName('active')[0].classList.remove('active');
-                document.getElementById('avengersItem').classList.add('active');
-                
-                removeIfExists(['synopsis', 'date' ]);
-
-                video_wrapper.style.display = 'none';
-                document.getElementById('thumbnail-videos').style.display = 'none';
-                document.getElementById('bottom_container').style.display = 'none';
-
-                var avengers_container = document.createElement('div')
-                var avengers = document.createElement('div')
-                var navigation = document.createElement('div')
-                var prev_dot = document.createElement('span')
-                var next_dot = document.createElement('span')
-                
-                var data = [
-                    {hero : "Iron Man", name: "Tony Stark", url : "#", image : "ironman.png"},
-                    {hero : "Captain America", name: "Steve Rogers", url : "#", image : "captainamerica.png"},
-                    {hero : "Thor", name: "", url : "#", image : "thor.png"},
-                    {hero : "Spider-man", name: "Peter Parker", url : "#", image : "spiderman.png"},
-                    {hero : "Hulk", name: "Bruce Banner", url : "#", image : "hulk.png"},
-                    {hero : "War Machine", name: "James Rhodes", url : "#", image : "warmachine.png"},
-                    {hero : "Black Widow", name: "Natasha Romanoff", url : "#", image : "blackwidow.png"},
-                    {hero : "Vision", name: "", url : "#", image : "vision.png"},
-                    {hero : "Falcon", name: "Sam Wilson", url : "#", image : "falcon.png"},
-                    {hero : "Hawkeye", name: "Clint Barton", url : "#", image : "hawkeye.png"},
-                    {hero : "Scarlet Witch", name: "Wanda Maximoff", url : "#", image : "scarletwitch.png"},
-                    {hero : "Black Panther", name: "T'challa", url : "#", image : "blackpanther.png"}
-                ]
-
-                var avengersHTML = ''
-
-                data.map(avenger => {
-                    avengersHTML += '<div class="avenger"><img style="width:100%" src="' + base_url + '/assets/heroes/' + avenger.image + '"/><div class="avenger-text">' + avenger.hero + ' <div class="avenger-name">' + avenger.name + '</div></div></div></div>'
-                })
-
-                avengers.style = "position: absolute;top: 10px;left: 10px;height: 550px;overflow: hidden;width: 800px; -webkit-transition: all 1s ease;-moz-transition: all 1s ease;-o-transition: all 1s ease;-ms-transition: all 1s ease;transition: all 1s ease;text-transform:uppercase"
-                avengers.innerHTML = avengersHTML
-                avengers_container.style = "width: 100%;height: 550px;position: absolute;top: 60px;overflow: hidden;"
-                avengers_container.id = "avengers_container"
-
-                prev_dot.className = "dot dot-active"
-                next_dot.className = "dot"
-
-                prev_dot.addEventListener('click', function(){
-                    avengers.style.left = "10px"
-                    prev_dot.className = "dot dot-active"
-                    next_dot.className = "dot"
-                })
-
-                next_dot.addEventListener('click', function(){
-                    avengers.style.left = "-350px"
-                    prev_dot.className = "dot"
-                    next_dot.className = "dot dot-active"
-                })
-
-                navigation.style = "position: absolute;bottom: 0px;left: 0px;right: 0px;margin: 0 auto;width: 50px;    background: rgb(0, 0, 0, 0.8);border-radius: 30px;padding: 0px 5px;"
-                navigation.appendChild(prev_dot)
-                navigation.appendChild(next_dot)
-
-                avengers_container.appendChild(avengers)
-                avengers_container.appendChild(navigation)
-                wrapper.appendChild(avengers_container)
-            }
-
-        });
 
         closeButton.addEventListener('click', function () {
             removeIfExists(['header', 'visitPageButton', 'poweredbyvidoomy', 'bottom_container',
