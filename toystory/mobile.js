@@ -1,5 +1,4 @@
-//var base_url = "https://jtorresdev.github.io/demo-video-vast/toystory"
-var base_url = "http://localwebapp/video/toystory"
+var base_url = "https://jtorresdev.github.io/demo-video-vast/toystory"
 
 var removeIfExists = function (ids) {
     ids.map(id => {
@@ -56,10 +55,9 @@ var tapOnVideo = function () {
 
         var menuHTML = ''
 
-		menuHTML += '<div style="color:#fff;font-family:FatFrank;text-transform: uppercase;line-height: 18px;text-align: center;">'
+		menuHTML += '<div style="color:#fff;font-family:FatFrank;text-transform: uppercase;line-height: 30px;text-align: center;">'
 		menuHTML += '<div style="float:left;margin-top: 5px;">'
-		menuHTML += '<div style="font-size: 26px;">Descubre la</div>'
-		menuHTML += '<div style="font-size: 18px;">nueva aventura</div>'
+		menuHTML += '<div style="font-size: 20px;">Vuelve a jugar</div>'
 	    menuHTML += '</div>'
 		menuHTML += '<div class="circlebutton"><img style="padding: 11px;" src="'+ base_url +'/assets/arrow-blue.png"/></div>'
 		menuHTML += '</div>';

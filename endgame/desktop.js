@@ -20,7 +20,7 @@ var marginTop = '60px';
 var marginLeft = '10px';
 
 var base_url = "https://jtorresdev.github.io/demo-video-vast/endgame"
-//var base_url = "http://localwebapp/video/endgame"
+//var base_url = "./"
 
 var hidePlayerButtons = function() {
 	var hide = 'display:none';

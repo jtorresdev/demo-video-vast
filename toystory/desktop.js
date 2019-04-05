@@ -20,7 +20,7 @@ var marginTop = '60px';
 var marginLeft = '10px';
 
 var base_url = "https://jtorresdev.github.io/demo-video-vast/toystory"
-//var base_url = "http://localwebapp/video/toystory"
+//var base_url = "./"
 
 var hidePlayerButtons = function() {
 	var hide = 'display:none';
@@ -208,10 +208,9 @@ var options = {
 
 				var menuHTML = '';
 
-				menuHTML += '<div style="color:#fff;font-family:FatFrank;text-transform: uppercase;line-height: 22px;text-align: center;">'
+				menuHTML += '<div style="color:#fff;font-family:FatFrank;text-transform: uppercase;line-height: 40px;text-align: center;">'
 				menuHTML += '<div style="float:left">'
-				menuHTML += '<div style="font-size: 30px;">Descubre la</div>'
-				menuHTML += '<div style="font-size: 21px;">nueva aventura</div>'
+				menuHTML += '<div style="font-size: 30px;">Vuelve a jugar</div>'
 				menuHTML += '</div>'
 				menuHTML += '<div class="circlebutton"><img style="padding: 11px;" src="'+ base_url +'/assets/arrow-blue.png"/></div>'
 				menuHTML += '</div>';

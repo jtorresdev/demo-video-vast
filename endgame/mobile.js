@@ -1,5 +1,5 @@
 var base_url = "https://jtorresdev.github.io/demo-video-vast/endgame"
-//var base_url = "http://localwebapp/video/endgame"
+//var base_url = "/."
 
 var removeIfExists = function (ids) {
     ids.map(id => {
@@ -86,12 +86,12 @@ var tapOnVideo = function () {
         var hours = Math.floor((t%(1000 * 60 * 60 * 24))/(1000 * 60 * 60)); 
         var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60)); 
         var seconds = Math.floor((t % (1000 * 60)) / 1000); 
-        countdown.style = "font-size: 24px;font-family: steelfishEb;color: white;background: rgba(0, 0, 0, 0.5);height:40px;padding: 5px;line-height: 20px;margin: 0 auto;display: table;"
+        countdown.style = 'font-size: 26px;color: white;background: rgba(0, 0, 0, 0.5);height: 45px;padding: 10px 10px 0px 10px;line-height: 18px;margin: 0px auto;display: table;font-family: Bahnschrift, "Adobe Blank";font-variation-settings: "wght" 600, "wdth" 80;'
         var countdownHTML = ''
             countdownHTML += '<div id="days" style="text-align:center;float: left;padding: 0 5px;"><div>'+ n(days) +'</div><span style="color:#9c97ae;font-size: 14px;">DIAS</span></div>'
-            countdownHTML += '<div id="hours" style="text-align:center;float: left;padding: 0 5px;"><div>'+ n(hours) +'</div><span style="color:#9c97ae;font-size: 14px;">HORAS</span></div>'
-            countdownHTML += '<div id="minutes" style="text-align:center;float: left;padding: 0 5px;"><div>'+ n(minutes) +'</div><span style="color:#9c97ae;font-size: 14px;">MINUTOS</span></div>'
-            countdownHTML += '<div id="seconds" style="text-align:center;float: left;padding: 0 5px;"><div>'+ n(seconds) +'</div><span style="color:#9c97ae;font-size: 14px;">SEGUNDOS</span></div>'
+            countdownHTML += '<div id="hours" style="text-align:center;float: left;padding: 0 5px;"><div>'+ n(hours) +'</div><span style="color:#9c97ae;font-size: 14px;">HRS</span></div>'
+            countdownHTML += '<div id="minutes" style="text-align:center;float: left;padding: 0 5px;"><div>'+ n(minutes) +'</div><span style="color:#9c97ae;font-size: 14px;">MINS</span></div>'
+            countdownHTML += '<div id="seconds" style="text-align:center;float: left;padding: 0 5px;"><div>'+ n(seconds) +'</div><span style="color:#9c97ae;font-size: 14px;">SEGS</span></div>'
         countdown.innerHTML = countdownHTML; 
             if (t < 0) {
                 clearInterval(x); 
