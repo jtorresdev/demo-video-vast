@@ -11,7 +11,7 @@ function getAttribute(attr){
 
 function makeDesktop(){
     var container = document.createElement('div')
-    var element = selectorType == 'class' ? document.getElementsByClassName(idOrclass)[0] : document.getElementsById(idOrclass)
+    var element = selectorType == 'class' ? document.getElementsByClassName(idOrclass)[0] : document.getElementById(idOrclass)
     var width = widthByAttribute||element.offsetWidth + 'px'
     container.style.width = width
     var height = container.style.width.replace('px', '') * 0.5625 + 'px';
@@ -79,7 +79,7 @@ function makeDesktop(){
         playerJs.onload = function(){
 
             var desktopScript = document.createElement('script')
-                desktopScript.src = "http://localwebapp/video/hellboy/desktop.js"
+                desktopScript.src = "https://www.vidoomy.com/hellboy_desktop/desktop.js"
                 desktopScript.setAttribute('playerWidth', width)
                 desktopScript.setAttribute('fontSize', '12px')
                 desktopScript.setAttribute('shortPlayerWidth', parseInt(width.replace('px', '')) - 300 + 'px')
@@ -169,7 +169,7 @@ function makeMobile(){
         playerJs.onload = function(){
 
             var desktopScript = document.createElement('script')
-                desktopScript.src = "http://localwebapp/video/mobile.js"
+                desktopScript.src = "https://www.vidoomy.com/hellboy_desktop/mobile.js"
                 desktopScript.setAttribute('playerWidth', width)
                 desktopScript.setAttribute('fontSize', '12px')
                 desktopScript.setAttribute('shortPlayerWidth', parseInt(width.replace('px', '')) - 300 + 'px')
