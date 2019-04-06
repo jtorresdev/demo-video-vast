@@ -2,6 +2,7 @@
 var selectorType = 'class'
 var idOrclass = 'article'
 var lineBreak = 5
+var base_url = '..'
 
 var widthByAttribute = getAttribute('playerWidth')
 
@@ -79,7 +80,7 @@ function makeDesktop(){
         playerJs.onload = function(){
 
             var desktopScript = document.createElement('script')
-                desktopScript.src = "https://www.vidoomy.com/hellboy_desktop/desktop.js"
+                desktopScript.src = base_url + "/desktop.js"
                 desktopScript.setAttribute('playerWidth', width)
                 desktopScript.setAttribute('fontSize', '12px')
                 desktopScript.setAttribute('shortPlayerWidth', parseInt(width.replace('px', '')) - 300 + 'px')
@@ -169,7 +170,7 @@ function makeMobile(){
         playerJs.onload = function(){
 
             var desktopScript = document.createElement('script')
-                desktopScript.src = "https://www.vidoomy.com/hellboy_desktop/mobile.js"
+                desktopScript.src = base_url + "/mobile.js"
                 desktopScript.setAttribute('playerWidth', width)
                 desktopScript.setAttribute('fontSize', '12px')
                 desktopScript.setAttribute('shortPlayerWidth', parseInt(width.replace('px', '')) - 300 + 'px')
