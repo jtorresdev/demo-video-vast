@@ -27,7 +27,7 @@ var tapOnVideo = function () {
         var logo = document.createElement('img')
         var menu = document.createElement('div')
 
-        menu.style = 'position: absolute;right: -15px;top: 15px;'
+        menu.style = 'position: absolute;right: 15px;top: 15px;'
 
         var menuHTML = ''
 
@@ -253,7 +253,7 @@ var tapOnVideo = function () {
                     avengersHTML += '<a class="avenger" href="'+ avenger.url +'" target="_blank"><img style="width:100%" src="' + base_url + '/assets/heroes/' + avenger.image + '"/><div class="avenger-text">' + avenger.hero + ' <div class="avenger-name">' + avenger.name + '</div></div></div></a>'
                 })
 
-                avengers.style = "position: absolute;top: 10px;left: 10px;height: 550px;overflow: hidden;width: 800px; -webkit-transition: all 1s ease;-moz-transition: all 1s ease;-o-transition: all 1s ease;-ms-transition: all 1s ease;transition: all 1s ease;text-transform:uppercase"
+                avengers.style = "position: absolute;top: 30px;left: 10px;height: 550px;overflow: hidden;width: 800px; -webkit-transition: all 1s ease;-moz-transition: all 1s ease;-o-transition: all 1s ease;-ms-transition: all 1s ease;transition: all 1s ease;text-transform:uppercase"
                 avengers.innerHTML = avengersHTML
                 avengers_container.style = "width: 100%;height: 550px;position: absolute;top: 60px;overflow: hidden;"
                 avengers_container.id = "avengers_container"
@@ -273,12 +273,12 @@ var tapOnVideo = function () {
                     next_dot.className = "dot dot-active"
                 })
 
-                navigation.style = "position: absolute;bottom: 0px;left: 0px;right: 0px;margin: 0 auto;width: 50px;    background: rgb(0, 0, 0, 0.8);border-radius: 30px;padding: 0px 5px;"
+                navigation.style = "position: absolute;top: 0px;left: 0px;right: 0px;margin: 0 auto;width: 50px;    background: rgb(0, 0, 0, 0.8);border-radius: 30px;padding: 0px 5px;"
                 navigation.appendChild(prev_dot)
                 navigation.appendChild(next_dot)
 
-                avengers_container.appendChild(avengers)
                 avengers_container.appendChild(navigation)
+                avengers_container.appendChild(avengers)
                 wrapper.appendChild(avengers_container)
             }
 

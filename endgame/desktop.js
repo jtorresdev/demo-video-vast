@@ -62,6 +62,7 @@ var playerOut = function() {
 };
 
 var playerIn = function() {
+	removeIfExists([ 'unmuteButton' ])
 	document.getElementById('paper').style.display = 'none';
 	video.muteToggle('video-id', true);
 	document.getElementById('video-id_fluid_controls_container').style.display = 'block';
@@ -85,19 +86,17 @@ var hideControlBar = function() {
 
 var playOnClick = function() {
 	document.getElementById('video-id').addEventListener('click', function() {
-		playerIn();
+		//playerIn();
 	});
 };
 
 var makeUnmuteButton = function() {
 	var unmuteButton = document.createElement('div');
-
+	unmuteButton.id = "unmuteButton"
 	unmuteButton.innerHTML = '<img src="'+ base_url +'/assets/unmute.png">';
-	unmuteButton.id = 'video-id_fluid_initial_play';
+	unmuteButton.style = "width: 100%;height: 100%;position: absolute;top: 0;right: 0;bottom: 0;left: 0;margin: auto;display: flex;flex-direction: column;justify-content: center;align-items: center;pointer-events: none;z-index: 999;cursor:pointer"
 
-	var initial_play = document.getElementById('video-id_fluid_initial_play_button');
-
-	initial_play.insertBefore(unmuteButton, initial_play.firstChild);
+	wrapper.appendChild(unmuteButton)
 
 	unmuteButton.addEventListener('click', playerIn);
 };
@@ -118,6 +117,7 @@ var makePaper = function() {
 		video_wrapper.style.marginTop = marginTop;
 		video_wrapper.style.marginLeft = marginLeft;
 		removeAllListener();
+		removeIfExists(['unmuteButton'])
 	});
 	document.getElementById('fluid_video_wrapper_video-id').appendChild(paper);
 };
@@ -281,7 +281,7 @@ var options = {
 						var date1 = document.createElement('img');
 
 						synopsis.style =
-							'position: absolute;top: 15%;left: 50px;color: white;width: 70%;font-size: 16px;font-family: bahnschrift;text-transform: uppercase;line-height: 25px;font-variation-settings: "wght" 200, "wdth" 75;letter-spacing: 2px;';
+							'position: absolute;top: 20%;left: 50px;color: white;width: 70%;font-size: 16px;font-family: bahnschrift;text-transform: uppercase;line-height: 25px;font-variation-settings: "wght" 200, "wdth" 75;letter-spacing: 2px;';
 						synopsis.id = 'synopsis';
 						var synopsisHTML = '';
 						synopsisHTML +=
@@ -417,15 +417,16 @@ var options = {
 var video = fluidPlayer('video-id', options);
 
 video.on('pause', function() {
-	var unmute = document.getElementById('video-id_fluid_initial_play');
-	if (unmute.classList[0] != 'fluid_initial_play') {
-		unmute.remove();
-		document.getElementById('video-id_fluid_initial_play').style = 'display:block;background:#fff';
+	if(document.getElementById('unmuteButton')){
+		document.getElementById('video-id_fluid_initial_play').style = "display:none !important";
+		document.getElementById('video-id').play()
+		video.muteToggle('video-id', true);
+		removeIfExists(['unmuteButton'])
 	}
 });
 
 video.on('play', function() {
-	wrapper.addEventListener('mouseenter', playerIn);
+	//wrapper.addEventListener('mouseenter', playerIn);
 });
 
 video.on('ended', function() {
