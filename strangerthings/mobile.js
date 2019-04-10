@@ -332,7 +332,6 @@ var tapOnVideo = function () {
 
         })
 
-         // efecto achicarse
          player.style.height = '100%'
          player.style.height = '230px'
     }
