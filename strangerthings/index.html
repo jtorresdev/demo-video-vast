@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.fluidplayer.com/v2/current/fluidplayer.min.css" type="text/css" />
+    <script src="fluidplayer.min.js"></script>
+    <style>
+        @font-face {
+            font-family: 'RobotoMedium';
+            src: url(assets/Roboto-Medium.ttf);
+        }
+
+        @font-face {
+            font-family: 'RobotoRegular';
+            src: url(assets/Roboto-Regular.ttf);
+        }
+
+        @font-face {
+            font-family: 'RobotoBold';
+            src: url(assets/Roboto-Bold.ttf);
+        }
+
+        .fluid_video_wrapper {
+            -webkit-transition: width 3s, height 3s, margin 3s;
+            transition: width 3s, height 3s, margin 3s;
+        }
+            
+        #menu ul {
+            font-size: 13px;
+            font-family: 'RobotoMedium';
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        #menu ul li {
+            float: left;
+            margin: 0px 10px;
+            padding: 0 10px 5px 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        #menu ul li:hover {
+            border-bottom: 5px solid #eb0d0d;
+        }
+
+        #menu ul li a {
+            color: #fff;
+            text-decoration: none
+        }
+
+        #menu ul li.active {
+            border-bottom: 5px solid #eb0d0d;
+        }
+
+
+        .thumbnail {
+            margin: 0px 10px;
+            width: 215px;
+            color: white;
+            font-family: RobotoRegular;
+            font-size: 14px;
+            cursor:pointer;
+            position: relative;
+            text-decoration: none
+        }
+
+        .thumbnail > .description {
+            color: #cbcbcf;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .thumbnail > .pg{
+            margin: 0 10px;
+            padding: 0px 5px;
+            border: 1px solid white;
+            border-radius: 3px;
+        }
+
+        .thumbnail > .title{
+            margin: 5px 0px;
+            text-transform: uppercase;
+            font-weight: bold
+        }
+
+        .thumbnail > .seasons{
+            font-weight: bold;
+        }
+
+
+        .thumbnail::before {
+            content: url(assets/play.png);
+            margin: 40px auto;
+            display: block;
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            right: 0;
+            left: 0;
+        }
+
+        .currentVideo {
+            outline: 3px solid #ac282c !important;
+        }
+
+        .header-container {
+            height: 60px;
+            border-bottom: 1px solid #e6ebf0;
+            padding: 0 45px;
+        }
+
+        .header {
+            width: 1260px;
+            height: 100%;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .header img {
+            padding: 10px 0 0 0
+        }
+
+        .container {
+            padding: 20px 0px;
+            position: relative;
+            margin: 0 auto;
+            width: 1260px;
+            display: block;
+        }
+
+        body {
+            margin: 0
+        }
+
+        .wireframe-right {
+            background: #e6ebf0;
+            width: 350px;
+            height: 550px;
+            float: left;
+            margin: 10px 0 0 15px;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class="header-container">
+        <div class="header">
+            <img src="assets/demo/vidoomy.png">
+        </div>
+    </div>
+    <div class="container">
+        <div class="title">
+            <img src="assets/demo/wireframe-title.png" alt="">
+        </div>
+        <div class="wrapper" id="wrapper" style="width:800px;height:450px;position: relative;margin: 10px 10px 10px 0px;float: left;">
+            <div class="big-video">
+                <video id="video-id" current-video="1" autoplay muted>
+                    <source src="assets/videos/video1.mp4" type="video/mp4" />
+                </video>
+            </div>
+        </div>
+        <div class="wireframe-right"></div>
+        <div class="wireframe-bottom">
+            <img src="assets/demo/wireframe-bottom.png">
+        </div>
+    </div>
+    <script src="desktop.js"></script>
+</body>
+</html>
