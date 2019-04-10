@@ -16,149 +16,106 @@
     }
 
     @font-face {
-            font-family: 'steelfishEb';
-            src: url(assets/steelfish_eb.otf);
+            font-family: 'RobotoMedium';
+            src: url(assets/Roboto-Medium.ttf);
         }
 
         @font-face {
-            font-family: 'steelfish';
-            src: url(assets/steelfish_rg.ttf);
+            font-family: 'RobotoRegular';
+            src: url(assets/Roboto-Regular.ttf);
         }
 
         @font-face {
-            font-family: 'bahnschrift';
-            src: url(assets/bahnschrift.ttf);
+            font-family: 'RobotoBold';
+            src: url(assets/Roboto-Bold.ttf);
         }
 
-    .player {
-        -webkit-transition: width 1s, height 1s, margin 1s, left 2s;
-        transition: width 1s, height 1s, margin 1s, left 2s;
-    }
+        .fluid_video_wrapper {
+            -webkit-transition: width 3s, height 3s, margin 3s;
+            transition: width 3s, height 3s, margin 3s;
+        }
+            
+        #menu ul {
+            font-size: 13px;
+            font-family: 'RobotoMedium';
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
-    .avenger {
-            width: 115px;
+        #menu ul li {
             float: left;
-            margin: 5px 5px 5px 0px;
+            margin: 0px 5px;
+            padding: 0 0px 0px 0px;
+            text-align: center;
             cursor: pointer;
-            position:relative
-        }
-
-        .avenger:hover > .avenger-text{
-            background: #eb0d0d;
-        }
-
-        .dot {
-            height: 15px;
-            width: 15px;
-            background-color: #818699;
-            border-radius: 50%;
-            display: inline-block;
-            margin: 5px 5px 2px 5px;
-            cursor:pointer
-        }
-
-        .dot-active{
-            background-color: #eb0d0d;
-        }
-
-        .avenger-text{
-            height: 90px;
-            width: 95px;
-            float: left;
-            background: rgba(0, 0, 0, 0.8);
-            margin-top: -5px;
-            color: white;
-            padding: 10px;
-            -webkit-clip-path: polygon(0 0, 100% 0, 100% 0, 100% 80%, 80% 100%, 0 100%, 0 100%, 0 0);
-            clip-path: polygon(0 0, 100% 0, 100% 0, 100% 80%, 80% 100%, 0 100%, 0 100%, 0 0);
-            border-top: 4px solid #eb0d0d;
-            font-family: Bahnschrift, "Adobe Blank";
-            font-variation-settings: "wght" 400, "wdth" 80;
-            font-size:18px
-        }
-
-        .avenger-name{
-            position: absolute;
-            bottom: 10px;
-            color:#b4b4b4;
-            font-size: 12px
-        }
-
-    #menu ul {
-        font-size: 20px;
-            font-family: 'steelfish';
             list-style-type: none;
-            display: inline;
-            font-style: italic;
-    }
+        }
 
-    #menu ul li {
-        float: left;
-        margin: 0px 0px;
-        padding: 0 5px 5px 5px;
-        text-align: center;
-        cursor: pointer;
-    }
+        #menu ul li:hover {
+            border-bottom: 5px solid #eb0d0d;
+        }
 
-    #menu ul li:hover {
-        border-bottom: 5px solid #eb0d0d;
-    }
+        #menu ul li a {
+            color: #fff;
+            text-decoration: none
+        }
 
-    #menu ul li a {
-        color: #fff;
-        text-decoration: none
-    }
+        #menu ul li.active {
+            border-bottom: 5px solid #eb0d0d;
+        }
 
-    #menu ul li.active {
-        border-bottom: 5px solid #eb0d0d;
-    }
 
-    
+        .thumbnail {
+            margin: 10px 5px;
+            width: 170px;
+            color: white;
+            font-family: RobotoRegular;
+            font-size: 14px;
+            cursor:pointer;
+            position: relative;
+            text-decoration: none;
+            float:left
+        }
 
-    .dropdown-link {
-        float: left;
-        width: 100%;
-        color: #ffe200;
-        text-decoration: none;
-        font-size: 24px;
-        font-family: steelfishEb;
-        text-align: center;
-        padding: 10px 0px;
-        border: 1px solid;
-        box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-    }
+        .thumbnail > img{
+            width : 100%
+        }
 
-    .thumbnail-videos {
-        height: 60px;
-        padding: 15px;
-        margin-top: 10px;
-        display:none;
-    }
+        .thumbnail > .description {
+            color: #cbcbcf;
+            font-size: 14px;
+            opacity: 0.8;
+        }
 
-    .thumb-video {
-        float: left;
-        margin: 0 5px;
-        height: 60px;
-        width: 100px;
-        background: white;
-        cursor: pointer;
-        overflow: hidden;
-        outline: 1px solid #ffffff;
-    }
+        .thumbnail > .pg{
+            margin: 0 10px;
+            padding: 0px 5px;
+            border: 1px solid white;
+            border-radius: 3px;
+        }
 
-    .stopped::after {
-        content: url(assets/play.png);
-        margin: 10px auto;
-        display: block;
-        width: 40px;
-        height: 40px;
-    }
+        .thumbnail > .title{
+            margin: 5px 0px;
+            text-transform: uppercase;
+            font-weight: bold
+        }
 
-    .currentVideo {
-        outline: 3px solid #ac282c !important;
-    }
+        .thumbnail > .seasons{
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+
+        .thumbnail::before {
+            content: url(assets/play.png);
+            margin: 30px auto;
+            display: block;
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            right: 0;
+            left: 0;
+        }
 
     /* The device with borders */
     .smartphone {
@@ -254,17 +211,6 @@
                 <video id="video-id" current-video="1" autoplay muted>
                     <source src="assets/videos/video1.mp4" type="video/mp4" />
                 </video>
-            </div>
-            <div class="thumbnail-videos" id="thumbnail-videos">
-                <div class="thumb-video currentVideo" id="thumb-video-1" data-src="assets/videos/video1.mp4"
-                    style="background-image:url('assets/thumb1.png');background-size: 110px;">
-                </div>
-                <div class="thumb-video stopped" id="thumb-video-2" data-src="assets/videos/video2.mp4"
-                    style="background-image:url('assets/thumb2.png');background-size: 110px;">
-                </div>
-                <div class="thumb-video stopped" id="thumb-video-3" data-src="assets/videos/video3.mp4"
-                    style="background-image:url('assets/thumb3.png');background-size: 110px;">
-                </div>
             </div>
         </div>
         <div class="bottom">

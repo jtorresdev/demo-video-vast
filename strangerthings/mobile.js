@@ -1,10 +1,22 @@
-var base_url = "https://jtorresdev.github.io/demo-video-vast/endgame"
-//var base_url = "/."
+//var base_url = "https://jtorresdev.github.io/demo-video-vast/endgame"
+var base_url = "./"
 
 var removeIfExists = function (ids) {
     ids.map(id => {
         document.getElementById(id) ? document.getElementById(id).remove() : null
     })
+}
+
+var showIfExists = function(ids){
+	ids.map((id) => {
+		document.getElementById(id) ? document.getElementById(id).style.display = "block" : null;
+	});
+}
+
+var hideIfExists = function(ids){
+	ids.map((id) => {
+		document.getElementById(id) ? document.getElementById(id).style.display = 'none' : null;
+	});
 }
 
 var tapOnVideo = function () {
@@ -16,7 +28,6 @@ var tapOnVideo = function () {
         document.getElementById('unmuteButton').remove()
         video.muteToggle('video-id', true)
         video.play()
-        document.getElementById('thumbnail-videos').style.display = 'block'
 
         document.getElementById('video-id').style.background = 'transparent'
 
@@ -24,7 +35,6 @@ var tapOnVideo = function () {
         var player = document.getElementById('player')
         var header = document.createElement('div')
         var closeButton = document.createElement('img')
-        var logo = document.createElement('img')
         var menu = document.createElement('div')
 
         menu.style = 'position: absolute;right: 15px;top: 15px;'
@@ -32,9 +42,9 @@ var tapOnVideo = function () {
         var menuHTML = ''
 
         menuHTML = '<ul>'
-        menuHTML += '<li class="active" id="videosItem"><a href="#">Trailers</a></li>'
-        menuHTML += '<li id="avengersItem"><a href="#">Vengadores</a></li>'
-        menuHTML += '<li id="synopsisItem"><a href="#">Sinopsis</a></li>'
+		menuHTML += '<li class="active" id="informationItem"><a href="#">Información</a></li>';
+		menuHTML += '<li id="trailersItem"><a href="#">Trailers y más</a></li>';
+		menuHTML += '<li id="similarItem"><a href="#">Similares</a></li>';
         menuHTML += '</ul>'
 
         menu.innerHTML = menuHTML
@@ -48,9 +58,6 @@ var tapOnVideo = function () {
         header.id = "header"
         header.style =
             'width:100%;height:55px;text-align: center;'
-
-        logo.src = base_url + '/assets/logo.png'
-        logo.style = 'width:100px;float:left;margin: 10px;'
 
         wrapper.style =
             'position: fixed;background-image: url('+ base_url +'/assets/background-mobile.png);height: 100%;top: 0px;background-size: cover;background-repeat: no-repeat;width: 100%;background-color: black;left: 0;z-index: 999999999;'
@@ -67,99 +74,76 @@ var tapOnVideo = function () {
         var bottom_container = document.createElement('div')
         var bottom_left = document.createElement('div')
         var bottom_right = document.createElement('div')
-        var VisitPageButton = document.createElement('a')
+        var synopsis = document.createElement('div')
         var powered = document.createElement('img')
-        var countdown = document.createElement('div')
-
-        countdown.id = "countdown"
-
-        var deadline = new Date("Apr 26, 2019 00:00:00").getTime(); 
-
-        function n(n){
-            return n > 9 ? "" + n: "0" + n;
-        }
-
-        var updateTime = function(){
-        var now = new Date().getTime(); 
-        var t = deadline - now; 
-        var days = Math.floor(t / (1000 * 60 * 60 * 24)); 
-        var hours = Math.floor((t%(1000 * 60 * 60 * 24))/(1000 * 60 * 60)); 
-        var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60)); 
-        var seconds = Math.floor((t % (1000 * 60)) / 1000); 
-        countdown.style = 'font-size: 26px;color: white;background: rgba(0, 0, 0, 0.5);height: 45px;padding: 10px 10px 0px 10px;line-height: 18px;margin: 0px auto;display: table;font-family: Bahnschrift, "Adobe Blank";font-variation-settings: "wght" 600, "wdth" 80;'
-        var countdownHTML = ''
-            countdownHTML += '<div id="days" style="text-align:center;float: left;padding: 0 5px;"><div>'+ n(days) +'</div><span style="color:#9c97ae;font-size: 14px;">DIAS</span></div>'
-            countdownHTML += '<div id="hours" style="text-align:center;float: left;padding: 0 5px;"><div>'+ n(hours) +'</div><span style="color:#9c97ae;font-size: 14px;">HRS</span></div>'
-            countdownHTML += '<div id="minutes" style="text-align:center;float: left;padding: 0 5px;"><div>'+ n(minutes) +'</div><span style="color:#9c97ae;font-size: 14px;">MINS</span></div>'
-            countdownHTML += '<div id="seconds" style="text-align:center;float: left;padding: 0 5px;"><div>'+ n(seconds) +'</div><span style="color:#9c97ae;font-size: 14px;">SEGS</span></div>'
-        countdown.innerHTML = countdownHTML; 
-            if (t < 0) {
-                clearInterval(x); 
-                countdown.innerHTML = "EXPIRED"; 
-            }
-        }
-
-        updateTime()
-
-        var x = setInterval(function() { 
-            updateTime()
-        }, 1000);
     
 
         powered.src = base_url + '/assets/powered.png'
-        powered.style = 'position:absolute;bottom: 10px; right: 10px;display:none'
+        powered.style = 'position:absolute;bottom: 10px; right: 10px;'
         powered.id = 'poweredbyvidoomy'
 
         bottom_container.id = "bottom_container"
         bottom_container.style =
-            'width: 330px;margin: 0px auto; bottom: 130px;left: 0;right: 0;'
+            'width: 100%;margin: 0px auto; bottom: 130px;left: 0;right: 0;padding:0 10px'
 
         bottom_left.style =
-            'letter-spacing: 1px;color:#fff;font-family: steelfishEb;font-size: 20px;width: 100px;text-align: center;margin: 25px 20px 15px 15px;float: left;'
+            'letter-spacing: 1px;color:#fff;font-family: steelfishEb;font-size: 20px;width: 100px;text-align: center;margin: 0px;float: left;'
         bottom_right.style =
-            'float: left;width: 160px;text-align: center;margin: 10px 15px;padding: 5px 0'
+            'float: right;width: 160px;text-align: center;margin: 0px;padding: 5px 0;letter-spacing: 1px;color: #fff;font-family: RobotoRegular;font-size: 16px;'
 
         var bottom_left_HTML = ''
-
-        bottom_left_HTML += '<img src="'+ base_url + '/assets/logo.png" width="100px"/>'
-        bottom_left_HTML += '<span style="margin-left:-10px">#AVENGERSENDGAME</span>'
-        bottom_left_HTML +=
-            '<a href="https://www.facebook.com/avengers/" style="float:left;margin-left: 5px;" target="_blank"><img src="' + base_url + '/assets/fb.png"/></a>'
-        bottom_left_HTML +=
-            '<a href="https://twitter.com/avengers?lang=es" style="float:left;margin: 0px 20px;" target="_blank"><img src="' + base_url + '/assets/tw.png"/></a>'
-        bottom_left_HTML +=
-            '<a href="https://www.instagram.com/avengers" style="float:left" target="_blank"><img src="' + base_url + '/assets/ig.png"/></a>'
-
+        bottom_left_HTML += '<img src="' + base_url + '/assets/date-mobile.png" id="date" width="150px" />'
+        bottom_left_HTML += '<img src="'+ base_url + '/assets/logo.png" id="logo" style="padding: 15px 0;"/>'
         bottom_left.innerHTML = bottom_left_HTML
+        bottom_left.id = "bottom_left"
 
         var bottom_right_HTML = ''
 
-        bottom_right_HTML = '<img src="' + base_url + '/assets/date-mobile.png" width="150px" />'
-        
+        bottom_right_HTML += '<span style="margin-left:-45px">#STRANGERTHINGS3</span>'
+        bottom_right_HTML += '<div style="margin-left:0px">'
+        bottom_right_HTML +=
+            '<a href="https://www.facebook.com/StrangerThingsEspana/?brand_redir=1031174333634374" style="float:left;margin-left: 5px;" target="_blank"><img src="' + base_url + '/assets/fb.png"/></a>'
+            bottom_right_HTML +=
+            '<a href="https://twitter.com/stranger_things" style="float:left;margin: 0px 20px;" target="_blank"><img src="' + base_url + '/assets/tw.png"/></a>'
+            bottom_right_HTML +=
+            '<a href="https://www.instagram.com/strangerthingstv" style="float:left" target="_blank"><img src="' + base_url + '/assets/ig.png"/></a>'
+        bottom_right_HTML += '</div>'
         bottom_right.innerHTML = bottom_right_HTML
+        bottom_right.id = "bottom_right"
 
-        bottom_right.appendChild(countdown)
+        synopsis.id = "synopsis"
+        synopsis.style = "float: left;color: white;font-family: RobotoRegular;font-size: 16px;"
+        synopsis.innerHTML = "<span>A raiz de la desaparición de un niño, un pueblo desvela un misterio relacionado con experimentos secretos, fuerzas sobrenaturales aterradoras y una niña muy extraña.</span>"
 
-        VisitPageButton.style =
-            'display: inline-block;width: 65%;width: 80%;margin: 10px 0px 0px 25px;height: 50px; color: rgb(255, 255, 255);background: rgb(235, 13, 13, 0.8);font-size: 16px; font-family: bahnschrift;text-transform: uppercase;text-align: center; line-height: 50px;cursor: pointer;text-decoration: none;clip-path: polygon(9% 0px, 100% 0px, 100% 0px, 100% 74%, 91% 100%, 0px 100%, 0px 100%, 0px 29%);'
+        var buttons = document.createElement('div')
+        var subscribe = document.createElement('a')
+        var watchNow = document.createElement('a')
 
-        VisitPageButton.innerText = 'Visitar pagina web'
-        VisitPageButton.href = 'https://disney.es/peliculas/vengadores-endgame'
-        VisitPageButton.target = '_blank'
-        VisitPageButton.id = 'visitPageButton'
+        buttons.style = "float:left;clear:both;margin: 40px -20px;"
+        buttons.id = "buttons"
 
-       var vpbutton_container = document.createElement('div')
-        vpbutton_container.style.width = '100%'
+        subscribe.style = "border: 1px solid rgb(229, 9, 20);background: #e50914; width: 15%; text-align:center; padding: 10px 20px; color: #fff; font-family: 'RobotoMedium'; font-size: 14px; text-transform: uppercase;border-radius: 3px;margin: 10px 10px 10px 20px;text-decoration:none"
+        subscribe.id = "subscribe"
+        subscribe.innerText = "Subscribirse"
+        subscribe.href = "https://www.netflix.com/"
+        subscribe.target = '_blank'
 
-        vpbutton_container.appendChild(VisitPageButton)
+        watchNow.style = "background: transparent; width: 15%; text-align:center; padding: 10px 20px; color: #fff; font-family: 'RobotoMedium'; font-size: 14px; text-transform: uppercase;border-radius: 3px;    margin: 10px 0px;    border: 1px solid white;text-decoration:none"
+        watchNow.innerHTML = '<img src="' + base_url + '/assets/triangle.png"> Ver ahora'
+        watchNow.href = "https://www.netflix.com/"
+        watchNow.id = "watchnow"
+        watchNow.target = '_blank'
+
+        buttons.appendChild(subscribe)
+        buttons.appendChild(watchNow)
         
         bottom_container.appendChild(bottom_left)
         bottom_container.appendChild(bottom_right)
        
-        bottom_container.appendChild(vpbutton_container)
+        bottom_container.appendChild(synopsis)
+        bottom_container.appendChild(buttons)
 
         header.appendChild(closeButton)
-        header.appendChild(logo)
         wrapper.insertBefore(header, wrapper.firstChild);
         wrapper.appendChild(bottom_container)
         wrapper.appendChild(powered)
@@ -167,119 +151,159 @@ var tapOnVideo = function () {
 
         var video_wrapper = document.getElementById('fluid_video_wrapper_video-id')
 
-        document.getElementById('synopsisItem').addEventListener('click', function (e) {
+        document.getElementById('trailersItem').addEventListener('click', function(e) {
+            document.getElementById('video-id').pause();
 
-            var player = document.getElementById('player')
-
-            e.preventDefault()
-            document.getElementById('video-id').pause()
-            removeIfExists(['avengers_container'])
-            document.getElementsByClassName('active')[0].classList.remove('active')
-            document.getElementById('synopsisItem').classList.add('active')
-
-            document.getElementById('bottom_container').style.marginTop = '100px'
-
-            video_wrapper.style.display = 'none'
-            document.getElementById('thumbnail-videos').style.display = 'none'
-            document.getElementById('bottom_container').style.display = 'block';
-
-            var synopsis = document.createElement('div')
-
-            synopsis.style = 'color: #fff;padding: 20px;font-size: 16px;font-family: bahnschrift;text-transform: uppercase;line-height: 22px;text-align:center;font-variation-settings: "wght" 400, "wdth" 80;letter-spacing: 2px;letter-spacing: 2px;'
-            synopsis.id = 'synopsis'
-            var synopsisHTML = ''
-            synopsisHTML +=
-                '<p style="font-size: 25px;margin-bottom: 0px;color: #fff;">Avengers end game</p>'
-            synopsisHTML +=
-                '<p>Después de los eventos devastadores de Avengers: Infinity War, el universo está en ruinas debido a las acciones de Thanos, el Titán Loco. Con la ayuda de los aliados que quedaron, los Vengadores deben reunirse una vez más para deshacer sus acciones y restaurar el orden en el universo de una vez por todas, si importar cuáles son las consecuencias. Cuarta entrega de la saga "Vengadores".</p>'
-            synopsis.innerHTML = synopsisHTML
-
-            player.appendChild(synopsis)
-        })
-
-        document.getElementById('videosItem').addEventListener('click', function (e) {
-            e.preventDefault()
-            document.getElementById('bottom_container').style.marginTop = '0px'
-            document.getElementById('video-id').pause()
-            removeIfExists(['avengers_container', 'synopsis'])
-            document.getElementsByClassName('active')[0].classList.remove('active')
-            document.getElementById('videosItem').classList.add('active')
-
-            video_wrapper.style.display = 'block'
-            document.getElementById('thumbnail-videos').style.display = 'block'
-            document.getElementById('bottom_container').style.display = 'block';
-        })
-
-        document.getElementById('avengersItem').addEventListener('click', function(e) {
             e.preventDefault();
 
-            if(!document.getElementById('avengers_container')){
+            document.getElementsByClassName('active')[0].classList.remove('active');
+            document.getElementById('trailersItem').classList.add('active');
 
-                document.getElementById('video-id').pause();
+            video_wrapper.style.display = 'none';
 
-                document.getElementsByClassName('active')[0].classList.remove('active');
-                document.getElementById('avengersItem').classList.add('active');
-                
-                removeIfExists(['synopsis', 'date' ]);
+            hideIfExists(['synopsis', 'buttons', 'rrss', 'similars', 'bottom_right', 'bottom_left' ]);
+            showIfExists(['buttons1'])
 
-                video_wrapper.style.display = 'none';
-                document.getElementById('thumbnail-videos').style.display = 'none';
-                document.getElementById('bottom_container').style.display = 'none';
+            document.getElementById('trailers') ? document.getElementById('trailers').style.display = "inline-flex" : null
 
-                var avengers_container = document.createElement('div')
-                var avengers = document.createElement('div')
-                var navigation = document.createElement('div')
-                var prev_dot = document.createElement('span')
-                var next_dot = document.createElement('span')
-                
+            if(!document.getElementById('buttons1')){
+                var new_buttons = buttons.cloneNode(true);
+                var new_logo = document.getElementById('logo').cloneNode(true);
+                new_buttons.id = "buttons1";
+                new_buttons.style = "display:block;position:absolute;bottom: 140px; left: 0"
+                new_logo.id = "logo1"
+                new_logo.style = 'padding:20px'
+                new_buttons.insertBefore(new_logo, new_buttons.firstChild)
+                wrapper.appendChild(new_buttons)
+            }
+
+
+            if (!document.getElementById('trailers')) {
+                var trailers_container = document.createElement('div')
+                var trailers_div = document.createElement('div')
+                    trailers_div.id = "tra"
+                var video_container = document.createElement('div')
+                var thumbs = [
+                    {'thumb' : 'thumb1.png', 'title' : 'Stranger Things (Tráiler)', 'video' : 'video1.mp4'},
+                    {'thumb' : 'thumb2.png', 'title': 'Stranger Things: Temporada 3 - Anuncio de fecha de estreno', 'video' : 'video2.mp4'},
+                    {'thumb' : 'thumb3.png', 'title' : 'Destacado: Noah', 'video' : 'video3.mp4'},
+                    {'thumb' : 'thumb4.png', 'title' : 'Destacado: El mundo', 'video' : 'video4.mp4'}
+                ]
+                thumbs.map(video => {
+                    var video_div = document.createElement('div')
+                        video_div.className = "thumbnail"
+                        video_div.addEventListener('click', function(){
+                            hideIfExists(['trailers'])
+                            showIfExists(['video_container'])
+
+                            var trailer_video = document.createElement('div')
+                                trailer_video.style = "position:absolute;width:80%;top:50px"
+                            
+                            var videoTag = document.createElement('video')
+                            var source = document.createElement('source')
+                                source.src = base_url + "/assets/videos/" + video.video
+                                source.type = "video/mp4"
+                                videoTag.style = "width: 315px;float: right;padding-right: 25px;"
+                                videoTag.autoplay = true
+                                videoTag.controls = true
+                                videoTag.appendChild(source)
+                                video_container.appendChild(videoTag)
+
+                            var arrow = document.createElement('img')
+                                arrow.src = base_url + "/assets/arrow.png"
+                                arrow.style.cursor = "pointer"
+                            
+                            arrow.addEventListener('click', function(){
+                                document.getElementById('video_container').innerHTML = ""
+                                document.getElementById('trailers').style.display = "inline-flex"
+                            })
+
+                            video_container.appendChild(arrow)
+                        })
+                    var videoHTML = ''
+                        videoHTML += '<img src="' + base_url + '/assets/' + video.thumb + '"><span>' + video.title +'</span>'
+                        video_div.innerHTML = videoHTML
+                        trailers_div.append(video_div)
+                })
+                trailers_container.style = "width: 100%;position: absolute;top: 60px;padding-left: 10px;"
+                trailers_container.id = "trailers"
+
+                video_container.id = "video_container"
+                video_container.style = "position: absolute;top: 100px;left: 0;right: 0;margin: 0 auto;width: 100%;padding: 10px;"
+
+                document.getElementById('buttons1').append()
+
+                trailers_container.append(trailers_div)
+                wrapper.append(trailers_container)
+                wrapper.append(video_container)
+            }
+        });
+
+        document.getElementById('informationItem').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementsByClassName('active')[0].classList.remove('active');
+            document.getElementById('informationItem').classList.add('active');
+
+            showIfExists(['synopsis', 'buttons', 'rrss', 'bottom_right', 'bottom_left'])
+            hideIfExists(['buttons1', 'trailers'])
+
+            document.getElementById('video_container').innerHTML = ""
+
+            video_wrapper.style.display = 'block';
+            
+        });
+
+        document.getElementById('similarItem').addEventListener('click', function(e) {
+            e.preventDefault();
+
+            document.getElementsByClassName('active')[0].classList.remove('active');
+            document.getElementById('similarItem').classList.add('active');
+
+            document.getElementById('video-id').pause();
+
+            hideIfExists(['synopsis', 'buttons', 'rrss', 'trailers', 'buttons1', 'bottom_right', 'bottom_left' ])
+            showIfExists(['similars'])
+
+            video_wrapper.style.display = 'none';
+
+            if(!document.getElementById('similars')){
+                var similars_container = document.createElement('div')
+                var similars_div = document.createElement('div')
+
+                    similars_div.id = "sim"
+
                 var data = [
-                    {hero : "Iron Man", name: "Tony Stark", url : "https://www.marvel.com/characters/iron-man-tony-stark", image : "ironman.png"},
-                    {hero : "Captain America", name: "Steve Rogers", url : "https://www.marvel.com/characters/captain-america-steve-rogers", image : "captainamerica.png"},
-                    {hero : "Thor", name: "", url : "https://www.marvel.com/characters/thor-thor-odinson", image : "thor.png"},
-                    {hero : "Spider-man", name: "Peter Parker", url : "https://www.marvel.com/characters/spider-man-peter-parker", image : "spiderman.png"},
-                    {hero : "Hulk", name: "Bruce Banner", url : "https://www.marvel.com/characters/hulk-bruce-banner", image : "hulk.png"},
-                    {hero : "War Machine", name: "James Rhodes", url : "https://www.marvel.com/characters/war-machine-james-rhodes", image : "warmachine.png"},
-                    {hero : "Black Widow", name: "Natasha Romanoff", url : "https://www.marvel.com/characters/black-widow-natasha-romanoff", image : "blackwidow.png"},
-                    {hero : "Vision", name: "", url : "https://www.marvel.com/characters/vision", image : "vision.png"},
-                    {hero : "Falcon", name: "Sam Wilson", url : "https://www.marvel.com/characters/falcon-sam-wilson", image : "falcon.png"},
-                    {hero : "Hawkeye", name: "Clint Barton", url : "https://www.marvel.com/characters/hawkeye-clint-barton", image : "hawkeye.png"},
-                    {hero : "Scarlet Witch", name: "Wanda Maximoff", url : "https://www.marvel.com/characters/scarlet-witch-wanda-maximoff", image : "scarletwitch.png"},
-                    {hero : "Black Panther", name: "T'challa", url : "https://www.marvel.com/characters/black-panther-t-challa", image : "blackpanther.png"}
+                    {'thumb' : 'similars_thumb1.png', 'title' : 'Crazy head', 'description' : 'No serán las chicas más adaptadas, pero tienen un duro trabajo por delante. ¿Qué podría salir mal?', 'year' : 2016, 'seasons' : 1, 'pg' : 16},
+                    {'thumb' : 'similars_thumb2.png', 'title' : 'Santa clarita diet', 'description' : 'Mami se desespera por la carne humana. Papi anhela una vida normal. El compromiso es la base de todo buen matrimonio.', 'year' : 2019, 'seasons' : 3, 'pg' : 16},
+                    {'thumb' : 'similars_thumb3.png', 'title' : 'Zombie', 'description' : '¿Quién se hubiese imaginado que convertirte en zombi también podía transformarte en una brillante detective?', 'year' : 2017, 'seasons' : 3, 'pg' : 13},
+                    {'thumb' : 'similars_thumb4.png', 'title' : 'The umbrella academy', 'description' : 'De chicos eran superhéroes y ahora aspiran a ser supervivientes. Y solo tienen ocho días para evitar el fin del mundo', 'year' : 2016, 'seasons' : 1, 'pg' : 16}
                 ]
 
-                var avengersHTML = ''
-
-                data.map(avenger => {
-                    avengersHTML += '<a class="avenger" href="'+ avenger.url +'" target="_blank"><img style="width:100%" src="' + base_url + '/assets/heroes/' + avenger.image + '"/><div class="avenger-text">' + avenger.hero + ' <div class="avenger-name">' + avenger.name + '</div></div></div></a>'
+                data.map(tvshow => {
+                    var tvshow_div = document.createElement('a')
+                    var tvshowHTML = ""
+                        tvshowHTML += '<img src="'+ base_url +'/assets/' + tvshow.thumb + '" style="    margin-bottom: 5px;">'
+                        tvshowHTML += '<span class="year">' + tvshow.year + '</span>'
+                        tvshowHTML += '<span class="pg">' + tvshow.pg + '+</span>'
+                        if(tvshow.seasons === 1){
+                            tvshowHTML += '<span class="seasons">' + tvshow.seasons + ' Temporada</span>'
+                        }else{
+                            tvshowHTML += '<span class="seasons">' + tvshow.seasons + ' Temporadas</span>'
+                        }
+                        tvshowHTML += '<div class="title">' + tvshow.title + '</div>'
+                        tvshowHTML += '<div class="description">' + tvshow.description + '</div>'
+                        tvshow_div.innerHTML = tvshowHTML
+                        tvshow_div.className = "thumbnail"
+                        tvshow_div.href = "https://netflix.com"
+                        tvshow_div.target = "_blank" 
+                        similars_div.append(tvshow_div)
                 })
 
-                avengers.style = "position: absolute;top: 30px;left: 10px;height: 550px;overflow: hidden;width: 800px; -webkit-transition: all 1s ease;-moz-transition: all 1s ease;-o-transition: all 1s ease;-ms-transition: all 1s ease;transition: all 1s ease;text-transform:uppercase"
-                avengers.innerHTML = avengersHTML
-                avengers_container.style = "width: 100%;height: 550px;position: absolute;top: 60px;overflow: hidden;"
-                avengers_container.id = "avengers_container"
-
-                prev_dot.className = "dot dot-active"
-                next_dot.className = "dot"
-
-                prev_dot.addEventListener('click', function(){
-                    avengers.style.left = "10px"
-                    prev_dot.className = "dot dot-active"
-                    next_dot.className = "dot"
-                })
-
-                next_dot.addEventListener('click', function(){
-                    avengers.style.left = "-350px"
-                    prev_dot.className = "dot"
-                    next_dot.className = "dot dot-active"
-                })
-
-                navigation.style = "position: absolute;top: 0px;left: 0px;right: 0px;margin: 0 auto;width: 50px;    background: rgb(0, 0, 0, 0.8);border-radius: 30px;padding: 0px 5px;"
-                navigation.appendChild(prev_dot)
-                navigation.appendChild(next_dot)
-
-                avengers_container.appendChild(navigation)
-                avengers_container.appendChild(avengers)
-                wrapper.appendChild(avengers_container)
+                similars_container.style = "width: 100%;position: absolute;top: 50px;padding: 6px;"
+                similars_container.id = "similars"
+                
+                similars_container.append(similars_div)
+                wrapper.append(similars_container)
             }
 
         });
@@ -291,7 +315,6 @@ var tapOnVideo = function () {
 
             document.getElementById('fluid_video_wrapper_video-id').style.display = 'block'
 
-            document.getElementById('thumbnail-videos').style.display = 'none'
             document.getElementById('player').style = 'width:100%;height:100%'
             document.getElementById('wrapper').style = 'width: 100%;margin-top: 10px;'
             document.getElementById('container').style.padding = '0px 10px'
