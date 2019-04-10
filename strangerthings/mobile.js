@@ -1,5 +1,5 @@
-//var base_url = "https://jtorresdev.github.io/demo-video-vast/endgame"
-var base_url = "./"
+var base_url = "https://jtorresdev.github.io/demo-video-vast/strangerthings"
+//var base_url = "./"
 
 var removeIfExists = function (ids) {
     ids.map(id => {
