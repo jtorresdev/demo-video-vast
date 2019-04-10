@@ -52,8 +52,6 @@ var removeAllListener = function() {
 var playerOut = function() {
 	var video_wrapper = document.getElementById('fluid_video_wrapper_video-id');
 	removeIfExists([ 'saveCalendarDropdown', 'avengers_container' ]);
-	document.getElementsByClassName('active')[0].classList.remove('active');
-	document.getElementById('informationItem').classList.add('active');
 	// si no ha terminado la transicion, vuelve al tamaño inicial
 	video_wrapper.style.width = width;
 	video_wrapper.style.height = height;
@@ -274,6 +272,9 @@ var options = {
 					removeIfExists(['similars_right_arrow', 'similars_left_arrow', 'trailers_right_arrow', 'trailers_left_arrow'])
 
 					document.getElementById('video_container').innerHTML = ""
+
+					document.getElementsByClassName('active')[0].classList.remove('active');
+					document.getElementById('informationItem').classList.add('active');
 
 					video_wrapper.style.display = 'block';
 					bannerRight.style.display = 'block';
