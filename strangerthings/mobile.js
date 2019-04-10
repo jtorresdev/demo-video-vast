@@ -310,7 +310,7 @@ var tapOnVideo = function () {
 
         closeButton.addEventListener('click', function () {
             removeIfExists(['header', 'visitPageButton', 'poweredbyvidoomy', 'bottom_container',
-                'menu', 'synopsis', 'saveCalendarDropdown', 'avengers_container'
+                'menu', 'synopsis', 'saveCalendarDropdown', 'avengers_container', 'trailers', 'similars', 'buttons1', 'video_container'
             ])
 
             document.getElementById('fluid_video_wrapper_video-id').style.display = 'block'
@@ -404,33 +404,6 @@ document.getElementById('video-id').addEventListener('click', function (e) {
     //video.play()
 })
 
-video.on('ended', function () {
-    var videoPlayer = document.getElementById('video-id')
-
-    var nextVideo = document.getElementById('thumb-video-' + (parseInt(videoPlayer.getAttribute(
-        "current-video")) + 1))
-    var prevVideo = document.getElementById('thumb-video-' + parseInt(videoPlayer.getAttribute(
-        "current-video")))
-
-
-    if ((parseInt(videoPlayer.getAttribute("current-video")) + 1) <= document.getElementsByClassName(
-            'thumb-video').length) {
-
-        nextVideo.classList.remove('stopped')
-        prevVideo.classList.add('stopped')
-
-        nextVideo.classList.add('currentVideo')
-        prevVideo.classList.remove('currentVideo')
-
-        videoPlayer.src = nextVideo.getAttribute('data-src');
-        videoPlayer.setAttribute('current-video', (parseInt(videoPlayer.getAttribute("current-video")) +
-            1))
-        videoPlayer.play();
-    } else {
-        videoPlayer.pause()
-    }
-})
-
 video.on('pause', function () {
     var unmute = document.getElementById('video-id_fluid_initial_play')
     if (unmute.classList[0] != 'fluid_initial_play') {
@@ -440,8 +413,6 @@ video.on('pause', function () {
     }
 })
 
-var videoThumbs = document.getElementsByClassName('thumb-video')
-
 document.getElementById('player').addEventListener("transitionend", function (event) {
     if (document.getElementById('wrapper').style.height === '100%') {
         document.getElementById('video-id_fluid_controls_container').style.display = 'block'
@@ -449,33 +420,3 @@ document.getElementById('player').addEventListener("transitionend", function (ev
     }
 
 });
-
-for (let elem of videoThumbs) {
-    elem.addEventListener('click', function (e) {
-
-        var unmute = document.getElementById('video-id_fluid_initial_play')
-        if (unmute.classList[0] != 'fluid_initial_play') {
-            unmute.remove()
-            document.getElementById('video-id_fluid_initial_play').style =
-                'display:block;background:#fff'
-        }
-
-        var videoPlayer = document.getElementById('video-id')
-
-        var nextVideo = document.getElementById('thumb-video-' + parseInt(e.target.id.substr(-1)))
-        var prevVideo = document.getElementById('thumb-video-' + parseInt(videoPlayer.getAttribute(
-            "current-video")))
-
-        nextVideo.classList.add('currentVideo')
-        prevVideo.classList.remove('currentVideo')
-
-        nextVideo.classList.remove('stopped')
-        prevVideo.classList.add('stopped')
-
-
-        videoPlayer.src = elem.getAttribute("data-src")
-        videoPlayer.setAttribute('current-video', parseInt(e.target.id.substr(-1)))
-
-        video.play()
-    })
-}
