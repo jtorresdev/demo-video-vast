@@ -245,9 +245,9 @@ var tapOnVideo = function () {
             document.getElementById('informationItem').classList.add('active');
 
             showIfExists(['synopsis', 'buttons', 'rrss', 'bottom_right', 'bottom_left'])
-            hideIfExists(['buttons1', 'trailers'])
+            hideIfExists(['buttons1', 'trailers', 'similars'])
 
-            document.getElementById('video_container').innerHTML = ""
+            document.getElementById('video_container') ? document.getElementById('video_container').innerHTML = "" : null
 
             video_wrapper.style.display = 'block';
             
@@ -256,7 +256,7 @@ var tapOnVideo = function () {
         document.getElementById('similarItem').addEventListener('click', function(e) {
             e.preventDefault();
 
-            document.getElementById('video_container').innerHTML = ""
+            document.getElementById('video_container') ? document.getElementById('video_container').innerHTML = "" : null
 
             document.getElementsByClassName('active')[0].classList.remove('active');
             document.getElementById('similarItem').classList.add('active');
