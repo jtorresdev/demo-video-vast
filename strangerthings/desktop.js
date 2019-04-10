@@ -412,6 +412,8 @@ var options = {
 
 					document.getElementById('video-id').pause();
 
+					document.getElementById('video_container').innerHTML = ""
+
 					hideIfExists(['synopsis', 'buttons', 'rrss', 'trailers', 'buttons1' ])
 					removeIfExists(['trailers_right_arrow', 'trailers_left_arrow'])
 					showIfExists(['similars'])

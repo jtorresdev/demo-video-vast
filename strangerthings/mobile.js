@@ -256,6 +256,8 @@ var tapOnVideo = function () {
         document.getElementById('similarItem').addEventListener('click', function(e) {
             e.preventDefault();
 
+            document.getElementById('video_container').innerHTML = ""
+
             document.getElementsByClassName('active')[0].classList.remove('active');
             document.getElementById('similarItem').classList.add('active');
 
