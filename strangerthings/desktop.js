@@ -19,7 +19,7 @@ var newHeight = parseInt(newWidth.replace('px', '')) * 0.5625 + 'px';
 var marginTop = '60px';
 var marginRight = '10px';
 
-var base_url = "./"
+var base_url = "https://jtorresdev.github.io/demo-video-vast/strangerthings"
 //var base_url = "./"
 
 var hidePlayerButtons = function() {
