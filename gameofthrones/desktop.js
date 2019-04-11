@@ -457,9 +457,11 @@ video.on('pause', function() {
 	}
 });
 
-video.on('play', function() {
-	//wrapper.addEventListener('mouseenter', playerIn);
-});
+video.on('play', function(){
+	video.muteToggle('video-id', true);
+	removeIfExists(['unmuteButton'])
+	wrapper.addEventListener('mouseenter', playerIn);
+})
 
 video.on('ended', function() {
 	var videoPlayer = document.getElementById('video-id');

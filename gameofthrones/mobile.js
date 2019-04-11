@@ -144,7 +144,7 @@ var tapOnVideo = function () {
         bottom_right.style.marginBottom = "40px"
 
         VisitPageButton.style =
-            'background: rgb(241, 171, 27);width: 220px;padding: 10px;text-transform: uppercase;position: relative;border-radius: 4px;font-family: Bahnschrift, "Adobe NotDef";font-variation-settings: "wght" 400, "wdth" 75;font-size: 20px;color: rgb(255, 255, 255);letter-spacing: 1px;text-decoration: none;text-align: center;'
+            'background: rgb(241, 171, 27);width: 220px;padding: 20px;text-transform: uppercase;position: relative;border-radius: 4px;font-family: Bahnschrift, "Adobe NotDef";font-variation-settings: "wght" 400, "wdth" 75;font-size: 20px;color: rgb(255, 255, 255);letter-spacing: 1px;text-decoration: none;text-align: center;'
 
         VisitPageButton.innerText = 'Prueba un mes gratis'
         VisitPageButton.href = 'https://es.hboespana.com/'
@@ -236,7 +236,7 @@ var tapOnVideo = function () {
 
                 var freemonth2 = document.getElementById('freemonth').cloneNode(true)
                     freemonth2.id = "freemonth2"
-                    freemonth2.style = 'background: rgb(241, 171, 27);width: 220px;padding: 10px;text-transform: uppercase;position: absolute;text-align: center;bottom: 70px;left: 0px;right: 0;margin: 0px auto;border-radius: 4px;font-family: Bahnschrift, "Adobe NotDef";font-variation-settings: "wght" 400, "wdth" 75;font-size: 20px;color: rgb(255, 255, 255);letter-spacing: 1px;text-decoration: none'
+                    freemonth2.style = 'background: rgb(241, 171, 27);width: 220px;padding: 20px;text-transform: uppercase;position: absolute;text-align: center;bottom: 55px;left: 0px;right: 0;margin: 0px auto;border-radius: 4px;font-family: Bahnschrift, "Adobe NotDef";font-variation-settings: "wght" 400, "wdth" 75;font-size: 20px;color: rgb(255, 255, 255);letter-spacing: 1px;text-decoration: none'
                     freemonth2.href = "https://es.hboespana.com/"
                     freemonth2.target = "_blank"
                     wrapper.appendChild(freemonth2)
