@@ -319,9 +319,9 @@ var options = {
 
 						var videos = [
 							{'name' : 'Making Off', 'source' : 'makingoff.mp4', 'thumb' : 'exclusive_thumb1.png' },
-							{'name' : 'Las Casas', 'source' : 'lascasas.mp4', 'thumb' : 'exclusive_thumb1.png' },
-							{'name' : 'Escenas rodadas por España', 'source' : 'rodajesespaña.mp4', 'thumb' : 'exclusive_thumb1.png' },
-							{'name' : 'Los mejores besos', 'source' : 'mejoresbesos.mp4', 'thumb' : 'exclusive_thumb1.png' }
+							{'name' : 'Las Casas', 'source' : 'lascasas.mp4', 'thumb' : 'exclusive_thumb2.png' },
+							{'name' : 'Escenas rodadas por España', 'source' : 'rodajesespaña.mp4', 'thumb' : 'exclusive_thumb3.png' },
+							{'name' : 'Los mejores besos', 'source' : 'mejoresbesos.mp4', 'thumb' : 'exclusive_thumb4.png' }
 						]
 
 						videos.map((video,i) => {
