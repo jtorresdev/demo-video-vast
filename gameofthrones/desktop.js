@@ -185,8 +185,10 @@ var options = {
 
 				freemonth.style = 'background: rgb(241, 171, 27);width: 220px;padding: 10px;text-transform: uppercase;position: absolute;left: 0;top: 90px;right: 0;margin: 0 auto;border-radius: 4px;font-family: Bahnschrift, "Adobe NotDef";font-variation-settings: "wght" 400, "wdth" 75;font-size: 20px;color: #fff;letter-spacing: 1px;text-decoration:none'
 				freemonth.innerText = "Prueba un mes gratis"
-				freemonth.href = "#"
+				freemonth.href = "https://es.hboespana.com/"
+				freemonth.target = "_blank"
 				freemonth.id = "freemonth"
+				
 
 				function n(n){
 					return n > 9 ? "" + n: "0" + n;
@@ -230,11 +232,11 @@ var options = {
 
 				rrssHTML = '';
 				rrssHTML +=
-					'<a href="https://www.facebook.com/avengers/" style="float:left" target="_blank"><img src="'+ base_url +'/assets/fb.png"/></a>';
+					'<a href="https://www.facebook.com/juegodetronos/" style="float:left" target="_blank"><img src="'+ base_url +'/assets/fb.png"/></a>';
 				rrssHTML +=
-					'<a href="https://twitter.com/avengers" style="float:left;margin: 0px 30px;" target="_blank"><img src="'+ base_url +'/assets/tw.png"/></a>';
+					'<a href="https://twitter.com/JuegoDeTronosTM" style="float:left;margin: 0px 30px;" target="_blank"><img src="'+ base_url +'/assets/tw.png"/></a>';
 				rrssHTML +=
-					'<a href="https://www.instagram.com/avengers" style="float:left" target="_blank"><img src="'+ base_url +'/assets/ig.png"/></a>';
+					'<a href="https://www.instagram.com/gameofthronesnotofficial/?hl=es" style="float:left" target="_blank"><img src="'+ base_url +'/assets/ig.png"/></a>';
 
 				rrss_links.style.marginLeft = '5px';
 				rrss_links.innerHTML = rrssHTML;
@@ -267,7 +269,7 @@ var options = {
 				wrapper.appendChild(background);
 
 				close.addEventListener('click', function() {
-					removeIfExists([ 'synopsis', 'visitPageButton', 'date', 'avengers_container' ]);
+					removeIfExists([ 'synopsis', 'visitPageButton', 'date', 'avengers_container', 'exclusives_videos', 'exclusives_playlist', 'freemonth2', 'freemonth1' ]);
 
 					document.getElementById('fluid_video_wrapper_video-id').style.display = 'block';
 					document.getElementById('thumbnail-videos').style.display = 'block';
@@ -346,7 +348,8 @@ var options = {
 						var freemonth2 = document.getElementById('freemonth').cloneNode(true)
 							freemonth2.id = "freemonth2"
 							freemonth2.style = 'background: rgb(241, 171, 27);width: 220px;padding: 10px;text-transform: uppercase;position: absolute;text-align: center;bottom: 55px;left: 20px;margin: 0px auto;border-radius: 4px;font-family: Bahnschrift, "Adobe NotDef";font-variation-settings: "wght" 400, "wdth" 75;font-size: 20px;color: rgb(255, 255, 255);letter-spacing: 1px;text-decoration: none'
-
+							freemonth2.href = "https://es.hboespana.com/"
+							freemonth2.target = "_blank"
 							video_div.appendChild(video_tag)
 							wrapper.appendChild(freemonth2)
 							wrapper.appendChild(video_div);
@@ -385,6 +388,8 @@ var options = {
 						var freemonth1 = document.getElementById('freemonth').cloneNode(true)
 							freemonth1.id = "freemonth1"
 							freemonth1.style = 'background: rgb(241, 171, 27);width: 220px;padding: 10px;text-transform: uppercase;position: absolute;text-align: center;top: 200px;right: 20px;margin: 0px auto;border-radius: 4px;font-family: Bahnschrift, "Adobe NotDef";font-variation-settings: "wght" 400, "wdth" 75;font-size: 20px;color: rgb(255, 255, 255);letter-spacing: 1px;text-decoration: none'
+							freemonth1.href = "https://es.hboespana.com/"
+							freemonth1.target = "_blank"
 						wrapper.appendChild(freemonth1)
 
 						video_wrapper.style.display = 'none';
@@ -408,12 +413,12 @@ var options = {
 						var avengersHTML = ''
 
 						data.map(character => {
-							avengersHTML += '<div class="character" href="'+ character.url +'" target="_blank"><img src="' + base_url + '/assets/characters/' + character.image + '"/><span>' + character.name + '</span></div></div>'
+							avengersHTML += '<div class="character" href="'+ character.url +'" target="_blank"><a target="_blank" href="http://viewers-guide.hbo.com/game-of-thrones/season-7/episode-7/people"><img src="' + base_url + '/assets/characters/' + character.image + '"/><span>' + character.name + '</span></a></div>'
 						})
 
-						avengers.style = "position: absolute;top: 10px;left: 10px;height: 100%;overflow: hidden;width: 70%;text-transform:uppercase"
+						avengers.style = "position: absolute;top: 10px;left: 10px;height: 100%;overflow: hidden;width: 100%;text-transform:uppercase"
 						avengers.innerHTML = avengersHTML
-						avengers_container.style = "width: 100%;height: 350px;position: absolute;top: 60px;overflow: hidden;"
+						avengers_container.style = "width: 65%;height: 350px;position: absolute;top: 60px;overflow: hidden;"
 						avengers_container.id = "avengers_container"
 
 					

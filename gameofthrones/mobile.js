@@ -1,11 +1,24 @@
-var base_url = "https://jtorresdev.github.io/demo-video-vast/endgame"
-//var base_url = "/."
+//var base_url = "https://jtorresdev.github.io/demo-video-vast/endgame"
+var base_url = "./"
 
 var removeIfExists = function (ids) {
     ids.map(id => {
         document.getElementById(id) ? document.getElementById(id).remove() : null
     })
 }
+
+var hideIfExists = function(ids){
+	ids.map((id) => {
+		document.getElementById(id) ? document.getElementById(id).style.display = 'none' : null;
+	});
+}
+
+var showIfExists = function(ids){
+	ids.map((id) => {
+		document.getElementById(id) ? document.getElementById(id).style.display = "block" : null;
+	});
+}
+
 
 var tapOnVideo = function () {
 
@@ -24,17 +37,16 @@ var tapOnVideo = function () {
         var player = document.getElementById('player')
         var header = document.createElement('div')
         var closeButton = document.createElement('img')
-        var logo = document.createElement('img')
         var menu = document.createElement('div')
 
-        menu.style = 'position: absolute;right: 15px;top: 15px;'
+        menu.style = 'position: absolute;right: 0px;top: 15px;'
 
         var menuHTML = ''
 
         menuHTML = '<ul>'
         menuHTML += '<li class="active" id="videosItem"><a href="#">Trailers</a></li>'
-        menuHTML += '<li id="avengersItem"><a href="#">Vengadores</a></li>'
-        menuHTML += '<li id="synopsisItem"><a href="#">Sinopsis</a></li>'
+        menuHTML += '<li id="charactersItem"><a href="#">Personajes</a></li>'
+        menuHTML += '<li id="exclusiveItem"><a href="#">Videos Exclusivos</a></li>'
         menuHTML += '</ul>'
 
         menu.innerHTML = menuHTML
@@ -49,20 +61,8 @@ var tapOnVideo = function () {
         header.style =
             'width:100%;height:55px;text-align: center;'
 
-        logo.src = base_url + '/assets/logo.png'
-        logo.style = 'width:100px;float:left;margin: 10px;'
-
         wrapper.style =
             'position: fixed;background-image: url('+ base_url +'/assets/background-mobile.png);height: 100%;top: 0px;background-size: cover;background-repeat: no-repeat;width: 100%;background-color: black;left: 0;z-index: 999999999;'
-
-        /* demo */
-
-        //document.getElementById('container').style.padding = '20px 0px'
-
-        /* demo */
-
-
-        // BANNERS
 
         var bottom_container = document.createElement('div')
         var bottom_left = document.createElement('div')
@@ -73,7 +73,7 @@ var tapOnVideo = function () {
 
         countdown.id = "countdown"
 
-        var deadline = new Date("Apr 26, 2019 00:00:00").getTime(); 
+        var deadline = new Date("Apr 14, 2019 00:00:00").getTime(); 
 
         function n(n){
             return n > 9 ? "" + n: "0" + n;
@@ -86,12 +86,12 @@ var tapOnVideo = function () {
         var hours = Math.floor((t%(1000 * 60 * 60 * 24))/(1000 * 60 * 60)); 
         var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60)); 
         var seconds = Math.floor((t % (1000 * 60)) / 1000); 
-        countdown.style = 'font-size: 26px;color: white;background: rgba(0, 0, 0, 0.5);height: 45px;padding: 10px 10px 0px 10px;line-height: 18px;margin: 0px auto;display: table;font-family: Bahnschrift, "Adobe Blank";font-variation-settings: "wght" 600, "wdth" 80;'
+        countdown.style = 'font-size: 20px;color: white;background: rgba(0, 0, 0, 0.5);height: 50px;padding: 10px 0px 0px 0px;line-height: 20px;margin: 0px auto;display: table;font-family:"TrajanPro-Regular"'
         var countdownHTML = ''
-            countdownHTML += '<div id="days" style="text-align:center;float: left;padding: 0 5px;"><div>'+ n(days) +'</div><span style="color:#9c97ae;font-size: 14px;">DIAS</span></div>'
-            countdownHTML += '<div id="hours" style="text-align:center;float: left;padding: 0 5px;"><div>'+ n(hours) +'</div><span style="color:#9c97ae;font-size: 14px;">HRS</span></div>'
-            countdownHTML += '<div id="minutes" style="text-align:center;float: left;padding: 0 5px;"><div>'+ n(minutes) +'</div><span style="color:#9c97ae;font-size: 14px;">MINS</span></div>'
-            countdownHTML += '<div id="seconds" style="text-align:center;float: left;padding: 0 5px;"><div>'+ n(seconds) +'</div><span style="color:#9c97ae;font-size: 14px;">SEGS</span></div>'
+            countdownHTML += '<div id="days" style="text-align:center;float: left;padding: 0 5px;"><div>'+ n(days) +'</div><span style="color:#9c97ae;font-size: 11px;">DIAS</span></div>'
+            countdownHTML += '<div id="hours" style="text-align:center;float: left;padding: 0 5px;"><div>'+ n(hours) +'</div><span style="color:#9c97ae;font-size: 11px;">HRS</span></div>'
+            countdownHTML += '<div id="minutes" style="text-align:center;float: left;padding: 0 5px;"><div>'+ n(minutes) +'</div><span style="color:#9c97ae;font-size: 11px;">MINS</span></div>'
+            countdownHTML += '<div id="seconds" style="text-align:center;float: left;padding: 0 5px;"><div>'+ n(seconds) +'</div><span style="color:#9c97ae;font-size: 11px;">SEGS</span></div>'
         countdown.innerHTML = countdownHTML; 
             if (t < 0) {
                 clearInterval(x); 
@@ -115,41 +115,44 @@ var tapOnVideo = function () {
             'width: 330px;margin: 0px auto; bottom: 130px;left: 0;right: 0;'
 
         bottom_left.style =
-            'letter-spacing: 1px;color:#fff;font-family: steelfishEb;font-size: 20px;width: 100px;text-align: center;margin: 25px 20px 15px 15px;float: left;'
+            'letter-spacing: 1px;color:#fff;font-family: steelfishEb;font-size: 20px;width: 120px;text-align: center;margin: 5px 5px 15px 15px;float: left;'
         bottom_right.style =
             'float: left;width: 160px;text-align: center;margin: 10px 15px;padding: 5px 0'
 
         var bottom_left_HTML = ''
 
-        bottom_left_HTML += '<img src="'+ base_url + '/assets/logo.png" width="100px"/>'
-        bottom_left_HTML += '<span style="margin-left:-10px">#AVENGERSENDGAME</span>'
+        bottom_left_HTML += '<img src="'+ base_url + '/assets/logo.png" width="100px" style="margin-bottom:10px"/>'
+        bottom_left_HTML += '<span class="hashtag">#PORELTRONO</span>'
         bottom_left_HTML +=
-            '<a href="https://www.facebook.com/avengers/" style="float:left;margin-left: 5px;" target="_blank"><img src="' + base_url + '/assets/fb.png"/></a>'
+            '<a href="https://www.facebook.com/juegodetronos/" style="float:left;margin-left: 10px;" target="_blank"><img src="' + base_url + '/assets/fb.png"/></a>'
         bottom_left_HTML +=
-            '<a href="https://twitter.com/avengers?lang=es" style="float:left;margin: 0px 20px;" target="_blank"><img src="' + base_url + '/assets/tw.png"/></a>'
+            '<a href="https://twitter.com/JuegoDeTronosTM" style="float:left;margin: 0px 20px;" target="_blank"><img src="' + base_url + '/assets/tw.png"/></a>'
         bottom_left_HTML +=
-            '<a href="https://www.instagram.com/avengers" style="float:left" target="_blank"><img src="' + base_url + '/assets/ig.png"/></a>'
+            '<a href="https://www.instagram.com/gameofthronesnotofficial/?hl=es" style="float:left" target="_blank"><img src="' + base_url + '/assets/ig.png"/></a>'
 
         bottom_left.innerHTML = bottom_left_HTML
 
         var bottom_right_HTML = ''
 
-        bottom_right_HTML = '<img src="' + base_url + '/assets/date-mobile.png" width="150px" />'
+        bottom_right_HTML = '<img src="' + base_url + '/assets/date.png" width="150px" style="margin-bottom:10px" />'
         
         bottom_right.innerHTML = bottom_right_HTML
 
         bottom_right.appendChild(countdown)
 
-        VisitPageButton.style =
-            'display: inline-block;width: 65%;width: 80%;margin: 10px 0px 0px 25px;height: 50px; color: rgb(255, 255, 255);background: rgb(235, 13, 13, 0.8);font-size: 16px; font-family: bahnschrift;text-transform: uppercase;text-align: center; line-height: 50px;cursor: pointer;text-decoration: none;clip-path: polygon(9% 0px, 100% 0px, 100% 0px, 100% 74%, 91% 100%, 0px 100%, 0px 100%, 0px 29%);'
+        bottom_left.style.marginBottom = "40px"
+        bottom_right.style.marginBottom = "40px"
 
-        VisitPageButton.innerText = 'Visitar pagina web'
-        VisitPageButton.href = 'https://disney.es/peliculas/vengadores-endgame'
+        VisitPageButton.style =
+            'background: rgb(241, 171, 27);width: 220px;padding: 10px;text-transform: uppercase;position: relative;border-radius: 4px;font-family: Bahnschrift, "Adobe NotDef";font-variation-settings: "wght" 400, "wdth" 75;font-size: 20px;color: rgb(255, 255, 255);letter-spacing: 1px;text-decoration: none;text-align: center;'
+
+        VisitPageButton.innerText = 'Prueba un mes gratis'
+        VisitPageButton.href = 'https://es.hboespana.com/'
         VisitPageButton.target = '_blank'
-        VisitPageButton.id = 'visitPageButton'
+        VisitPageButton.id = 'freemonth'
 
        var vpbutton_container = document.createElement('div')
-        vpbutton_container.style.width = '100%'
+        vpbutton_container.style = 'width:100%;text-align:center'
 
         vpbutton_container.appendChild(VisitPageButton)
         
@@ -159,7 +162,6 @@ var tapOnVideo = function () {
         bottom_container.appendChild(vpbutton_container)
 
         header.appendChild(closeButton)
-        header.appendChild(logo)
         wrapper.insertBefore(header, wrapper.firstChild);
         wrapper.appendChild(bottom_container)
         wrapper.appendChild(powered)
@@ -167,7 +169,7 @@ var tapOnVideo = function () {
 
         var video_wrapper = document.getElementById('fluid_video_wrapper_video-id')
 
-        document.getElementById('synopsisItem').addEventListener('click', function (e) {
+        document.getElementById('exclusiveItem').addEventListener('click', function (e) {
 
             var player = document.getElementById('player')
 
@@ -175,7 +177,7 @@ var tapOnVideo = function () {
             document.getElementById('video-id').pause()
             removeIfExists(['avengers_container'])
             document.getElementsByClassName('active')[0].classList.remove('active')
-            document.getElementById('synopsisItem').classList.add('active')
+            document.getElementById('exclusiveItem').classList.add('active')
 
             document.getElementById('bottom_container').style.marginTop = '100px'
 
@@ -183,25 +185,73 @@ var tapOnVideo = function () {
             document.getElementById('thumbnail-videos').style.display = 'none'
             document.getElementById('bottom_container').style.display = 'block';
 
-            var synopsis = document.createElement('div')
+            hideIfExists(['bottom_container'])
 
-            synopsis.style = 'color: #fff;padding: 20px;font-size: 16px;font-family: bahnschrift;text-transform: uppercase;line-height: 22px;text-align:center;font-variation-settings: "wght" 400, "wdth" 80;letter-spacing: 2px;letter-spacing: 2px;'
-            synopsis.id = 'synopsis'
-            var synopsisHTML = ''
-            synopsisHTML +=
-                '<p style="font-size: 25px;margin-bottom: 0px;color: #fff;">Avengers end game</p>'
-            synopsisHTML +=
-                '<p>Después de los eventos devastadores de Avengers: Infinity War, el universo está en ruinas debido a las acciones de Thanos, el Titán Loco. Con la ayuda de los aliados que quedaron, los Vengadores deben reunirse una vez más para deshacer sus acciones y restaurar el orden en el universo de una vez por todas, si importar cuáles son las consecuencias. Cuarta entrega de la saga "Vengadores".</p>'
-            synopsis.innerHTML = synopsisHTML
+            if (!document.getElementById('exclusive_video')) {
+                var video_div = document.createElement('div');
+                var playlist = document.createElement('div');
 
-            player.appendChild(synopsis)
+                var video_tag = document.createElement('video')
+                var source = document.createElement('source')
+
+                video_div.id = "exclusive_video"
+                playlist.id = "exclusive_playlist"
+
+                source.type = "video/mp4"
+                video_tag.appendChild(source)
+                video_tag.controls = true
+                video_tag.style = "width:100%"
+
+                video_div.style = "position:absolute;left:10px;top:70px;width:95%;" 
+
+                playlist.style = "position: absolute;left: 0px;right:0;margin: 0 auto;bottom: 130px;width: 320px;background: rgba(0, 0, 0, 0.8);padding: 0px 0px;" 
+
+                var videos = [
+                    {'name' : 'Making Off', 'source' : 'makingoff.mp4', 'thumb' : 'exclusive_thumb1.png' },
+                    {'name' : 'Las Casas', 'source' : 'lascasas.mp4', 'thumb' : 'exclusive_thumb1.png' },
+                    {'name' : 'Escenas rodadas por España', 'source' : 'rodajesespaña.mp4', 'thumb' : 'exclusive_thumb1.png' },
+                    {'name' : 'Los mejores besos', 'source' : 'mejoresbesos.mp4', 'thumb' : 'exclusive_thumb1.png' }
+                ]
+
+                videos.map((video,i) => {
+                
+                    var thumb_div = document.createElement('div')
+                        thumb_div.className = "thumb"
+                        thumb_div.setAttribute('video-src', video.source)
+                        thumb_div.innerHTML = '<img src="' + base_url + '/assets/'+ video.thumb + '" style="padding: 5px;float: left;"><span class="thumb-name">' + video.name + '</span>'
+                        thumb_div.addEventListener('click', function(e){
+                            video_tag.src = base_url + "/assets/videos/" + thumb_div.getAttribute('video-src')
+
+                            document.getElementsByClassName('thumb-active')[0].className = "thumb"
+                            thumb_div.className = "thumb thumb-active"
+
+                            video_tag.play()
+                        })
+                        playlist.appendChild(thumb_div)
+                        if(i === 0){
+                            thumb_div.className = "thumb thumb-active"
+                            video_tag.src = base_url + "/assets/videos/" + video.source
+                        }
+                })
+
+                var freemonth2 = document.getElementById('freemonth').cloneNode(true)
+                    freemonth2.id = "freemonth2"
+                    freemonth2.style = 'background: rgb(241, 171, 27);width: 220px;padding: 10px;text-transform: uppercase;position: absolute;text-align: center;bottom: 70px;left: 0px;right: 0;margin: 0px auto;border-radius: 4px;font-family: Bahnschrift, "Adobe NotDef";font-variation-settings: "wght" 400, "wdth" 75;font-size: 20px;color: rgb(255, 255, 255);letter-spacing: 1px;text-decoration: none'
+                    freemonth2.href = "https://es.hboespana.com/"
+                    freemonth2.target = "_blank"
+                    wrapper.appendChild(freemonth2)
+                    video_div.appendChild(video_tag)
+                    
+                    wrapper.appendChild(video_div);
+                    wrapper.appendChild(playlist)
+            }
         })
 
         document.getElementById('videosItem').addEventListener('click', function (e) {
             e.preventDefault()
             document.getElementById('bottom_container').style.marginTop = '0px'
             document.getElementById('video-id').pause()
-            removeIfExists(['avengers_container', 'synopsis'])
+            removeIfExists(['avengers_container', 'synopsis', 'exclusive_playlist', 'exclusive_video', 'freemonth2'])
             document.getElementsByClassName('active')[0].classList.remove('active')
             document.getElementById('videosItem').classList.add('active')
 
@@ -210,7 +260,7 @@ var tapOnVideo = function () {
             document.getElementById('bottom_container').style.display = 'block';
         })
 
-        document.getElementById('avengersItem').addEventListener('click', function(e) {
+        document.getElementById('charactersItem').addEventListener('click', function(e) {
             e.preventDefault();
 
             if(!document.getElementById('avengers_container')){
@@ -218,66 +268,44 @@ var tapOnVideo = function () {
                 document.getElementById('video-id').pause();
 
                 document.getElementsByClassName('active')[0].classList.remove('active');
-                document.getElementById('avengersItem').classList.add('active');
+                document.getElementById('charactersItem').classList.add('active');
                 
-                removeIfExists(['synopsis', 'date' ]);
+                removeIfExists(['synopsis', 'date',  'exclusive_playlist', 'exclusive_video', 'freemonth2' ]);
+
+                showIfExists(['bottom_container'])
 
                 video_wrapper.style.display = 'none';
                 document.getElementById('thumbnail-videos').style.display = 'none';
-                document.getElementById('bottom_container').style.display = 'none';
+                //document.getElementById('bottom_container').style.display = 'none';
+                document.getElementById('bottom_container').style.marginTop = '50px'
 
                 var avengers_container = document.createElement('div')
                 var avengers = document.createElement('div')
-                var navigation = document.createElement('div')
-                var prev_dot = document.createElement('span')
-                var next_dot = document.createElement('span')
                 
                 var data = [
-                    {hero : "Iron Man", name: "Tony Stark", url : "https://www.marvel.com/characters/iron-man-tony-stark", image : "ironman.png"},
-                    {hero : "Captain America", name: "Steve Rogers", url : "https://www.marvel.com/characters/captain-america-steve-rogers", image : "captainamerica.png"},
-                    {hero : "Thor", name: "", url : "https://www.marvel.com/characters/thor-thor-odinson", image : "thor.png"},
-                    {hero : "Spider-man", name: "Peter Parker", url : "https://www.marvel.com/characters/spider-man-peter-parker", image : "spiderman.png"},
-                    {hero : "Hulk", name: "Bruce Banner", url : "https://www.marvel.com/characters/hulk-bruce-banner", image : "hulk.png"},
-                    {hero : "War Machine", name: "James Rhodes", url : "https://www.marvel.com/characters/war-machine-james-rhodes", image : "warmachine.png"},
-                    {hero : "Black Widow", name: "Natasha Romanoff", url : "https://www.marvel.com/characters/black-widow-natasha-romanoff", image : "blackwidow.png"},
-                    {hero : "Vision", name: "", url : "https://www.marvel.com/characters/vision", image : "vision.png"},
-                    {hero : "Falcon", name: "Sam Wilson", url : "https://www.marvel.com/characters/falcon-sam-wilson", image : "falcon.png"},
-                    {hero : "Hawkeye", name: "Clint Barton", url : "https://www.marvel.com/characters/hawkeye-clint-barton", image : "hawkeye.png"},
-                    {hero : "Scarlet Witch", name: "Wanda Maximoff", url : "https://www.marvel.com/characters/scarlet-witch-wanda-maximoff", image : "scarletwitch.png"},
-                    {hero : "Black Panther", name: "T'challa", url : "https://www.marvel.com/characters/black-panther-t-challa", image : "blackpanther.png"}
+                    {name: "Cersei Lannister", url : "#", image : "cerseilannister.png"},
+                    {name: "Tyrion Lannister", url : "#", image : "tyrionlannister.png"},
+                    {name: "Daenerys Targaryen", url : "#", image : "daenerystargaryen.png"},
+                    {name: "Jon Nieve", url : "#", image : "jonnieve.png"},
+                    {name: "Sansa Stark", url : "#", image : "sansastark.png"},
+                    {name: "Arya Stark", url : "#", image : "aryastark.png"},
+                    {name: "Euron Greyjoy", url : "#", image : "eurongreyjoy.png"},
+                    {name: "Podrick Payne", url : "#", image : "podrickpayne.png"}
                 ]
+
 
                 var avengersHTML = ''
 
-                data.map(avenger => {
-                    avengersHTML += '<a class="avenger" href="'+ avenger.url +'" target="_blank"><img style="width:100%" src="' + base_url + '/assets/heroes/' + avenger.image + '"/><div class="avenger-text">' + avenger.hero + ' <div class="avenger-name">' + avenger.name + '</div></div></div></a>'
+                data.map(character => {
+                    avengersHTML += '<div class="character" href="'+ character.url +'" target="_blank"><a target="_blank" href="http://viewers-guide.hbo.com/game-of-thrones/season-7/episode-7/people"><img src="' + base_url + '/assets/characters/' + character.image + '"/><span>' + character.name + '</span></a></div>'
                 })
 
-                avengers.style = "position: absolute;top: 30px;left: 10px;height: 550px;overflow: hidden;width: 800px; -webkit-transition: all 1s ease;-moz-transition: all 1s ease;-o-transition: all 1s ease;-ms-transition: all 1s ease;transition: all 1s ease;text-transform:uppercase"
+                avengers.style = "position: absolute;top: 30px;left: 10px;height: 550px;overflow: hidden;width: 100%;text-transform:uppercase"
                 avengers.innerHTML = avengersHTML
-                avengers_container.style = "width: 100%;height: 550px;position: absolute;top: 60px;overflow: hidden;"
+                avengers_container.style = "width: 100%;height:300px;position: absolute;top: 30px;overflow: hidden;"
                 avengers_container.id = "avengers_container"
 
-                prev_dot.className = "dot dot-active"
-                next_dot.className = "dot"
 
-                prev_dot.addEventListener('click', function(){
-                    avengers.style.left = "10px"
-                    prev_dot.className = "dot dot-active"
-                    next_dot.className = "dot"
-                })
-
-                next_dot.addEventListener('click', function(){
-                    avengers.style.left = "-350px"
-                    prev_dot.className = "dot"
-                    next_dot.className = "dot dot-active"
-                })
-
-                navigation.style = "position: absolute;top: 0px;left: 0px;right: 0px;margin: 0 auto;width: 50px;    background: rgb(0, 0, 0, 0.8);border-radius: 30px;padding: 0px 5px;"
-                navigation.appendChild(prev_dot)
-                navigation.appendChild(next_dot)
-
-                avengers_container.appendChild(navigation)
                 avengers_container.appendChild(avengers)
                 wrapper.appendChild(avengers_container)
             }
@@ -286,7 +314,7 @@ var tapOnVideo = function () {
 
         closeButton.addEventListener('click', function () {
             removeIfExists(['header', 'visitPageButton', 'poweredbyvidoomy', 'bottom_container',
-                'menu', 'synopsis', 'saveCalendarDropdown', 'avengers_container'
+                'menu', 'synopsis', 'saveCalendarDropdown', 'avengers_container', 'exclusive_video', 'exclusive_playlist', 'freemonth2'
             ])
 
             document.getElementById('fluid_video_wrapper_video-id').style.display = 'block'
