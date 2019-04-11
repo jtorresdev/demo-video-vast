@@ -218,7 +218,7 @@ var tapOnVideo = function () {
                     var thumb_div = document.createElement('div')
                         thumb_div.className = "thumb"
                         thumb_div.setAttribute('video-src', video.source)
-                        thumb_div.innerHTML = '<img src="' + base_url + '/assets/'+ video.thumb + '" style="padding: 5px;float: left;"><span class="thumb-name">' + video.name + '</span>'
+                        thumb_div.innerHTML = '<img src="' + base_url + '/assets/'+ video.thumb + '" style="padding: 5px;float: left;width:60px"><span class="thumb-name">' + video.name + '</span>'
                         thumb_div.addEventListener('click', function(e){
                             video_tag.src = base_url + "/assets/videos/" + thumb_div.getAttribute('video-src')
 
