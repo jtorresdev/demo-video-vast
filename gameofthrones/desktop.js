@@ -194,7 +194,7 @@ var options = {
 					return n > 9 ? "" + n: "0" + n;
 				}
 
-				var deadline = new Date("Apr 14, 2019 00:00:00").getTime(); 
+				var deadline = new Date("Apr 15, 2019 00:00:00").getTime(); 
 				var x = setInterval(function() { 
 				var now = new Date().getTime(); 
 				var t = deadline - now; 

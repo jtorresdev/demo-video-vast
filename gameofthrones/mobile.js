@@ -73,7 +73,7 @@ var tapOnVideo = function () {
 
         countdown.id = "countdown"
 
-        var deadline = new Date("Apr 14, 2019 00:00:00").getTime(); 
+        var deadline = new Date("Apr 15, 2019 00:00:00").getTime(); 
 
         function n(n){
             return n > 9 ? "" + n: "0" + n;
