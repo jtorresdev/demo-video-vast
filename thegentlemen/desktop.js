@@ -13,14 +13,14 @@ var firstPlay = true;
 var width = document.currentScript.getAttribute('playerWidth')||'800px';
 var height = parseInt(width.replace('px', '')) * 0.5625 + 'px';
 var fontSize = document.currentScript.getAttribute('fontSize')||'16px';
-var newWidth = document.currentScript.getAttribute('shortPlayerWidth')||'480px';
+var newWidth = document.currentScript.getAttribute('shortPlayerWidth')||'409px';
 var newHeight = parseInt(newWidth.replace('px', '')) * 0.5625 + 'px';
 
-var marginTop = '60px';
-var marginLeft = '10px';
+var marginTop = '130px';
+var marginLeft = 'calc(100% - 440px)';
 
-var base_url = "https://jtorresdev.github.io/demo-video-vast/audi"
-//var base_url = "./"
+//var base_url = "https://jtorresdev.github.io/demo-video-vast/audi"
+var base_url = "./"
 
 var hidePlayerButtons = function() {
 	var hide = 'display:none';
@@ -52,10 +52,10 @@ var removeAllListener = function() {
 var playerOut = function() {
 	var video_wrapper = document.getElementById('fluid_video_wrapper_video-id');
 	// si no ha terminado la transicion, vuelve al tamaño inicial
-	video_wrapper.style.width = width;
+/* 	video_wrapper.style.width = width;
 	video_wrapper.style.height = height;
 	video_wrapper.style.marginTop = '0px';
-	video_wrapper.style.marginLeft = '0px';
+	video_wrapper.style.marginLeft = '0px'; */
 };
 
 var playerIn = function() {
