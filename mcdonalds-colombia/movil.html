@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.fluidplayer.com/v2/current/fluidplayer.min.css" type="text/css" />
+    <script src="fluidplayer.min.js"></script>
+</head>
+<style>
+    body {
+        margin: 0;
+        background: white
+    }
+
+    @font-face {
+            font-family: 'steelfishEb';
+            src: url(assets/steelfish_eb.otf);
+        }
+
+        @font-face {
+            font-family: 'steelfish';
+            src: url(assets/steelfish_rg.ttf);
+        }
+
+        @font-face {
+            font-family: 'bahnschrift';
+            src: url(assets/bahnschrift.ttf);
+        }
+
+    .player {
+        -webkit-transition: width 1s, height 1s, margin 1s, left 2s;
+        transition: width 1s, height 1s, margin 1s, left 2s;
+    }
+
+    .avenger {
+            width: 115px;
+            float: left;
+            margin: 5px 5px 5px 0px;
+            cursor: pointer;
+            position:relative
+        }
+
+        .avenger:hover > .avenger-text{
+            background: #eb0d0d;
+        }
+
+        .dot {
+            height: 15px;
+            width: 15px;
+            background-color: #818699;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 5px 5px 2px 5px;
+            cursor:pointer
+        }
+
+        .dot-active{
+            background-color: #eb0d0d;
+        }
+
+        .avenger-text{
+            height: 90px;
+            width: 95px;
+            float: left;
+            background: rgba(0, 0, 0, 0.8);
+            margin-top: -5px;
+            color: white;
+            padding: 10px;
+            -webkit-clip-path: polygon(0 0, 100% 0, 100% 0, 100% 80%, 80% 100%, 0 100%, 0 100%, 0 0);
+            clip-path: polygon(0 0, 100% 0, 100% 0, 100% 80%, 80% 100%, 0 100%, 0 100%, 0 0);
+            border-top: 4px solid #eb0d0d;
+            font-family: Bahnschrift, "Adobe Blank";
+            font-variation-settings: "wght" 400, "wdth" 80;
+            font-size:18px
+        }
+
+        .avenger-name{
+            position: absolute;
+            bottom: 10px;
+            color:#b4b4b4;
+            font-size: 12px
+        }
+
+    #menu ul {
+        font-size: 20px;
+            font-family: 'steelfish';
+            list-style-type: none;
+            display: inline;
+            font-style: italic;
+    }
+
+    #menu ul li {
+        float: left;
+        margin: 0px 0px;
+        padding: 0 5px 5px 5px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    #menu ul li:hover {
+        border-bottom: 5px solid #eb0d0d;
+    }
+
+    #menu ul li a {
+        color: #fff;
+        text-decoration: none
+    }
+
+    #menu ul li.active {
+        border-bottom: 5px solid #eb0d0d;
+    }
+
+    
+
+    .dropdown-link {
+        float: left;
+        width: 100%;
+        color: #ffe200;
+        text-decoration: none;
+        font-size: 24px;
+        font-family: steelfishEb;
+        text-align: center;
+        padding: 10px 0px;
+        border: 1px solid;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+    }
+
+    .thumbnail-videos {
+        height: 60px;
+        padding: 15px;
+        margin-top: 10px;
+        display:none;
+    }
+
+    .thumb-video {
+        float: left;
+        margin: 0 5px;
+        height: 60px;
+        width: 100px;
+        background: white;
+        cursor: pointer;
+        overflow: hidden;
+        outline: 1px solid #ffffff;
+    }
+
+    .stopped::after {
+        content: url(assets/play.png);
+        margin: 10px auto;
+        display: block;
+        width: 40px;
+        height: 40px;
+    }
+
+    .currentVideo {
+        outline: 3px solid #ac282c !important;
+    }
+
+    /* The device with borders */
+    .smartphone {
+        position: relative;
+        width: 360px;
+        height: 640px;
+        margin: auto;
+        border: 16px black solid;
+        border-top-width: 60px;
+        border-bottom-width: 60px;
+        border-radius: 36px;
+        overflow: hidden;
+    }
+
+    /* The horizontal line on the top of the device */
+    .smartphone:before {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 5px;
+        position: absolute;
+        top: -30px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #333;
+        border-radius: 10px;
+    }
+
+    /* The circle on the bottom of the device */
+    .smartphone:after {
+        content: '';
+        display: block;
+        width: 35px;
+        height: 35px;
+        position: absolute;
+        left: 50%;
+        bottom: -65px;
+        transform: translate(-50%, -50%);
+        background: #333;
+        border-radius: 50%;
+    }
+
+    /* The screen (or content) of the device */
+    .smartphone .content {
+        width: 360px;
+        height: 640px;
+        background: white;
+    }
+
+    /* demo*/
+
+    .header-container {
+        height: 60px;
+        border-bottom: 1px solid #e6ebf0;
+        padding: 0 10px;
+    }
+
+    .header {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        margin: 0 auto;
+    }
+
+    .header img {
+        padding: 10px 0 0 0
+    }
+
+    .container {
+        padding: 0px 10px;
+        position: relative;
+        margin: 0 auto;
+
+        display: block;
+    }
+</style>
+
+<body>
+    <div class="googlechrome">
+        <img src="assets/demo/googlechrome.png" width="100%">
+    </div>
+    <div class="container" id="container">
+        <div class="header-container">
+            <div class="header">
+                <img src="assets/demo/vidoomy.png">
+            </div>
+        </div>
+        <div class="title" style="margin-top: 10px;">
+            <img src="assets/demo/wireframe-title.png" width="200px">
+        </div>
+        <div id="wrapper" style="width:100%;margin-top:10px">
+            <div id="player" class="player" style="width:100%;height:100%">
+                <video id="video-id" current-video="1" autoplay muted>
+                    <source src="assets/videos/video1.mp4" type="video/mp4" />
+                </video>
+            </div>
+            <div class="thumbnail-videos" id="thumbnail-videos">
+                <div class="thumb-video currentVideo" id="thumb-video-1" data-src="assets/videos/video1.mp4"
+                    style="background-image:url('assets/thumb1.png');background-size: 110px;">
+                </div>
+                <div class="thumb-video stopped" id="thumb-video-2" data-src="assets/videos/video2.mp4"
+                    style="background-image:url('assets/thumb2.png');background-size: 110px;">
+                </div>
+                <div class="thumb-video stopped" id="thumb-video-3" data-src="assets/videos/video3.mp4"
+                    style="background-image:url('assets/thumb3.png');background-size: 110px;">
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <img src="assets/demo/wireframe-bottom-mobile.png" style="width: 330px;
+                    margin-top: 15px;">
+        </div>
+    </div>
+
+    <script src="mobile.js">
+        
+    </script>
+</body>
+
+</html>
