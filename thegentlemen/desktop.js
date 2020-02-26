@@ -51,10 +51,10 @@ var removeAllListener = function() {
 var playerOut = function() {
 	var video_wrapper = document.getElementById('fluid_video_wrapper_video-id');
 	// si no ha terminado la transicion, vuelve al tamaño inicial
-	/* 	video_wrapper.style.width = width;
+	video_wrapper.style.width = width;
 	video_wrapper.style.height = height;
 	video_wrapper.style.marginTop = '0px';
-	video_wrapper.style.marginLeft = '0px'; */
+	video_wrapper.style.marginLeft = '0px';
 };
 
 var playerIn = function() {
