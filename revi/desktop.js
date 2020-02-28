@@ -85,19 +85,6 @@ var playOnClick = function() {
 	});
 };
 
-var makeUnmuteButton = function() {
-	var unmuteButton = document.createElement('div');
-
-	unmuteButton.innerHTML = '<img src="' + base_url + '/assets/unmute.png">';
-	unmuteButton.id = 'video-id_fluid_initial_play';
-
-	var initial_play = document.getElementById('video-id_fluid_initial_play_button');
-
-	initial_play.insertBefore(unmuteButton, initial_play.firstChild);
-
-	unmuteButton.addEventListener('click', playerIn);
-};
-
 var makePaper = function() {
 	var paper = document.createElement('img');
 	paper.src = '' + base_url + '/assets/paper.png';
@@ -227,13 +214,17 @@ var options = {
 
 				bannerRight.style.display = 'none';
 
+				var buttonMoreInfo = document.createElement('button');
+				buttonMoreInfo.style =
+					'width: 188px;height: 45px;font-size: 16px;font-weight: bold;color: #ffffff;font-family: "Roboto Condensed";position: absolute;left: 32px;bottom: 23px;background: transparent;border: 2px solid #ffffff;border-radius: 3px;cursor: pointer;';
+				buttonMoreInfo.innerHTML = 'MORE INFO';
+
 				var form = document.createElement('div');
-				var button = document.createElement('button');
-				button.style =
-					'width: 100%; height: 45px; font-size: 14px;  color: #ffffff; font-family: "Roboto"; position: relative; background: #ea406b; border: 0; border-radius: 3px; cursor: pointer;';
-				var buttonHTML = '';
-				buttonHTML += 'Submit and get your bonus';
-				button.innerHTML = buttonHTML;
+				var buttonSubmit = document.createElement('button');
+				buttonSubmit.style =
+					'width: 100%; height: 45px; font-size: 14px;  color: #ffffff; font-family: "Roboto Condensed"; position: relative; background: #ea406b; border: 0; border-radius: 3px; cursor: pointer;';
+
+				buttonSubmit.innerHTML = 'Submit and get your bonus';
 				var formHTML = '';
 				formHTML += `<img class="banner" src="${base_url}/assets/banner.png">`;
 				formHTML += '<input class="form-control" placeholder="First name" id="firstname"/>';
@@ -242,11 +233,12 @@ var options = {
 				formHTML += '<input class="form-control" placeholder="Phone" id="phone" />';
 				formHTML +=
 					'<span>By clicking this you are accepting to receive information from us and the our <a>Terms and Conditions</a> and we assure your <a>Privacy</a> is protected.</span>';
+				formHTML += '<input required type="checkbox" style=" position: relative; top: 71px; right: 113px; ">';
 
 				form.style = 'position: absolute; right: 65px; top: 24px; width: 238px; text-align: center;';
 				form.innerHTML = formHTML;
 
-				button.addEventListener('click', function() {
+				buttonSubmit.addEventListener('click', function() {
 					var inputs = ['firstname', 'lastname', 'phone', 'email'];
 					var params = [];
 					var no_pass = [];
@@ -269,8 +261,9 @@ var options = {
 					}
 				});
 
-				form.appendChild(button);
+				form.appendChild(buttonSubmit);
 				wrapper.appendChild(form);
+				wrapper.appendChild(buttonMoreInfo);
 
 				wrapper.appendChild(close);
 				wrapper.appendChild(bannerRight);
