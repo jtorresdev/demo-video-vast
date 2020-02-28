@@ -51,13 +51,14 @@ var removeAllListener = function() {
 var playerOut = function() {
 	var video_wrapper = document.getElementById('fluid_video_wrapper_video-id');
 	// si no ha terminado la transicion, vuelve al tamaño inicial
-	/* 	video_wrapper.style.width = width;
+	video_wrapper.style.width = width;
 	video_wrapper.style.height = height;
 	video_wrapper.style.marginTop = '0px';
-	video_wrapper.style.marginLeft = '0px'; */
+	video_wrapper.style.marginLeft = '0px';
 };
 
 var playerIn = function() {
+	document.getElementById('paper').style.display = 'none';
 	video.muteToggle('video-id', true);
 	document.getElementById('video-id_fluid_controls_container').style.display = 'block';
 	var video_wrapper = document.getElementById('fluid_video_wrapper_video-id');
@@ -95,6 +96,26 @@ var makeUnmuteButton = function() {
 	initial_play.insertBefore(unmuteButton, initial_play.firstChild);
 
 	unmuteButton.addEventListener('click', playerIn);
+};
+
+var makePaper = function() {
+	var paper = document.createElement('img');
+	paper.src = '' + base_url + '/assets/paper.png';
+	paper.style = 'position: absolute;bottom: 0px;right: 0px;z-index: 99;cursor:pointer';
+	paper.id = 'paper';
+	paper.addEventListener('click', function() {
+		document.getElementById('paper').style.display = 'none';
+		video.muteToggle('video-id', true);
+		document.getElementById('video-id_fluid_controls_container').style.display = 'block';
+		video.play();
+		var video_wrapper = document.getElementById('fluid_video_wrapper_video-id');
+		video_wrapper.style.width = newWidth;
+		video_wrapper.style.height = newHeight;
+		video_wrapper.style.marginTop = marginTop;
+		video_wrapper.style.marginLeft = marginLeft;
+		removeAllListener();
+	});
+	document.getElementById('fluid_video_wrapper_video-id').appendChild(paper);
 };
 
 var track = function(params, action) {
@@ -180,7 +201,8 @@ var options = {
 
 			playOnClick();
 
-			makeUnmuteButton();
+			// makeUnmuteButton();
+			makePaper();
 
 			// obtenemos el contenedor del reproductor
 			var video_wrapper = document.getElementById('fluid_video_wrapper_video-id');
@@ -258,6 +280,7 @@ var options = {
 					removeIfExists(['synopsis', 'visitPageButton', 'date']);
 
 					document.getElementById('fluid_video_wrapper_video-id').style.display = 'block';
+					document.getElementById('paper').style.display = 'block';
 
 					playerOut();
 
@@ -272,6 +295,7 @@ var options = {
 			video_wrapper.addEventListener('transitionend', function(event) {
 				if (event.propertyName === 'width') {
 					if (event.elapsedTime <= 3 && video_wrapper.style.width === width) {
+						document.getElementById('paper').style.display = 'block';
 					}
 				}
 			});
