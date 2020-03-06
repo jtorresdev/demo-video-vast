@@ -9,6 +9,8 @@
 		<script src="fluidplayer.min.js"></script>
 	</head>
 	<style>
+		@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&display=swap');
+
 		body {
 			margin: 0;
 			background: white;
@@ -18,24 +20,49 @@
 			-webkit-transition: width 1s, height 1s, margin 1s, left 2s;
 			transition: width 1s, height 1s, margin 1s, left 2s;
 		}
-		@font-face {
-			font-family: 'TrajanPro-Regular';
-			src: url(assets/TrajanPro-Regular.otf);
-		}
-
-		@font-face {
-			font-family: 'TrajanPro-Bold';
-			src: url(assets/TrajanPro-Bold.otf);
-		}
-
-		@font-face {
-			font-family: 'bahnschrift';
-			src: url(assets/bahnschrift.ttf);
-		}
 
 		.fluid_video_wrapper {
 			-webkit-transition: width 3s, height 3s, margin 3s;
 			transition: width 3s, height 3s, margin 3s;
+		}
+
+		.form-control {
+			background: transparent;
+			width: 90%;
+			height: 40px;
+			border: 1px solid #ffffff;
+			margin-bottom: 11px;
+			padding: 0px 0px 0 20px;
+			font-family: 'Roboto Condensed';
+		}
+
+		.form-control:focus {
+			border-bottom: 2px solid #ffffff;
+			outline: none !important;
+		}
+
+		input {
+			color: white;
+		}
+
+		.form-control::placeholder {
+			font-weight: 600;
+			color: #282828;
+		}
+
+		p {
+			font-family: 'Roboto Condensed';
+			text-align: left !important;
+			position: relative;
+			color: #5d5d5d;
+			font-size: 9px;
+			bottom: 2px;
+			left: 1%;
+			margin: 0 0 10px 0;
+		}
+
+		a {
+			text-decoration: underline;
 		}
 
 		.character {
@@ -83,55 +110,6 @@
 			font-size: 18px;
 			text-transform: uppercase;
 			line-height: 50px;
-		}
-
-		#menu ul {
-			font-size: 12px;
-			font-family: 'TrajanPro-Bold';
-			list-style-type: none;
-			display: inline;
-		}
-
-		#menu ul li {
-			float: left;
-			margin: 0px 0px;
-			padding: 0 10px 5px 10px;
-			text-align: center;
-			cursor: pointer;
-			position: relative;
-		}
-
-		#menu ul li:hover:after {
-			content: url(assets/menu-hover.png);
-			display: block;
-			width: 140px;
-			height: 50px;
-			position: absolute;
-			top: -20px;
-			left: -30px;
-			z-index: 2;
-			right: 0;
-			margin: 0 auto;
-		}
-
-		#menu ul li a {
-			color: #fff;
-			text-decoration: none;
-			z-index: 5;
-			position: relative;
-		}
-
-		#menu ul li.active:after {
-			content: url(assets/menu-hover.png);
-			display: block;
-			width: 140px;
-			height: 50px;
-			position: absolute;
-			top: -20px;
-			left: -30px;
-			z-index: 2;
-			right: 0;
-			margin: 0 auto;
 		}
 
 		.hashtag {
@@ -265,26 +243,6 @@
 					<video id="video-id" current-video="1" autoplay muted>
 						<source src="assets/videos/video1.mp4" type="video/mp4" />
 					</video>
-				</div>
-				<div class="thumbnail-videos" id="thumbnail-videos">
-					<div
-						class="thumb-video currentVideo"
-						id="thumb-video-1"
-						data-src="assets/videos/video1.mp4"
-						style="background-image:url('assets/thumb1.png');background-size: 110px;"
-					></div>
-					<div
-						class="thumb-video stopped"
-						id="thumb-video-2"
-						data-src="assets/videos/video2.mp4"
-						style="background-image:url('assets/thumb2.png');background-size: 110px;"
-					></div>
-					<div
-						class="thumb-video stopped"
-						id="thumb-video-3"
-						data-src="assets/videos/video3.mp4"
-						style="background-image:url('assets/thumb3.png');background-size: 110px;"
-					></div>
 				</div>
 			</div>
 			<div class="bottom">
