@@ -1,0 +1,43 @@
+<div>
+    <link rel="stylesheet" href="https://cdn.fluidplayer.com/v2/current/fluidplayer.min.css" type="text/css" />
+    <script src="fluidplayer.min.js"></script>
+    <style>
+        .fluid_video_wrapper{-webkit-transition:width 3s,height 3s,margin 3s;transition:width 3s,height 3s,margin 3s}#menu ul{font-size:24px;font-family:steelfishEb;list-style-type:none;display:inline}#menu ul li{float:left;margin:0 10px;padding:0 10px 5px 10px;text-align:center;cursor:pointer}#menu ul li:hover{border-bottom:5px solid #ffe200}#menu ul li a{color:#ffe200;text-decoration:none}#menu ul li.active{border-bottom:5px solid #ffe200}@font-face{font-family:steelfishEb;src:url(assets/steelfish_eb.otf)}@font-face{font-family:bahnschrift;src:url(assets/bahnschrift.ttf)}.dropdown-link{float:left;width:100%;color:#ffe200;text-decoration:none;font-size:24px;font-family:steelfishEb;text-align:center;padding:10px 0;border:1px solid;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box}.thumbnail-videos{position:absolute;bottom:0;left:10px;height:105px}.thumb-video{float:left;margin:0 5px;height:80px;width:140px;background:red;cursor:pointer;overflow:hidden;outline:1px solid #fff}.stopped::after{content:url(assets/play.png);margin:20px auto;display:block;width:40px;height:40px}.currentVideo{outline:3px solid #b29813!important}
+    </style>
+    <script>
+        function getParamValue(paramName) {
+            var url = window.location.search.substring(1); //get rid of "?" in querystring
+            var qArray = url.split('&'); //get key-value pairs
+            for (var i = 0; i < qArray.length; i++) {
+                var pArr = qArray[i].split('='); //split key and value
+                if (pArr[0] == paramName)
+                    return pArr[1]; //return value
+            }
+        }
+
+        window.onload = function () {
+            document.getElementById('wrapper').style = "width:" + getParamValue('playerWidth') + ";height:" +
+                parseInt(getParamValue('playerWidth').replace('px', '')) * 0.5625 + 'px' +
+                ";position: relative;float: left;"
+        }
+    </script>
+    <div class="wrapper" id="wrapper" style="width:970px;height:550px;position: relative;float: left;">
+        <div class="big-video">
+            <video id="video-id" current-video="1" muted>
+                <source src="assets/videos/video1.mp4" type="video/mp4" />
+            </video>
+        </div>
+        <div class="thumbnail-videos" id="thumbnail-videos">
+            <div class="thumb-video currentVideo" id="thumb-video-1" data-src="assets/videos/video1.mp4"
+                style="background-image:url('assets/thumb1.png')">
+            </div>
+            <div class="thumb-video stopped" id="thumb-video-2" data-src="assets/videos/video2.mp4"
+                style="background-image:url('assets/thumb2.png')">
+            </div>
+            <div class="thumb-video stopped" id="thumb-video-3" data-src="assets/videos/video3.mp4"
+                style="background-image:url('assets/thumb3.png')">
+            </div>
+        </div>
+    </div>
+    <script src="desktop.js"></script>
+    <div>
