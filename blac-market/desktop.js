@@ -19,7 +19,7 @@ var marginTop = '100px';
 var marginLeft = '20px';
 var base_url = './';
 
-var hidePlayerButtons = function() {
+var hidePlayerButtons = function () {
 	var hide = 'display:none';
 
 	var fullscreen = document.getElementById('video-id_fluid_control_fullscreen');
@@ -30,7 +30,7 @@ var hidePlayerButtons = function() {
 	progress.style = hide;
 };
 
-var showPlayerButtons = function() {
+var showPlayerButtons = function () {
 	var show = 'display:block';
 
 	var fullscreen = document.getElementById('video-id_fluid_control_fullscreen');
@@ -41,12 +41,12 @@ var showPlayerButtons = function() {
 	progress.style = show;
 };
 
-var removeAllListener = function() {
+var removeAllListener = function () {
 	wrapper.removeEventListener('mouseleave', playerOut);
 	wrapper.removeEventListener('mouseenter', playerIn);
 };
 
-var playerOut = function() {
+var playerOut = function () {
 	var video_wrapper = document.getElementById('fluid_video_wrapper_video-id');
 	removeIfExists(['saveCalendarDropdown']);
 	// si no ha terminado la transicion, vuelve al tamaño inicial
@@ -56,7 +56,7 @@ var playerOut = function() {
 	video_wrapper.style.marginLeft = '0px';
 };
 
-var playerIn = function() {
+var playerIn = function () {
 	removeIfExists(['unmuteButton']);
 	document.getElementById('paper').style.display = 'none';
 	video.muteToggle('video-id', true);
@@ -68,24 +68,24 @@ var playerIn = function() {
 	video_wrapper.style.marginLeft = marginLeft;
 };
 
-var removeIfExists = function(ids) {
-	ids.map(id => {
+var removeIfExists = function (ids) {
+	ids.map((id) => {
 		document.getElementById(id) ? document.getElementById(id).remove() : null;
 	});
 };
 
-var hideControlBar = function() {
+var hideControlBar = function () {
 	document.getElementById('video-id_fluid_controls_container').style.display = 'none';
 	document.getElementById('video-id_fluid_initial_play').style = 'cursor:none;display:none';
 };
 
-var playOnClick = function() {
-	document.getElementById('video-id').addEventListener('click', function() {
+var playOnClick = function () {
+	document.getElementById('video-id').addEventListener('click', function () {
 		//removeIfExists(['unmuteButton'])
 	});
 };
 
-var makeUnmuteButton = function() {
+var makeUnmuteButton = function () {
 	var unmuteButton = document.createElement('div');
 	unmuteButton.id = 'unmuteButton';
 	unmuteButton.innerHTML = '<img src="' + base_url + '/assets/unmute.png">';
@@ -101,12 +101,12 @@ var makeUnmuteButton = function() {
 	unmuteButton.addEventListener('click', playerIn);
 };
 
-var makePaper = function() {
+var makePaper = function () {
 	var paper = document.createElement('img');
 	paper.src = '' + base_url + '/assets/paper.png';
 	paper.style = 'position: absolute;bottom: 0px;right: 0px;z-index: 99;cursor:pointer; opacity:0';
 	paper.id = 'paper';
-	paper.addEventListener('click', function() {
+	paper.addEventListener('click', function () {
 		document.getElementById('paper').style.display = 'none';
 		video.muteToggle('video-id', true);
 		document.getElementById('video-id_fluid_controls_container').style.display = 'block';
@@ -132,7 +132,7 @@ var options = {
 		},
 		autoPlay: true,
 		mute: true,
-		playerInitCallback: function() {
+		playerInitCallback: function () {
 			hidePlayerButtons();
 			hideControlBar();
 
@@ -201,8 +201,8 @@ var options = {
 
 				menuHTML = '<ul>';
 				menuHTML += '<li class="active" id=""><img src="' + base_url + '/assets/home.png" /></li>';
-				menuHTML += '<li id="videosItem"><a href="#"><img src="' + base_url + '/assets/calidad.png" /></a></li>';
-				menuHTML += '<li id="synopsisItem"><a href="#"><img src="' + base_url + '/assets/ayuda.png" /></a></li>';
+				menuHTML += '<li id="videosItem"><a href="#"><img src="' + base_url + '/assets/CALIDAD.png" /></a></li>';
+				menuHTML += '<li id="synopsisItem"><a href="#"><img src="' + base_url + '/assets/AYUDA.png" /></a></li>';
 				menuHTML += '</ul>';
 
 				menu.innerHTML = menuHTML;
@@ -216,7 +216,7 @@ var options = {
 				wrapper.appendChild(offers);
 				wrapper.appendChild(background);
 
-				close.addEventListener('click', function() {
+				close.addEventListener('click', function () {
 					removeIfExists(['synopsis', 'visitPageButton', 'date']);
 
 					document.getElementById('fluid_video_wrapper_video-id').style.display = 'block';
@@ -232,7 +232,7 @@ var options = {
 			}
 
 			// agregamos el listener para cuando termine de achicarse
-			video_wrapper.addEventListener('transitionend', function(event) {
+			video_wrapper.addEventListener('transitionend', function (event) {
 				if (event.propertyName === 'width') {
 					if (event.elapsedTime <= 3 && video_wrapper.style.width === width) {
 					}
@@ -249,7 +249,7 @@ var options = {
 
 var video = fluidPlayer('video-id', options);
 
-video.on('pause', function() {
+video.on('pause', function () {
 	var unmute = document.getElementById('video-id_fluid_initial_play');
 	if (unmute.classList[0] != 'fluid_initial_play') {
 		unmute.remove();
@@ -257,6 +257,6 @@ video.on('pause', function() {
 	}
 });
 
-video.on('play', function() {
+video.on('play', function () {
 	wrapper.addEventListener('mouseenter', playerIn);
 });
