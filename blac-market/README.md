@@ -1,5 +1,3 @@
 # demo-video-vast
 
-Desktop version: https://jtorresdev.github.io/demo-video-vast/hellboy
-
-Mobile version: https://jtorresdev.github.io/demo-video-vast/hellboy/mobile
+Desktop version: https://jtorresdev.github.io/demo-video-vast/blac-market
