@@ -25,8 +25,14 @@
 				cursor: pointer;
 			}
 
+			#menu ul li:not(:first-child) {
+				margin-top: 7px;
+				padding-bottom: 0;
+			}
+
 			#menu ul li:hover {
-				border-bottom: 5px solid #cccccc;
+				border-bottom: 1px solid #cccccc;
+				opacity: 1;
 			}
 
 			#menu ul li a {
@@ -35,7 +41,7 @@
 			}
 
 			#menu ul li.active {
-				border-bottom: 2px solid #cccccc;
+				border-bottom: 1px solid #cccccc;
 			}
 
 			@font-face {

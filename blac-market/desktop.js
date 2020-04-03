@@ -49,13 +49,11 @@ var removeAllListener = function() {
 var playerOut = function() {
 	var video_wrapper = document.getElementById('fluid_video_wrapper_video-id');
 	removeIfExists(['saveCalendarDropdown']);
-	document.getElementsByClassName('active')[0].classList.remove('active');
-	document.getElementById('videosItem').classList.add('active');
 	// si no ha terminado la transicion, vuelve al tamaño inicial
-	/* video_wrapper.style.width = width;
+	video_wrapper.style.width = width;
 	video_wrapper.style.height = height;
 	video_wrapper.style.marginTop = '0px';
-	video_wrapper.style.marginLeft = '0px'; */
+	video_wrapper.style.marginLeft = '0px';
 };
 
 var playerIn = function() {
@@ -94,6 +92,10 @@ var makeUnmuteButton = function() {
 	unmuteButton.style =
 		'width: 100%;height: 100%;position: absolute;top: 0;right: 0;bottom: 0;left: 0;margin: auto;display: flex;flex-direction: column;justify-content: center;align-items: center;pointer-events: none;z-index: 999;cursor:pointer';
 
+	var initial_play = document.getElementById('video-id_fluid_initial_play_button');
+
+	initial_play.insertBefore(unmuteButton, initial_play.firstChild);
+
 	wrapper.appendChild(unmuteButton);
 
 	unmuteButton.addEventListener('click', playerIn);
@@ -102,7 +104,7 @@ var makeUnmuteButton = function() {
 var makePaper = function() {
 	var paper = document.createElement('img');
 	paper.src = '' + base_url + '/assets/paper.png';
-	paper.style = 'position: absolute;bottom: 0px;right: 0px;z-index: 99;cursor:pointer';
+	paper.style = 'position: absolute;bottom: 0px;right: 0px;z-index: 99;cursor:pointer; opacity:0';
 	paper.id = 'paper';
 	paper.addEventListener('click', function() {
 		document.getElementById('paper').style.display = 'none';
@@ -152,7 +154,7 @@ var options = {
 				var logo = document.createElement('img');
 				var logoTop = document.createElement('img');
 				var date = document.createElement('img');
-				var powered = document.createElement('img');
+				var powered = document.createElement('a');
 				var close = document.createElement('img');
 				var rrss = document.createElement('div');
 				var rrss_links = document.createElement('div');
@@ -169,23 +171,24 @@ var options = {
 				close.id = 'closeButton';
 
 				offers.setAttribute('href', '#');
-				offers.style = 'position: absolute;right: 5%;bottom: 130px;width: 220px;text-align: center;';
+				offers.style = 'position: absolute;right: -10px;bottom: 153px;width: 220px;text-align: center;';
 
-				powered.src = '' + base_url + '/assets/codigos.png';
-				powered.style = 'position:absolute;bottom:10px;right:10px';
+				powered.setAttribute('href', '#');
+				powered.innerHTML = '<img src="' + base_url + '/assets/codigos.png" /></a >';
+				powered.style = 'position:absolute;bottom:37px;right:50px';
 
 				rrss.innerHTML = '';
 				rrss.style = 'position: absolute;top: 28px;left: 197px;opacity: 0.5;';
 
 				rrssHTML = '';
-				rrssHTML += '<a href="https://www.facebook.com/" style="float:left" target="_blank"><img src="' + base_url + '/assets/fb.png"/></a>';
+				rrssHTML += '<a href="https://www.facebook.com/" target="_blank"><img src="' + base_url + '/assets/fb.png"/></a>';
+				rrssHTML += '<a href="https://twitter.com" target="_blank"><img src="' + base_url + '/assets/tw.png"/></a>';
+				rrssHTML += '<a href="https://www.instagram.com/" target="_blank"><img src="' + base_url + '/assets/ig.png"/></a>';
+
 				rrssHTML +=
-					'<a href="https://twitter.com" style="float:left;margin: 0px 20px;" target="_blank"><img src="' + base_url + '/assets/tw.png"/></a>';
-				rrssHTML += '<a href="https://www.instagram.com/" style="float:left" target="_blank"><img src="' + base_url + '/assets/ig.png"/></a>';
+					'<a href="https://www.linkedin.com/" style="margin-top: -2px;" target="_blank"><img src="' + base_url + '/assets/linkedin.png"/></a>';
 
-				rrssHTML += '<a href="https://www.linkedin.com/" style="float:left" target="_blank"><img src="' + base_url + '/assets/linkedin.png"/></a>';
-
-				rrss_links.style.marginLeft = '5px';
+				rrss_links.style = 'display: flex;justify-content: space-evenly;width: 150px;';
 				rrss_links.innerHTML = rrssHTML;
 
 				rrss.appendChild(rrss_links);
@@ -217,7 +220,6 @@ var options = {
 					removeIfExists(['synopsis', 'visitPageButton', 'date']);
 
 					document.getElementById('fluid_video_wrapper_video-id').style.display = 'block';
-					document.getElementById('thumbnail-videos').style.display = 'block';
 					document.getElementById('paper').style.display = 'block';
 
 					playerOut();
@@ -227,69 +229,12 @@ var options = {
 					document.getElementById('video-id_fluid_initial_play').style = 'cursor:none;display:none';
 					video.pause();
 				});
-
-				document.getElementById('synopsisItem').addEventListener('click', function(e) {
-					document.getElementById('video-id').pause();
-
-					e.preventDefault();
-
-					removeIfExists(['saveCalendarDropdown']);
-
-					document.getElementsByClassName('active')[0].classList.remove('active');
-					document.getElementById('synopsisItem').classList.add('active');
-
-					video_wrapper.style.display = 'none';
-					offers.style.display = 'none';
-					document.getElementById('thumbnail-videos').style.display = 'none';
-
-					if (!document.getElementById('synopsis')) {
-						var synopsis = document.createElement('div');
-						var VisitPageButton = document.createElement('a');
-
-						synopsis.style =
-							'position: absolute;top: 20%;left: 50px;color: white;width:90%;font-size: ' +
-							fontSize +
-							';font-family: bahnschrift;text-transform: uppercase;line-height: 25px;';
-						synopsis.id = 'synopsis';
-						var synopsisHTML = '';
-						synopsisHTML += '<p style="font-size: 25px;margin-bottom: 0px;color: #ffe100;">Vuelve Hellboy,</p>';
-						synopsisHTML +=
-							"<p>el gran demonio de piel roja, con cola, cuernos y un brazo de piedra. Atrapado entre los mundos de lo sobrenatural y lo humano, el apodado como 'El más grande Investigador de lo Paranormal del Mundo' junto con la Agencia para la Investigación y Defensa Paranormal (A.I.D.P.) tendrán un nuevo y peligroso desafío. Su misión será enfrentarse a una nueva y poderosa amenaza: Nimue (Milla Jovovich), conocida como La Reina de la Sangre, un espíritu ancestral de la época del rey Arturo que ha vuelto a nuestro mundo llena de sed de venganza para sembrar el terror y destruir a la raza humana.</p>";
-						synopsis.innerHTML = synopsisHTML;
-
-						VisitPageButton.style =
-							'position: absolute;bottom: 12%;left: 60px;width: 25%;height: 45px;border: 1px solid #ffe100;color: #ffe100;font-size: 16px;font-family: bahnschrift;text-transform: uppercase;text-align: center;line-height: 45px;cursor: pointer;text-decoration: none;';
-
-						VisitPageButton.innerText = 'Visitar pagina web';
-						VisitPageButton.href = 'https://www.hellboy.movie/';
-						VisitPageButton.target = '_blank';
-						VisitPageButton.id = 'visitPageButton';
-
-						wrapper.appendChild(VisitPageButton);
-						wrapper.appendChild(synopsis);
-
-						removeAllListener();
-					}
-				});
-
-				document.getElementById('videosItem').addEventListener('click', function(e) {
-					e.preventDefault();
-					document.getElementsByClassName('active')[0].classList.remove('active');
-					document.getElementById('videosItem').classList.add('active');
-
-					removeIfExists(['saveCalendarDropdown', 'synopsis', 'date', 'visitPageButton']);
-
-					video_wrapper.style.display = 'block';
-					offers.style.display = 'block';
-					document.getElementById('thumbnail-videos').style.display = 'block';
-				});
 			}
 
 			// agregamos el listener para cuando termine de achicarse
 			video_wrapper.addEventListener('transitionend', function(event) {
 				if (event.propertyName === 'width') {
 					if (event.elapsedTime <= 3 && video_wrapper.style.width === width) {
-						document.getElementById('paper').style.display = 'block';
 					}
 				}
 			});
@@ -305,66 +250,13 @@ var options = {
 var video = fluidPlayer('video-id', options);
 
 video.on('pause', function() {
-	if (document.getElementById('unmuteButton')) {
-		document.getElementById('video-id_fluid_initial_play').style = 'display:none !important';
-		document.getElementById('video-id').play();
-		video.muteToggle('video-id', true);
-		removeIfExists(['unmuteButton']);
+	var unmute = document.getElementById('video-id_fluid_initial_play');
+	if (unmute.classList[0] != 'fluid_initial_play') {
+		unmute.remove();
+		document.getElementById('video-id_fluid_initial_play').style = 'display:block;background:#d9c408';
 	}
 });
 
 video.on('play', function() {
-	//wrapper.addEventListener('mouseenter', playerIn);
+	wrapper.addEventListener('mouseenter', playerIn);
 });
-
-video.on('ended', function() {
-	var videoPlayer = document.getElementById('video-id');
-
-	var nextVideo = document.getElementById('thumb-video-' + (parseInt(videoPlayer.getAttribute('current-video')) + 1));
-	var prevVideo = document.getElementById('thumb-video-' + parseInt(videoPlayer.getAttribute('current-video')));
-
-	if (parseInt(videoPlayer.getAttribute('current-video')) + 1 <= document.getElementsByClassName('thumb-video').length) {
-		nextVideo.classList.remove('stopped');
-		prevVideo.classList.add('stopped');
-
-		nextVideo.classList.add('currentVideo');
-		prevVideo.classList.remove('currentVideo');
-
-		videoPlayer.src = nextVideo.getAttribute('data-src');
-		videoPlayer.setAttribute('current-video', parseInt(videoPlayer.getAttribute('current-video')) + 1);
-		videoPlayer.play();
-		removeAllListener();
-		playerIn();
-	} else {
-		videoPlayer.pause();
-		removeAllListener();
-	}
-});
-
-var videoThumbs = document.getElementsByClassName('thumb-video');
-
-for (let elem of videoThumbs) {
-	elem.addEventListener('click', function(e) {
-		var unmute = document.getElementById('video-id_fluid_initial_play');
-		if (unmute.classList[0] != 'fluid_initial_play') {
-			unmute.remove();
-			document.getElementById('video-id_fluid_initial_play').style = 'display:block;background:#d9c408';
-		}
-
-		var videoPlayer = document.getElementById('video-id');
-
-		var nextVideo = document.getElementById('thumb-video-' + parseInt(e.target.id.substr(-1)));
-		var prevVideo = document.getElementById('thumb-video-' + parseInt(videoPlayer.getAttribute('current-video')));
-
-		nextVideo.classList.add('currentVideo');
-		prevVideo.classList.remove('currentVideo');
-
-		nextVideo.classList.remove('stopped');
-		prevVideo.classList.add('stopped');
-
-		videoPlayer.src = elem.getAttribute('data-src');
-		videoPlayer.setAttribute('current-video', parseInt(e.target.id.substr(-1)));
-
-		video.play();
-	});
-}
