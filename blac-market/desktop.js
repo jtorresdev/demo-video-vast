@@ -59,7 +59,7 @@ var playerOut = function () {
 var playerIn = function () {
 	removeIfExists(['unmuteButton']);
 	document.getElementById('paper').style.display = 'none';
-	video.muteToggle('video-id', true);
+	//video.muteToggle('video-id', true);
 	document.getElementById('video-id_fluid_controls_container').style.display = 'block';
 	var video_wrapper = document.getElementById('fluid_video_wrapper_video-id');
 	video_wrapper.style.width = newWidth;
