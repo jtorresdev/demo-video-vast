@@ -43,16 +43,6 @@
 				border-bottom: 1px solid #cccccc;
 			}
 
-			@font-face {
-				font-family: steelfishEb;
-				src: url(assets/steelfish_eb.otf);
-			}
-
-			@font-face {
-				font-family: bahnschrift;
-				src: url(assets/bahnschrift.ttf);
-			}
-
 			.stopped::after {
 				content: url(assets/play.png);
 				margin: 20px auto;
@@ -114,12 +104,7 @@
 			<div class="title">
 				<img src="assets/demo/wireframe-title.png" alt="" />
 			</div>
-			<div
-				class="wrapper"
-				id="wrapper"
-				style="width:800px;height:450px;position: relative;margin: 10px 10px 10px 0px;
-        float: left;"
-			>
+			<div class="wrapper" id="wrapper" style="width: 800px; height: 450px; position: relative; margin: 10px 10px 10px 0px; float: left;">
 				<div class="big-video">
 					<video id="video-id" current-video="1" muted>
 						<source src="assets/videos/video1.mp4" type="video/mp4" />
