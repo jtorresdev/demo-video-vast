@@ -150,6 +150,7 @@ var options = {
 				var wrapperSwitch = document.createElement("div");
 				var close = document.createElement("img");
 				var menu = document.createElement("div");
+
 				var btnDestacadoS20 = document.createElement("button");
 				var btnDestacadoS20Plus = document.createElement("button");
 				var dotsDestacadosS20 = document.createElement("div");
@@ -292,7 +293,7 @@ var options = {
 				var menuHTML = "";
 
 				menuHTML = "<ul>";
-				menuHTML += '<li class="active" id="homeItem"><a href="#"><img id="img-home" src="https://jtorresdev.github.io/demo-video-vast/samsung/assets/home-white.png"></a></li>';
+				menuHTML += `<li class="active" id="homeItem"><a href="#"><img id="img-home" src="${base_url}/assets/home-white.png"></a></li>`;
 				menuHTML += '<li id="destacadosItem"><a href="#">DESTACADOS</a></li>';
 				menuHTML += '<li id="camaraItem"><a href="#">CÁMARA</a></li>';
 				menuHTML += '<li id="diseñoItem"><a href="#">DISEÑO</a></li>';
