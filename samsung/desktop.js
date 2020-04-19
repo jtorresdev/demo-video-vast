@@ -171,10 +171,10 @@ var options = {
 
 				wrapperSwitch.innerHTML = `
 				<div style="display:flex;">	
-					<label id="sw-s20" style="height:50px;width:163px;background-color:white;border-radius:7px;"><img src="assets/swi-1.png" style="height:40px;width:32px;background-size:unset;position:relative;top:5px;left:4px;"/> <span id="sw-text-s20" style="color:#000000;position:relative;bottom:12px;">Galaxy S20 | S20+</span>
+					<label id="sw-s20" style="height:50px;width:163px;background-color:white;border-radius:7px;"><img src="${base_url}/assets/swi-1.png" style="height:40px;width:32px;background-size:unset;position:relative;top:5px;left:4px;"/> <span id="sw-text-s20" style="color:#000000;position:relative;bottom:12px;">Galaxy S20 | S20+</span>
 						<input type="radio" id="s20" name="modelo" style="display:none;" checked>
 					</label>		
-					<label id="sw-s20-ultra" style="height:50px;width:163px;background-color:#000000;border-radius:7px;"><img src="assets/swi-2.png" style="height:40px;width:35px;background-size:unset;position:relative;top:5px;left:4px;"/> <span id="sw-text-s20-ultra" style="color:#ffffff;position:relative;bottom:12px;">Galaxy S20 Ultra</span>
+					<label id="sw-s20-ultra" style="height:50px;width:163px;background-color:#000000;border-radius:7px;"><img src="${base_url}/assets/swi-2.png" style="height:40px;width:35px;background-size:unset;position:relative;top:5px;left:4px;"/> <span id="sw-text-s20-ultra" style="color:#ffffff;position:relative;bottom:12px;">Galaxy S20 Ultra</span>
 						<input type="radio" id="sultra" name="modelo" style="display:none;">
 					</label>
 				</div>`;
@@ -468,7 +468,7 @@ document.getElementById("destacadosItem").addEventListener("click", () => {
 		document.getElementById("dotsDestacados").style.display = "flex";
 		document.getElementById("btn-destacado-s20").style.display = "none";
 		document.getElementById("btn-destacado-s20+").style.display = "none";
-		document.getElementById("bg-samsung").style.backgroundImage = "url(/assets/background-destacados-s20ultra.png)";
+		document.getElementById("bg-samsung").style.backgroundImage = "url('" + base_url + "/assets/background-destacados-s20ultra.png')";
 		//Se hace click en los dots
 		document.getElementById("first-destacados").addEventListener("click", () => {
 			document.getElementById("bg-samsung").style.backgroundImage = "url('" + base_url + "/assets/background-destacados-s20ultra.png')";
