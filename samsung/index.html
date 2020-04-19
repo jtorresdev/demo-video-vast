@@ -1,242 +1,227 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="https://cdn.fluidplayer.com/v2/current/fluidplayer.min.css" type="text/css" />
+		<script src="fluidplayer.min.js"></script>
+		<style>
+			@font-face {
+				font-family: "steelfishEb";
+				src: url(assets/steelfish_eb.otf);
+			}
 
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://cdn.fluidplayer.com/v2/current/fluidplayer.min.css" type="text/css" />
-    <script src="fluidplayer.min.js"></script>
-    <style>
-        @font-face {
-            font-family: 'steelfishEb';
-            src: url(assets/steelfish_eb.otf);
-        }
+			@font-face {
+				font-family: "steelfish";
+				src: url(assets/steelfish_rg.ttf);
+			}
 
-        @font-face {
-            font-family: 'steelfish';
-            src: url(assets/steelfish_rg.ttf);
-        }
+			@font-face {
+				font-family: "Samsung One";
+				src: url(assets/SamsungOne-400.ttf);
+			}
 
-        @font-face {
-            font-family: 'Samsung One';
-            src: url(assets/SamsungOne-400.ttf);
-        }
+			@font-face {
+				font-family: "Samsung Sharp Sans";
+				src: url(assets/SamsungSharpSans-Bold.ttf);
+			}
 
-        @font-face {
-            font-family: 'Samsung Sharp Sans';
-            src: url(assets/SamsungSharpSans-Bold.ttf);
-        }
+			@font-face {
+				font-family: "bahnschrift";
+				src: url(assets/bahnschrift.ttf);
+			}
 
-        @font-face {
-            font-family: 'bahnschrift';
-            src: url(assets/bahnschrift.ttf);
-        }
+			.fluid_video_wrapper {
+				-webkit-transition: width 3s, height 3s, margin 3s;
+				transition: width 3s, height 3s, margin 3s;
+			}
 
-        .fluid_video_wrapper {
-            -webkit-transition: width 3s, height 3s, margin 3s;
-            transition: width 3s, height 3s, margin 3s;
-        }
+			.avenger {
+				width: 115px;
+				float: left;
+				margin: 0 5px;
+				cursor: pointer;
+			}
 
-        .avenger {
-            width: 115px;
-            float: left;
-            margin: 0 5px;
-            cursor: pointer
-        }
+			.avenger:hover > .avenger-text {
+				background: #eb0d0d;
+			}
 
-        .avenger:hover>.avenger-text {
-            background: #eb0d0d;
-        }
+			.dot {
+				height: 15px;
+				width: 15px;
+				background-color: #818699;
+				border-radius: 50%;
+				display: inline-block;
+				margin: 5px 5px 2px 5px;
+				cursor: pointer;
+			}
 
-        .dot {
-            height: 15px;
-            width: 15px;
-            background-color: #818699;
-            border-radius: 50%;
-            display: inline-block;
-            margin: 5px 5px 2px 5px;
-            cursor: pointer
-        }
+			.dot-active {
+				background-color: #eb0d0d;
+			}
 
-        .dot-active {
-            background-color: #eb0d0d;
-        }
+			.avenger-text {
+				height: 110px;
+				width: 95px;
+				float: left;
+				background: rgba(0, 0, 0, 0.8);
+				margin-top: -5px;
+				color: white;
+				padding: 10px;
+				-webkit-clip-path: polygon(0 0, 100% 0, 100% 0, 100% 80%, 80% 100%, 0 100%, 0 100%, 0 0);
+				clip-path: polygon(0 0, 100% 0, 100% 0, 100% 80%, 80% 100%, 0 100%, 0 100%, 0 0);
+				border-top: 4px solid #eb0d0d;
+				font-family: Bahnschrift, "Adobe Blank";
+				font-variation-settings: "wght" 400, "wdth" 80;
+				font-size: 18px;
+			}
 
-        .avenger-text {
-            height: 110px;
-            width: 95px;
-            float: left;
-            background: rgba(0, 0, 0, 0.8);
-            margin-top: -5px;
-            color: white;
-            padding: 10px;
-            -webkit-clip-path: polygon(0 0, 100% 0, 100% 0, 100% 80%, 80% 100%, 0 100%, 0 100%, 0 0);
-            clip-path: polygon(0 0, 100% 0, 100% 0, 100% 80%, 80% 100%, 0 100%, 0 100%, 0 0);
-            border-top: 4px solid #eb0d0d;
-            font-family: Bahnschrift, "Adobe Blank";
-            font-variation-settings: "wght"400, "wdth"80;
-            font-size: 18px
-        }
+			.avenger-name {
+				position: absolute;
+				bottom: 10px;
+				color: #b4b4b4;
+				font-size: 14px;
+			}
 
-        .avenger-name {
-            position: absolute;
-            bottom: 10px;
-            color: #b4b4b4;
-            font-size: 14px
-        }
+			#menu ul {
+				font-size: 12px;
+				font-family: "Samsung One";
+				list-style-type: none;
+				display: inline;
+			}
 
-        #menu ul {
-            font-size: 12px;
-            font-family: 'Samsung One';
-            list-style-type: none;
-            display: inline;
-        }
+			#menu ul li {
+				float: left;
+				margin: 0px 10px;
+				padding: 0 10px 5px 10px;
+				text-align: center;
+				cursor: pointer;
+			}
 
-        #menu ul li {
-            float: left;
-            margin: 0px 10px;
-            padding: 0 10px 5px 10px;
-            text-align: center;
-            cursor: pointer;
-        }
+			#menu ul li:hover {
+				border-bottom: 1px solid #ffffff;
+			}
 
-        #menu ul li:hover {
-            border-bottom: 1px solid #ffffff;
-        }
+			#menu ul li a {
+				color: #fff;
+				text-decoration: none;
+			}
 
-        #menu ul li a {
-            color: #fff;
-            text-decoration: none
-        }
+			#menu ul li.active {
+				/* margin: 0; */
+				margin: 0px 10px;
+				padding: 0 10px 5px 10px;
+				border-bottom: 1px solid #ffffff;
+				display: flex;
+				justify-content: center;
+				/* padding: 0; */
+			}
 
-        #menu ul li.active {
-            /* margin: 0; */
-            margin: 0px 10px;
-            padding: 0 10px 5px 10px;
-            border-bottom: 1px solid #ffffff;
-            display: flex;
-            justify-content: center;
-            /* padding: 0; */
-        }
+			#menu ul li.active-w {
+				margin: 0px 10px;
+				padding: 0 10px 5px 10px;
+				border-bottom: 1px solid #000000;
+				display: flex;
+				justify-content: center;
+			}
 
-        #menu ul li.active-w {
-            margin: 0px 10px;
-            padding: 0 10px 5px 10px;
-            border-bottom: 1px solid #000000;
-            display: flex;
-            justify-content: center;
+			.thumbnail-videos {
+				position: absolute;
+				bottom: 10px;
+				left: 10px;
+				height: 105px;
+			}
 
-        }
+			.thumb-video {
+				float: left;
+				margin: 0 5px;
+				height: 75px;
+				width: 140px;
+				background: red;
+				cursor: pointer;
+				overflow: hidden;
+				outline: 1px solid #ffffff;
+			}
 
-        .thumbnail-videos {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            height: 105px;
-        }
+			.stopped::after {
+				content: url(assets/play.png);
+				margin: 18px auto;
+				display: block;
+				width: 40px;
+				height: 40px;
+			}
 
-        .thumb-video {
-            float: left;
-            margin: 0 5px;
-            height: 75px;
-            width: 140px;
-            background: red;
-            cursor: pointer;
-            overflow: hidden;
-            outline: 1px solid #ffffff;
-        }
+			.currentVideo {
+				outline: 3px solid #ac282c !important;
+			}
 
-        .stopped::after {
-            content: url(assets/play.png);
-            margin: 18px auto;
-            display: block;
-            width: 40px;
-            height: 40px;
-        }
+			.header-container {
+				height: 60px;
+				border-bottom: 1px solid #e6ebf0;
+				padding: 0 45px;
+			}
 
-        .currentVideo {
-            outline: 3px solid #ac282c !important;
-        }
+			.header {
+				width: 1260px;
+				height: 100%;
+				position: relative;
+				margin: 0 auto;
+			}
 
-        .header-container {
-            height: 60px;
-            border-bottom: 1px solid #e6ebf0;
-            padding: 0 45px;
-        }
+			.header img {
+				padding: 10px 0 0 0;
+			}
 
-        .header {
-            width: 1260px;
-            height: 100%;
-            position: relative;
-            margin: 0 auto;
-        }
+			.container {
+				padding: 20px 0px;
+				position: relative;
+				margin: 0 auto;
+				width: 1260px;
+				display: block;
+			}
 
-        .header img {
-            padding: 10px 0 0 0
-        }
+			body {
+				margin: 0;
+			}
 
-        .container {
-            padding: 20px 0px;
-            position: relative;
-            margin: 0 auto;
-            width: 1260px;
-            display: block;
-        }
+			.wireframe-right {
+				background: #e6ebf0;
+				width: 350px;
+				height: 550px;
+				float: left;
+				margin: 10px 0 0 15px;
+			}
 
-        body {
-            margin: 0
-        }
+			#sw-text-s20,
+			#sw-text-s20-ultra {
+				font-size: 12px;
+				font-family: "Samsung Sharp Sans";
+			}
+		</style>
+	</head>
 
-        .wireframe-right {
-            background: #e6ebf0;
-            width: 350px;
-            height: 550px;
-            float: left;
-            margin: 10px 0 0 15px;
-        }
-
-        #sw-text-s20,
-        #sw-text-s20-ultra {
-            font-size: 12px;
-            font-family: 'Samsung Sharp Sans';
-        }
-    </style>
-</head>
-
-<body>
-    <div class="header-container">
-        <div class="header">
-            <img src="assets/demo/vidoomy.png">
-        </div>
-    </div>
-    <div class="container">
-        <div class="title">
-            <img src="assets/demo/wireframe-title.png" alt="">
-        </div>
-        <div class="wrapper" id="wrapper" style="width:800px;height:450px;position: relative;margin: 10px 10px 10px 0px;
-        float: left;">
-            <div class="big-video">
-                <video id="video-id" current-video="1" muted>
-                    <source src="assets/videos/video1.mp4" type="video/mp4" />
-                </video>
-            </div>
-            <!-- <div class="thumbnail-videos" id="thumbnail-videos">
-                <div class="thumb-video currentVideo" id="thumb-video-1" data-src="assets/videos/video1.mp4"
-                    style="background-image:url('assets/thumb1.png')">
-                </div>
-                <div class="thumb-video stopped" id="thumb-video-2" data-src="assets/videos/video2.mp4"
-                    style="background-image:url('assets/thumb2.png')">
-                </div>
-                <div class="thumb-video stopped" id="thumb-video-3" data-src="assets/videos/video3.mp4"
-                    style="background-image:url('assets/thumb3.png')">
-                </div>
-            </div> -->
-        </div>
-        <div class="wireframe-right"></div>
-        <div class="wireframe-bottom">
-            <img src="assets/demo/wireframe-bottom.png">
-        </div>
-    </div>
-    <script src="desktop.js"></script>
-</body>
-
+	<body>
+		<div class="header-container">
+			<div class="header">
+				<img src="assets/demo/vidoomy.png" />
+			</div>
+		</div>
+		<div class="container">
+			<div class="title">
+				<img src="assets/demo/wireframe-title.png" alt="" />
+			</div>
+			<div class="wrapper" id="wrapper" style="width: 800px; height: 450px; position: relative; margin: 10px 10px 10px 0px; float: left; border: 1px solid lightgrey;">
+				<div class="big-video">
+					<video id="video-id" current-video="1" muted>
+						<source src="assets/videos/video1.mp4" type="video/mp4" />
+					</video>
+				</div>
+			</div>
+			<div class="wireframe-right"></div>
+			<div class="wireframe-bottom">
+				<img src="assets/demo/wireframe-bottom.png" />
+			</div>
+		</div>
+		<script src="desktop.js"></script>
+	</body>
 </html>
