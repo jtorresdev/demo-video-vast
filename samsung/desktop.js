@@ -150,7 +150,6 @@ var options = {
 				var wrapperSwitch = document.createElement("div");
 				var close = document.createElement("img");
 				var menu = document.createElement("div");
-				var countdown = document.createElement("div");
 				var btnDestacadoS20 = document.createElement("button");
 				var btnDestacadoS20Plus = document.createElement("button");
 				var dotsDestacadosS20 = document.createElement("div");
@@ -161,43 +160,10 @@ var options = {
 				var dotsCamara = document.createElement("div");
 				var dotsRendimiento = document.createElement("div");
 				background.id = "bg-samsung";
-				background.style =
-					"background-image:url('https://jtorresdev.github.io/demo-video-vast/samsung/assets/background.png');width:" +
-					width +
-					";height:" +
-					height +
-					";background-repeat: no-repeat;";
+				background.style = "background-image:url('" + base_url + "/assets/background.png');width:" + width + ";height:" + height + ";background-repeat: no-repeat;";
 				wrapperSwitch.style = "position:absolute;top:0;height:50px;width:326px;margin:10px; border:2px solid #ffffff; border-radius:10px;";
 				wrapperSwitch.id = "wrapper-switch";
-				countdown.id = "countdown";
-				function n(n) {
-					return n > 9 ? "" + n : "0" + n;
-				}
-				var deadline = new Date("Apr 26, 2019 00:00:00").getTime();
-				var x = setInterval(function () {
-					var now = new Date().getTime();
-					var t = deadline - now;
-					var days = Math.floor(t / (1000 * 60 * 60 * 24));
-					var hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-					var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
-					var seconds = Math.floor((t % (1000 * 60)) / 1000);
-					countdown.style =
-						'font-size: 50px;color: white;background: rgba(0, 0, 0, 0.5);height: 55px;padding: 20px 10px 0px 10px;line-height: 20px;margin: 0px auto;display: table;font-family: Bahnschrift, "Adobe Blank";font-variation-settings: "wght" 600, "wdth" 80;';
-					var countdownHTML = "";
-					countdownHTML +=
-						'<div id="days" style="text-align:center;float: left;padding: 0 10px;"><div>' + n(days) + '</div><span style="color:#9c97ae;font-size: 20px;">DÍAS</span></div>';
-					countdownHTML +=
-						'<div id="hours" style="text-align:center;float: left;padding: 0 10px;"><div>' + n(hours) + '</div><span style="color:#9c97ae;font-size: 20px;">HRS</span></div>';
-					countdownHTML +=
-						'<div id="minutes" style="text-align:center;float: left;padding: 0 10px;"><div>' + n(minutes) + '</div><span style="color:#9c97ae;font-size: 20px;">MINS</span></div>';
-					countdownHTML +=
-						'<div id="seconds" style="text-align:center;float: left;padding: 0 10px;"><div>' + n(seconds) + '</div><span style="color:#9c97ae;font-size: 20px;">SEGS</span></div>';
-					countdown.innerHTML = countdownHTML;
-					if (t < 0) {
-						clearInterval(x);
-						countdown.innerHTML = "EXPIRED";
-					}
-				}, 1000);
+
 				close.src = "" + base_url + "/assets/close.png";
 				close.style = "position:absolute;top:10px;right:10px;cursor: pointer;";
 				close.id = "closeButton";
