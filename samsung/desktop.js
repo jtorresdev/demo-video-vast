@@ -496,7 +496,7 @@ document.getElementById("destacadosItem").addEventListener("click", () => {
 			ChangeColorSwitch("#ffffff", "#000000", "#000000");
 		});
 		document.getElementById("second-destacados").addEventListener("click", () => {
-			document.getElementById("bg-samsung").style.backgroundImage = "url('" + base_url + "/assets/background-destacados-s20-2.png')";
+			document.getElementById("bg-samsung").style.backgroundImage = "url('" + base_url + "/assets/camara-ultra.png')";
 			ChangeColorSwitch("#ffffff", "#000000", "#000000");
 		});
 		document.getElementById("third-destacados").addEventListener("click", () => {
