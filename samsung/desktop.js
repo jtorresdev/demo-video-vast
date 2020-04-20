@@ -160,6 +160,8 @@ var options = {
 				var dotsCamaraS20 = document.createElement("div");
 				var dotsCamara = document.createElement("div");
 				var dotsRendimiento = document.createElement("div");
+				var dotsRendimientoPlus = document.createElement("div");
+
 				background.id = "bg-samsung";
 				background.style = "background-image:url('" + base_url + "/assets/background.png');width:" + width + ";height:" + height + ";background-repeat: no-repeat;";
 				wrapperSwitch.style = "position:absolute;top:0;height:50px;width:326px;margin:10px; border:2px solid #ffffff; border-radius:10px;";
@@ -172,10 +174,8 @@ var options = {
 				wrapperSwitch.innerHTML = `
 				<div style="display:flex;">	
 					<label id="sw-s20" style="height:50px;width:163px;background-color:white;border-radius:7px;"><img src="${base_url}/assets/swi-1.png" style="height:40px;width:32px;background-size:unset;position:relative;top:5px;left:4px;"/> <span id="sw-text-s20" style="color:#000000;position:relative;bottom:12px;">Galaxy S20 | S20+</span>
-						<input type="radio" id="s20" name="modelo" style="display:none;" checked>
 					</label>		
 					<label id="sw-s20-ultra" style="height:50px;width:163px;background-color:#000000;border-radius:7px;"><img src="${base_url}/assets/swi-2.png" style="height:40px;width:35px;background-size:unset;position:relative;top:5px;left:4px;"/> <span id="sw-text-s20-ultra" style="color:#ffffff;position:relative;bottom:12px;">Galaxy S20 Ultra</span>
-						<input type="radio" id="sultra" name="modelo" style="display:none;">
 					</label>
 				</div>`;
 
@@ -288,6 +288,19 @@ var options = {
 					</label>				
 				</div>`;
 
+				dotsRendimientoPlus.style = "width:100%;height:50px;display:none;justify-content:center;position:relative;bottom:50px;align-items:center;";
+				dotsRendimientoPlus.id = "dotsRendimientoPlus";
+				dotsRendimientoPlus.setAttribute("class", "dots");
+				dotsRendimientoPlus.innerHTML = `
+				<div style="width:100px;display:flex;justify-content:space-evenly;">
+					<label style="background:none;height:18px;width:18px;border-radius:50%;" id="first-rendimiento-plus">
+						<input type="radio" name="slider-diseño"  style="display:none;"/>
+					</label>
+					<label style="background:none;height:18px;width:18px;border-radius:50%;" id="second-rendimiento-plus">
+						<input type="radio" name="slider-diseño"  style="display:none;"/>
+					</label>				
+				</div>`;
+
 				menu.style = "position:absolute;right:-33px;top:30px";
 
 				var menuHTML = "";
@@ -316,9 +329,10 @@ var options = {
 				wrapper.appendChild(dotsCamara);
 				wrapper.appendChild(dotsCamaraS20);
 				wrapper.appendChild(dotsRendimiento);
+				wrapper.appendChild(dotsRendimientoPlus);
 
 				close.addEventListener("click", function () {
-					document.getElementById("sw-s20").click();
+					document.getElementById("homeItem").click();
 					document.getElementById("fluid_video_wrapper_video-id").style.display = "block";
 					document.getElementById("paper").style.display = "block";
 
@@ -391,13 +405,20 @@ function ChangeColorSwitch(color1, color2, color3) {
 	document.getElementById("sw-text-s20").style.color = color2;
 	document.getElementById("sw-s20-ultra").style.backgroundColor = color2;
 	document.getElementById("sw-text-s20-ultra").style.color = color1;
-	document.getElementById("s20").checked = true;
 }
 
 function ChangeColorHomeAndClose() {
 	document.getElementById("img-home").setAttribute("src", base_url + "/assets/home-black.png");
 	document.getElementById("closeButton").setAttribute("src", base_url + "/assets/close-w.png");
 }
+
+document.getElementById("sw-s20").addEventListener("click", () => {
+	ChangeColorSwitch("#ffffff", "#000000", "#ffffff");
+});
+
+document.getElementById("sw-s20-ultra").addEventListener("click", () => {
+	ChangeColorSwitch("#000000", "#ffffff", "#ffffff");
+});
 
 document.getElementById("homeItem").addEventListener("click", () => {
 	document.getElementById("fluid_video_wrapper_video-id").style.display = "block";
@@ -420,7 +441,7 @@ document.getElementById("homeItem").addEventListener("click", () => {
 	});
 	document.getElementById("sw-s20-ultra").addEventListener("click", () => {
 		document.getElementById("bg-samsung").style.backgroundImage = "url('" + base_url + "/assets/background.png')";
-		ChangeColorSwitch("#ffffff", "#000000", "#ffffff");
+		ChangeColorSwitch("#000000", "#ffffff", "#ffffff");
 	});
 });
 
@@ -476,11 +497,11 @@ document.getElementById("destacadosItem").addEventListener("click", () => {
 		});
 		document.getElementById("second-destacados").addEventListener("click", () => {
 			document.getElementById("bg-samsung").style.backgroundImage = "url('" + base_url + "/assets/background-destacados-s20-2.png')";
-			ChangeColorSwitch("#000000", "#ffffff", "#000000");
+			ChangeColorSwitch("#ffffff", "#000000", "#000000");
 		});
 		document.getElementById("third-destacados").addEventListener("click", () => {
 			document.getElementById("bg-samsung").style.backgroundImage = "url('" + base_url + "/assets/background-destacados-s20-3.png')";
-			ChangeColorSwitch("#000000", "#ffffff", "#000000");
+			ChangeColorSwitch("#ffffff", "#000000", "#000000");
 		});
 	}
 
@@ -544,7 +565,7 @@ document.getElementById("camaraItem").addEventListener("click", () => {
 		});
 		document.getElementById("third-camara").addEventListener("click", () => {
 			document.getElementById("bg-samsung").style.backgroundImage = "url('" + base_url + "/assets/background-camara-4.png')";
-			ChangeColorSwitch("#000000", "#ffffff", "#000000");
+			ChangeColorSwitch("#ffffff", "#000000", "#000000");
 		});
 	};
 
@@ -582,9 +603,8 @@ document.getElementById("diseñoItem").addEventListener("click", () => {
 			ChangeColorSwitch("#000000", "#ffffff", "ffffff");
 		});
 		document.getElementById("second-diseño-s20").addEventListener("click", () => {
-			document.getElementById("bg-samsung").style.backgroundImage = "url('" + base_url + "/assets/background-diseño-2.png')";
-			ChangeColorSwitch("#ffffff", "#000000", "#000000");
-			SwitchDiseñoS20Ultra();
+			document.getElementById("bg-samsung").style.backgroundImage = "url('" + base_url + "/assets/background-diseño-3.png')";
+			ChangeColorSwitch("#000000", "#ffffff", "ffffff");
 		});
 	};
 
@@ -604,12 +624,10 @@ document.getElementById("diseñoItem").addEventListener("click", () => {
 
 	document.getElementById("sw-s20").addEventListener("click", () => {
 		SwitchDiseñoS20();
-		console.log("diseños20");
 	});
 
 	document.getElementById("sw-s20-ultra").addEventListener("click", () => {
 		SwitchDiseñoS20Ultra();
-		console.log("diseños20ultra");
 	});
 	SwitchDiseñoS20();
 });
@@ -618,23 +636,55 @@ document.getElementById("rendimientoItem").addEventListener("click", () => {
 	document.getElementById("video-id").pause();
 	document.getElementById("fluid_video_wrapper_video-id").style.display = "none";
 
-	HideDots();
-	document.getElementById("dotsRendimiento").style.display = "flex";
-
 	DeleteActiveClass();
 	document.getElementById("rendimientoItem").setAttribute("class", "active-w");
-
-	document.getElementById("bg-samsung").style.backgroundImage = "url('" + base_url + "/assets/background-rendimiento-bateria.png')";
 
 	ChangeColorHomeAndClose();
 	ChangeMenuColor("#000000");
 	ChangeColorSwitch("#000000", "#ffffff", "#000000");
 
-	//Se escucha los dots
-	document.getElementById("first-rendimiento").addEventListener("click", () => {
+	const ChangeRendimientoS20 = function () {
+		HideDots();
+		document.getElementById("dotsRendimiento").style.display = "flex";
+		ChangeColorSwitch("#000000", "#ffffff", "#000000");
+
 		document.getElementById("bg-samsung").style.backgroundImage = "url('" + base_url + "/assets/background-rendimiento-bateria.png')";
+
+		//Se escucha los dots
+		document.getElementById("first-rendimiento").addEventListener("click", () => {
+			ChangeColorSwitch("#000000", "#ffffff", "#000000");
+			document.getElementById("bg-samsung").style.backgroundImage = "url('" + base_url + "/assets/background-rendimiento-bateria.png')";
+		});
+		document.getElementById("second-rendimiento").addEventListener("click", () => {
+			ChangeColorSwitch("#000000", "#ffffff", "#000000");
+			document.getElementById("bg-samsung").style.backgroundImage = "url('" + base_url + "/assets/background-rendimiento-memoria.png')";
+		});
+	};
+
+	const ChangeRendimientoS20Ultra = function () {
+		HideDots();
+		document.getElementById("dotsRendimientoPlus").style.display = "flex";
+		ChangeColorSwitch("#ffffff", "#000000", "#000000");
+
+		document.getElementById("bg-samsung").style.backgroundImage = "url('" + base_url + "/assets/background-rendimiento-bateria.png')";
+
+		//Se escucha los dots
+		document.getElementById("first-rendimiento-plus").addEventListener("click", () => {
+			ChangeColorSwitch("#ffffff", "#000000", "#000000");
+			document.getElementById("bg-samsung").style.backgroundImage = "url('" + base_url + "/assets/background-rendimiento-bateria.png')";
+		});
+		document.getElementById("second-rendimiento-plus").addEventListener("click", () => {
+			ChangeColorSwitch("#ffffff", "#000000", "#000000");
+			document.getElementById("bg-samsung").style.backgroundImage = "url('" + base_url + "/assets/background-rendimiento-memoria.png')";
+		});
+	};
+	document.getElementById("sw-s20").addEventListener("click", () => {
+		ChangeRendimientoS20();
 	});
-	document.getElementById("second-rendimiento").addEventListener("click", () => {
-		document.getElementById("bg-samsung").style.backgroundImage = "url('" + base_url + "/assets/background-rendimiento-memoria.png')";
+
+	document.getElementById("sw-s20-ultra").addEventListener("click", () => {
+		ChangeRendimientoS20Ultra();
 	});
+
+	ChangeRendimientoS20();
 });
