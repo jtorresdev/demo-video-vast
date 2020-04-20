@@ -417,6 +417,9 @@ let isHome = true;
 let menuActive = "home";
 
 const contentActive = (menuActive) => {
+	console.log(menuActive);
+	console.log(isHome);
+
 	switch (menuActive) {
 		case "destacados":
 			destacadosFunc();
@@ -439,6 +442,9 @@ const contentActive = (menuActive) => {
 			break;
 	}
 };
+
+console.log(menuActive);
+console.log(isHome);
 
 document.getElementById("sw-s20").addEventListener("click", () => {
 	if (isHome) {
@@ -481,14 +487,13 @@ const homeFunc = () => {
 
 	ChangeColorSwitch("#ffffff", "#000000", "#ffffff");
 
-	document.getElementById("sw-s20").addEventListener("click", () => {
+	if (modelActive === 1) {
 		document.getElementById("bg-samsung").style.backgroundImage = "url('" + base_url + "/assets/background.png')";
 		ChangeColorSwitch("#ffffff", "#000000", "#ffffff");
-	});
-	document.getElementById("sw-s20-ultra").addEventListener("click", () => {
+	} else {
 		document.getElementById("bg-samsung").style.backgroundImage = "url('" + base_url + "/assets/background.png')";
 		ChangeColorSwitch("#000000", "#ffffff", "#ffffff");
-	});
+	}
 };
 
 const destacadosFunc = () => {
