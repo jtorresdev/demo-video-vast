@@ -306,11 +306,11 @@ var options = {
 				var menuHTML = "";
 
 				menuHTML = "<ul>";
-				menuHTML += `<li class="active" id="homeItem"><a href="#"><img id="img-home" src="${base_url}/assets/home-white.png"></a></li>`;
-				menuHTML += '<li id="destacadosItem"><a href="#">DESTACADOS</a></li>';
-				menuHTML += '<li id="camaraItem"><a href="#">CÁMARA</a></li>';
-				menuHTML += '<li id="designItem"><a href="#">DISEÑO</a></li>';
-				menuHTML += '<li id="rendimientoItem"><a href="#">RENDIMIENTO</a></li>';
+				menuHTML += `<li class="active" id="homeItem"><a ><img id="img-home" src="${base_url}/assets/home-white.png"></a></li>`;
+				menuHTML += '<li id="destacadosItem"><a >DESTACADOS</a></li>';
+				menuHTML += '<li id="camaraItem"><a>CÁMARA</a></li>';
+				menuHTML += '<li id="designItem"><a >DISEÑO</a></li>';
+				menuHTML += '<li id="rendimientoItem"><a>RENDIMIENTO</a></li>';
 				menuHTML += "</ul>";
 
 				menu.innerHTML = menuHTML;
