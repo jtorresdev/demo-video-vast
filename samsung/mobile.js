@@ -137,7 +137,64 @@ var tapOnVideo = function () {
 			document.getElementById("closeButton").setAttribute("src", base_url + "/assets/close-w.png");
 		}
 
-		document.getElementById("homeItem").addEventListener("click", () => {
+		let modelActive = 1;
+		let isHome = true;
+		let menuActive = "home";
+
+		const contentActive = (menuActive) => {
+			console.log(menuActive);
+			console.log(isHome);
+
+			switch (menuActive) {
+				case "destacados":
+					destacadosFunc();
+					break;
+
+				case "camara":
+					camaraFunc();
+					break;
+
+				case "design":
+					designFunc();
+					break;
+
+				case "rendimiento":
+					rendimientoFunc();
+					break;
+
+				default:
+					homeFunc();
+					break;
+			}
+		};
+
+		document.getElementById("sw-s20").addEventListener("click", () => {
+			if (isHome) {
+				ChangeColorSwitch("#ffffff", "#000000", "#ffffff");
+			} else {
+				ChangeColorSwitch("#000000", "#ffffff", "#000000");
+			}
+
+			modelActive = 1;
+			contentActive(menuActive);
+		});
+
+		document.getElementById("sw-s20-ultra").addEventListener("click", () => {
+			if (isHome) {
+				ChangeColorSwitch("#000000", "#ffffff", "#ffffff");
+			} else {
+				ChangeColorSwitch("#ffffff", "#000000", "#000000");
+			}
+
+			modelActive = 2;
+			contentActive(menuActive);
+		});
+
+		/* funciones de pestañas */
+
+		const homeFunc = () => {
+			isHome = true;
+			menuActive = "home";
 			ChangeColorSwitch("#ffffff", "#000000", "#ffffff");
 			ChangeMenuColor("#ffffff");
 			document.getElementById("img-home").setAttribute("src", base_url + "/assets/home-white.png");
@@ -150,16 +207,16 @@ var tapOnVideo = function () {
 			document.getElementById("wrapper").style.backgroundImage = `url(${base_url}/assets/background-mobile.png)`;
 			document.getElementById("wrapper").style.backgroundColor = "#000000";
 
-			document.getElementById("sw-s20").addEventListener("click", () => {
+			if (modelActive === 1) {
 				ChangeColorSwitch("#ffffff", "#000000", "#ffffff");
-			});
-
-			document.getElementById("sw-s20-ultra").addEventListener("click", () => {
+			} else {
 				ChangeColorSwitch("#000000", "#ffffff", "#ffffff");
-			});
-		});
+			}
+		};
 
-		document.getElementById("destacadosItem").addEventListener("click", () => {
+		const destacadosFunc = () => {
+			isHome = false;
+			menuActive = "destacados";
 			document.getElementById("fluid_video_wrapper_video-id").style.display = "none";
 			document.getElementById("video-id").pause();
 			document.getElementById("wrapper").style.backgroundImage = "none";
@@ -277,18 +334,18 @@ var tapOnVideo = function () {
 				});
 			};
 
-			document.getElementById("sw-s20").addEventListener("click", () => {
+			if (modelActive === 1) {
 				ChangeDestacadosS20();
-			});
-
-			document.getElementById("sw-s20-ultra").addEventListener("click", () => {
+				ChangeColorSwitch("#000000", "#ffffff", "#000000");
+			} else {
 				ChangeDestacadosS20Ultra();
-			});
+				ChangeColorSwitch("#ffffff", "#000000", "#000000");
+			}
+		};
 
-			ChangeDestacadosS20();
-		});
-
-		document.getElementById("camaraItem").addEventListener("click", () => {
+		const camaraFunc = () => {
+			isHome = false;
+			menuActive = "camara";
 			document.getElementById("fluid_video_wrapper_video-id").style.display = "none";
 			document.getElementById("video-id").pause();
 			document.getElementById("wrapper").style.backgroundImage = "none";
@@ -373,18 +430,16 @@ var tapOnVideo = function () {
 				});
 			};
 
-			document.getElementById("sw-s20").addEventListener("click", () => {
+			if (modelActive === 1) {
 				ChangeCamaraS20();
-			});
-
-			document.getElementById("sw-s20-ultra").addEventListener("click", () => {
+			} else {
 				ChangeCamaraS20Ultra();
-			});
+			}
+		};
 
-			ChangeCamaraS20();
-		});
-
-		document.getElementById("diseñoItem").addEventListener("click", () => {
+		const designFunc = () => {
+			isHome = false;
+			menuActive = "design";
 			document.getElementById("fluid_video_wrapper_video-id").style.display = "none";
 			document.getElementById("video-id").pause();
 			document.getElementById("wrapper").style.backgroundImage = "none";
@@ -452,18 +507,16 @@ var tapOnVideo = function () {
 				});
 			};
 
-			document.getElementById("sw-s20").addEventListener("click", () => {
+			if (modelActive === 1) {
 				ChangeDiseñoS20();
-			});
-
-			document.getElementById("sw-s20-ultra").addEventListener("click", () => {
+			} else {
 				ChangeDiseñoS20Ultra();
-			});
+			}
+		};
 
-			ChangeDiseñoS20();
-		});
-
-		document.getElementById("rendimientoItem").addEventListener("click", () => {
+		const rendimientoFunc = () => {
+			isHome = false;
+			menuActive = "rendimiento";
 			document.getElementById("fluid_video_wrapper_video-id").style.display = "none";
 			document.getElementById("video-id").pause();
 			document.getElementById("wrapper").style.backgroundImage = "none";
@@ -529,15 +582,23 @@ var tapOnVideo = function () {
 				});
 			};
 
-			document.getElementById("sw-s20").addEventListener("click", () => {
+			if (modelActive === 1) {
 				ChangeRendimientoS20();
-			});
-
-			document.getElementById("sw-s20-ultra").addEventListener("click", () => {
+			} else {
 				ChangeRendimientoS20Ultra();
-			});
-			ChangeRendimientoS20();
-		});
+			}
+		};
+		/* listeners */
+
+		document.getElementById("homeItem").addEventListener("click", homeFunc);
+
+		document.getElementById("destacadosItem").addEventListener("click", destacadosFunc);
+
+		document.getElementById("camaraItem").addEventListener("click", camaraFunc);
+
+		document.getElementById("diseñoItem").addEventListener("click", designFunc);
+
+		document.getElementById("rendimientoItem").addEventListener("click", rendimientoFunc);
 
 		closeButton.addEventListener("click", function () {
 			removeIfExists(["header", "switch-div", "menu", "containerImg"]);
