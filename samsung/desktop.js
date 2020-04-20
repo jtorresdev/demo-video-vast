@@ -155,8 +155,8 @@ var options = {
 				var btnDestacadoS20Plus = document.createElement("button");
 				var dotsDestacadosS20 = document.createElement("div");
 				var dotsDestacados = document.createElement("div");
-				var dotsDiseño = document.createElement("div");
-				var dotsDiseñoS20 = document.createElement("div");
+				var dotsdesign = document.createElement("div");
+				var dotsdesignS20 = document.createElement("div");
 				var dotsCamaraS20 = document.createElement("div");
 				var dotsCamara = document.createElement("div");
 				var dotsRendimiento = document.createElement("div");
@@ -191,13 +191,13 @@ var options = {
 				dotsDestacadosS20.innerHTML = `
 				<div style="width:100px;display:flex;justify-content:space-around;">
 					<label style="background:none;height:14px;width:14px;border-radius:50%;" id="first-destacados-s20">
-						<input type="radio" name="slider-diseño"  style="display:none;"/>
+						<input type="radio" name="slider-design"  style="display:none;"/>
 					</label>
 					<label style="background:none;height:14px;width:14px;border-radius:50%;" id="second-destacados-s20">
-						<input type="radio" name="slider-diseño"  style="display:none;"/>
+						<input type="radio" name="slider-design"  style="display:none;"/>
 					</label>	
 					<label style="background:none;height:14px;width:14px;border-radius:50%;" id="third-destacados-s20">
-						<input type="radio" name="slider-diseño"  style="display:none;"/>
+						<input type="radio" name="slider-design"  style="display:none;"/>
 					</label>				
 				</div>`;
 
@@ -207,39 +207,39 @@ var options = {
 				dotsDestacados.innerHTML = `
 				<div style="width:100px;display:flex;justify-content:space-around;">
 					<label style="background:none;height:14px;width:14px;border-radius:50%;" id="first-destacados">
-						<input type="radio" name="slider-diseño"  style="display:none;"/>
+						<input type="radio" name="slider-design"  style="display:none;"/>
 					</label>
 					<label style="background:none;height:14px;width:14px;border-radius:50%;" id="second-destacados">
-						<input type="radio" name="slider-diseño"  style="display:none;"/>
+						<input type="radio" name="slider-design"  style="display:none;"/>
 					</label>	
 					<label style="background:none;height:14px;width:14px;border-radius:50%;" id="third-destacados">
-						<input type="radio" name="slider-diseño"  style="display:none;"/>
+						<input type="radio" name="slider-design"  style="display:none;"/>
 					</label>				
 				</div>`;
 
-				dotsDiseñoS20.style = "width:100%;height:50px;display:none;justify-content:center;position:relative;bottom:50px;align-items:center;";
-				dotsDiseñoS20.id = "dotsDiseñoS20";
-				dotsDiseñoS20.setAttribute("class", "dots");
-				dotsDiseñoS20.innerHTML = `
+				dotsdesignS20.style = "width:100%;height:50px;display:none;justify-content:center;position:relative;bottom:50px;align-items:center;";
+				dotsdesignS20.id = "dotsdesignS20";
+				dotsdesignS20.setAttribute("class", "dots");
+				dotsdesignS20.innerHTML = `
 				<div style="width:100px;display:flex;justify-content:space-evenly;">
-					<label style="background:none;height:18px;width:18px;border-radius:50%;" id="first-diseño-s20">
-						<input type="radio" name="slider-diseño"  style="display:none;"/>
+					<label style="background:none;height:18px;width:18px;border-radius:50%;" id="first-design-s20">
+						<input type="radio" name="slider-design"  style="display:none;"/>
 					</label>
-					<label style="background:none;height:18px;width:18px;border-radius:50%;" id="second-diseño-s20">
-						<input type="radio" name="slider-diseño"  style="display:none;"/>
+					<label style="background:none;height:18px;width:18px;border-radius:50%;" id="second-design-s20">
+						<input type="radio" name="slider-design"  style="display:none;"/>
 					</label>												
 				</div>`;
 
-				dotsDiseño.style = "width:100%;height:50px;display:none;justify-content:center;position:relative;bottom:50px;align-items:center;";
-				dotsDiseño.id = "dotsDiseño";
-				dotsDiseño.setAttribute("class", "dots");
-				dotsDiseño.innerHTML = `
+				dotsdesign.style = "width:100%;height:50px;display:none;justify-content:center;position:relative;bottom:50px;align-items:center;";
+				dotsdesign.id = "dotsdesign";
+				dotsdesign.setAttribute("class", "dots");
+				dotsdesign.innerHTML = `
 				<div style="width:100px;display:flex;justify-content:space-evenly;">
-					<label style="background:none;height:18px;width:18px;border-radius:50%;" id="first-diseño">
-						<input type="radio" name="slider-diseño"  style="display:none;"/>
+					<label style="background:none;height:18px;width:18px;border-radius:50%;" id="first-design">
+						<input type="radio" name="slider-design"  style="display:none;"/>
 					</label>
-					<label style="background:none;height:18px;width:18px;border-radius:50%;" id="second-diseño">
-						<input type="radio" name="slider-diseño"  style="display:none;"/>
+					<label style="background:none;height:18px;width:18px;border-radius:50%;" id="second-design">
+						<input type="radio" name="slider-design"  style="display:none;"/>
 					</label>								
 				</div>`;
 
@@ -281,10 +281,10 @@ var options = {
 				dotsRendimiento.innerHTML = `
 				<div style="width:100px;display:flex;justify-content:space-evenly;">
 					<label style="background:none;height:18px;width:18px;border-radius:50%;" id="first-rendimiento">
-						<input type="radio" name="slider-diseño"  style="display:none;"/>
+						<input type="radio" name="slider-design"  style="display:none;"/>
 					</label>
 					<label style="background:none;height:18px;width:18px;border-radius:50%;" id="second-rendimiento">
-						<input type="radio" name="slider-diseño"  style="display:none;"/>
+						<input type="radio" name="slider-design"  style="display:none;"/>
 					</label>				
 				</div>`;
 
@@ -294,10 +294,10 @@ var options = {
 				dotsRendimientoPlus.innerHTML = `
 				<div style="width:100px;display:flex;justify-content:space-evenly;">
 					<label style="background:none;height:18px;width:18px;border-radius:50%;" id="first-rendimiento-plus">
-						<input type="radio" name="slider-diseño"  style="display:none;"/>
+						<input type="radio" name="slider-design"  style="display:none;"/>
 					</label>
 					<label style="background:none;height:18px;width:18px;border-radius:50%;" id="second-rendimiento-plus">
-						<input type="radio" name="slider-diseño"  style="display:none;"/>
+						<input type="radio" name="slider-design"  style="display:none;"/>
 					</label>				
 				</div>`;
 
@@ -309,7 +309,7 @@ var options = {
 				menuHTML += `<li class="active" id="homeItem"><a href="#"><img id="img-home" src="${base_url}/assets/home-white.png"></a></li>`;
 				menuHTML += '<li id="destacadosItem"><a href="#">DESTACADOS</a></li>';
 				menuHTML += '<li id="camaraItem"><a href="#">CÁMARA</a></li>';
-				menuHTML += '<li id="diseñoItem"><a href="#">DISEÑO</a></li>';
+				menuHTML += '<li id="designItem"><a href="#">DISEÑO</a></li>';
 				menuHTML += '<li id="rendimientoItem"><a href="#">RENDIMIENTO</a></li>';
 				menuHTML += "</ul>";
 
@@ -324,8 +324,8 @@ var options = {
 				wrapper.appendChild(btnDestacadoS20Plus);
 				wrapper.appendChild(dotsDestacadosS20);
 				wrapper.appendChild(dotsDestacados);
-				wrapper.appendChild(dotsDiseño);
-				wrapper.appendChild(dotsDiseñoS20);
+				wrapper.appendChild(dotsdesign);
+				wrapper.appendChild(dotsdesignS20);
 				wrapper.appendChild(dotsCamara);
 				wrapper.appendChild(dotsCamaraS20);
 				wrapper.appendChild(dotsRendimiento);
@@ -412,15 +412,61 @@ function ChangeColorHomeAndClose() {
 	document.getElementById("closeButton").setAttribute("src", base_url + "/assets/close-w.png");
 }
 
+let modelActive = 1;
+let isHome = true;
+let menuActive = "home";
+
+const contentActive = (menuActive) => {
+	switch (menuActive) {
+		case "destacados":
+			destacadosFunc();
+			break;
+
+		case "camara":
+			camaraFunc();
+			break;
+
+		case "design":
+			designFunc();
+			break;
+
+		case "rendimiento":
+			rendimientoFunc();
+			break;
+
+		default:
+			homeFunc();
+			break;
+	}
+};
+
 document.getElementById("sw-s20").addEventListener("click", () => {
-	ChangeColorSwitch("#ffffff", "#000000", "#ffffff");
+	if (isHome) {
+		ChangeColorSwitch("#ffffff", "#000000", "#ffffff");
+	} else {
+		ChangeColorSwitch("#000000", "#ffffff", "#000000");
+	}
+
+	modelActive = 1;
+	contentActive(menuActive);
 });
 
 document.getElementById("sw-s20-ultra").addEventListener("click", () => {
-	ChangeColorSwitch("#000000", "#ffffff", "#ffffff");
+	if (isHome) {
+		ChangeColorSwitch("#000000", "#ffffff", "#ffffff");
+	} else {
+		ChangeColorSwitch("#ffffff", "#000000", "#000000");
+	}
+
+	modelActive = 2;
+	contentActive(menuActive);
 });
 
-document.getElementById("homeItem").addEventListener("click", () => {
+/** funciones de pestañas */
+
+const homeFunc = () => {
+	isHome = true;
+	menuActive = "home";
 	document.getElementById("fluid_video_wrapper_video-id").style.display = "block";
 
 	document.getElementById("bg-samsung").style.backgroundImage = "url('" + base_url + "/assets/background.png')";
@@ -443,9 +489,11 @@ document.getElementById("homeItem").addEventListener("click", () => {
 		document.getElementById("bg-samsung").style.backgroundImage = "url('" + base_url + "/assets/background.png')";
 		ChangeColorSwitch("#000000", "#ffffff", "#ffffff");
 	});
-});
+};
 
-document.getElementById("destacadosItem").addEventListener("click", () => {
+const destacadosFunc = () => {
+	isHome = false;
+	menuActive = "destacados";
 	document.getElementById("video-id").pause();
 	document.getElementById("fluid_video_wrapper_video-id").style.display = "none";
 
@@ -479,7 +527,6 @@ document.getElementById("destacadosItem").addEventListener("click", () => {
 		document.getElementById("third-destacados-s20").addEventListener("click", () => {
 			document.getElementById("bg-samsung").style.backgroundImage = "url('" + base_url + "/assets/background-destacados-s20-3.png')";
 		});
-		ChangeColorSwitch("#000000", "#ffffff", "#000000");
 	};
 
 	function SwitchDestacadosS20Ultra() {
@@ -505,19 +552,18 @@ document.getElementById("destacadosItem").addEventListener("click", () => {
 		});
 	}
 
-	document.getElementById("sw-s20").addEventListener("click", () => {
+	if (modelActive === 1) {
 		SwitchDestacadosS20();
-	});
-
-	document.getElementById("sw-s20-ultra").addEventListener("click", () => {
+		ChangeColorSwitch("#000000", "#ffffff", "#000000");
+	} else {
 		SwitchDestacadosS20Ultra();
 		ChangeColorSwitch("#ffffff", "#000000", "#000000");
-	});
+	}
+};
 
-	SwitchDestacadosS20();
-});
-
-document.getElementById("camaraItem").addEventListener("click", () => {
+const camaraFunc = () => {
+	isHome = false;
+	menuActive = "camara";
 	document.getElementById("video-id").pause();
 	document.getElementById("fluid_video_wrapper_video-id").style.display = "none";
 
@@ -569,70 +615,71 @@ document.getElementById("camaraItem").addEventListener("click", () => {
 		});
 	};
 
-	document.getElementById("sw-s20").addEventListener("click", () => {
+	if (modelActive === 1) {
 		SwitchCamaraS20();
-	});
-
-	document.getElementById("sw-s20-ultra").addEventListener("click", () => {
+		ChangeColorSwitch("#000000", "#ffffff", "#000000");
+	} else {
 		SwitchCamaraS20Ultra();
-	});
+		ChangeColorSwitch("#ffffff", "#000000", "#000000");
+	}
+};
 
-	SwitchCamaraS20();
-});
-
-document.getElementById("diseñoItem").addEventListener("click", () => {
+const designFunc = () => {
+	isHome = false;
+	menuActive = "design";
 	document.getElementById("video-id").pause();
 	document.getElementById("fluid_video_wrapper_video-id").style.display = "none";
 
 	DeleteActiveClass();
-	document.getElementById("diseñoItem").setAttribute("class", "active-w");
+	document.getElementById("designItem").setAttribute("class", "active-w");
 
 	ChangeColorHomeAndClose();
 	ChangeMenuColor("#000000");
 	ChangeColorSwitch("#000000", "#ffffff", "#000000");
 
-	const SwitchDiseñoS20 = function () {
+	const SwitchdesignS20 = function () {
 		HideDots();
-		document.getElementById("dotsDiseñoS20").style.display = "flex";
+		document.getElementById("dotsdesignS20").style.display = "flex";
 		ChangeColorSwitch("#000000", "#ffffff", "ffffff");
 		document.getElementById("bg-samsung").style.backgroundImage = "url('" + base_url + "/assets/background-diseño-1.png')";
 
 		//se pone una escucha en los dots
-		document.getElementById("first-diseño-s20").addEventListener("click", () => {
+		document.getElementById("first-design-s20").addEventListener("click", () => {
 			document.getElementById("bg-samsung").style.backgroundImage = "url('" + base_url + "/assets/background-diseño-1.png')";
 			ChangeColorSwitch("#000000", "#ffffff", "ffffff");
 		});
-		document.getElementById("second-diseño-s20").addEventListener("click", () => {
+		document.getElementById("second-design-s20").addEventListener("click", () => {
 			document.getElementById("bg-samsung").style.backgroundImage = "url('" + base_url + "/assets/background-diseño-3.png')";
 			ChangeColorSwitch("#000000", "#ffffff", "ffffff");
 		});
 	};
 
-	const SwitchDiseñoS20Ultra = function () {
+	const SwitchdesignS20Ultra = function () {
 		HideDots();
-		document.getElementById("dotsDiseño").style.display = "flex";
+		document.getElementById("dotsdesign").style.display = "flex";
 		ChangeColorSwitch("#ffffff", "#000000", "#000000");
 		document.getElementById("bg-samsung").style.backgroundImage = "url('" + base_url + "/assets/background-diseño-2.png')";
 		//se pone una escucha en los dots
-		document.getElementById("first-diseño").addEventListener("click", () => {
+		document.getElementById("first-design").addEventListener("click", () => {
 			document.getElementById("bg-samsung").style.backgroundImage = "url('" + base_url + "/assets/background-diseño-2.png')";
 		});
-		document.getElementById("second-diseño").addEventListener("click", () => {
+		document.getElementById("second-design").addEventListener("click", () => {
 			document.getElementById("bg-samsung").style.backgroundImage = "url('" + base_url + "/assets/background-diseño-3.png')";
 		});
 	};
 
-	document.getElementById("sw-s20").addEventListener("click", () => {
-		SwitchDiseñoS20();
-	});
+	if (modelActive === 1) {
+		SwitchdesignS20();
+		ChangeColorSwitch("#000000", "#ffffff", "#000000");
+	} else {
+		SwitchdesignS20Ultra();
+		ChangeColorSwitch("#ffffff", "#000000", "#000000");
+	}
+};
 
-	document.getElementById("sw-s20-ultra").addEventListener("click", () => {
-		SwitchDiseñoS20Ultra();
-	});
-	SwitchDiseñoS20();
-});
-
-document.getElementById("rendimientoItem").addEventListener("click", () => {
+const rendimientoFunc = () => {
+	isHome = false;
+	menuActive = "rendimiento";
 	document.getElementById("video-id").pause();
 	document.getElementById("fluid_video_wrapper_video-id").style.display = "none";
 
@@ -678,13 +725,23 @@ document.getElementById("rendimientoItem").addEventListener("click", () => {
 			document.getElementById("bg-samsung").style.backgroundImage = "url('" + base_url + "/assets/background-rendimiento-memoria.png')";
 		});
 	};
-	document.getElementById("sw-s20").addEventListener("click", () => {
+
+	if (modelActive === 1) {
 		ChangeRendimientoS20();
-	});
-
-	document.getElementById("sw-s20-ultra").addEventListener("click", () => {
+		ChangeColorSwitch("#000000", "#ffffff", "#000000");
+	} else {
 		ChangeRendimientoS20Ultra();
-	});
+		ChangeColorSwitch("#ffffff", "#000000", "#000000");
+	}
+};
 
-	ChangeRendimientoS20();
-});
+/** listeners */
+
+document.getElementById("homeItem").addEventListener("click", homeFunc);
+document.getElementById("destacadosItem").addEventListener("click", destacadosFunc);
+
+document.getElementById("camaraItem").addEventListener("click", camaraFunc);
+
+document.getElementById("designItem").addEventListener("click", designFunc);
+
+document.getElementById("rendimientoItem").addEventListener("click", rendimientoFunc);
