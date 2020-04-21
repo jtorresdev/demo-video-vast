@@ -21,17 +21,6 @@
 			transition: width 3s, height 3s, margin 3s;
 		}
 
-		.avenger {
-			width: 115px;
-			float: left;
-			margin: 0 5px;
-			cursor: pointer;
-		}
-
-		.avenger:hover>.avenger-text {
-			background: #eb0d0d;
-		}
-
 		label {
 			cursor: pointer;
 		}
@@ -48,29 +37,6 @@
 
 		.dot-active {
 			background-color: #eb0d0d;
-		}
-
-		.avenger-text {
-			height: 110px;
-			width: 95px;
-			float: left;
-			background: rgba(0, 0, 0, 0.8);
-			margin-top: -5px;
-			color: white;
-			padding: 10px;
-			-webkit-clip-path: polygon(0 0, 100% 0, 100% 0, 100% 80%, 80% 100%, 0 100%, 0 100%, 0 0);
-			clip-path: polygon(0 0, 100% 0, 100% 0, 100% 80%, 80% 100%, 0 100%, 0 100%, 0 0);
-			border-top: 4px solid #eb0d0d;
-			font-family: Bahnschrift, "Adobe Blank";
-			font-variation-settings: "wght"400, "wdth"80;
-			font-size: 18px;
-		}
-
-		.avenger-name {
-			position: absolute;
-			bottom: 10px;
-			color: #b4b4b4;
-			font-size: 14px;
 		}
 
 		#menu ul {
@@ -115,23 +81,6 @@
 			justify-content: center;
 		}
 
-		.thumbnail-videos {
-			position: absolute;
-			bottom: 10px;
-			left: 10px;
-			height: 105px;
-		}
-
-		.thumb-video {
-			float: left;
-			margin: 0 5px;
-			height: 75px;
-			width: 140px;
-			background: red;
-			cursor: pointer;
-			overflow: hidden;
-			outline: 1px solid #ffffff;
-		}
 
 		.stopped::after {
 			content: url(assets/play.png);
@@ -139,10 +88,6 @@
 			display: block;
 			width: 40px;
 			height: 40px;
-		}
-
-		.currentVideo {
-			outline: 3px solid #ac282c !important;
 		}
 
 		.header-container {
@@ -213,6 +158,176 @@
 			<img src="assets/demo/wireframe-bottom.png" />
 		</div>
 	</div>
+	<script>
+		( function () {
+			"use strict";
+
+			var module = {
+				options: [],
+				header: [ navigator.platform, navigator.userAgent, navigator.appVersion, navigator.vendor, window
+					.opera
+				],
+				dataos: [ {
+						name: "Windows Phone",
+						value: "Windows Phone",
+						version: "OS"
+					},
+					{
+						name: "Windows",
+						value: "Win",
+						version: "NT"
+					},
+					{
+						name: "iPhone",
+						value: "iPhone",
+						version: "OS"
+					},
+					{
+						name: "iPad",
+						value: "iPad",
+						version: "OS"
+					},
+					{
+						name: "Kindle",
+						value: "Silk",
+						version: "Silk"
+					},
+					{
+						name: "Android",
+						value: "Android",
+						version: "Android"
+					},
+					{
+						name: "PlayBook",
+						value: "PlayBook",
+						version: "OS"
+					},
+					{
+						name: "BlackBerry",
+						value: "BlackBerry",
+						version: "/"
+					},
+					{
+						name: "Macintosh",
+						value: "Mac",
+						version: "OS X"
+					},
+					{
+						name: "Linux",
+						value: "Linux",
+						version: "rv"
+					},
+					{
+						name: "Palm",
+						value: "Palm",
+						version: "PalmOS"
+					}
+				],
+				databrowser: [ {
+						name: "Chrome",
+						value: "Chrome",
+						version: "Chrome"
+					},
+					{
+						name: "Firefox",
+						value: "Firefox",
+						version: "Firefox"
+					},
+					{
+						name: "Safari",
+						value: "Safari",
+						version: "Version"
+					},
+					{
+						name: "Internet Explorer",
+						value: "MSIE",
+						version: "MSIE"
+					},
+					{
+						name: "Opera",
+						value: "Opera",
+						version: "Opera"
+					},
+					{
+						name: "BlackBerry",
+						value: "CLDC",
+						version: "CLDC"
+					},
+					{
+						name: "Mozilla",
+						value: "Mozilla",
+						version: "Mozilla"
+					}
+				],
+				init: function () {
+					var agent = this.header.join( " " ),
+						os = this.matchItem( agent, this.dataos ),
+						browser = this.matchItem( agent, this.databrowser );
+
+					return {
+						os: os,
+						browser: browser
+					};
+				},
+				matchItem: function ( string, data ) {
+					var i = 0,
+						j = 0,
+						html = "",
+						regex,
+						regexv,
+						match,
+						matches,
+						version;
+
+					for ( i = 0; i < data.length; i += 1 ) {
+						regex = new RegExp( data[ i ].value, "i" );
+						match = regex.test( string );
+						if ( match ) {
+							regexv = new RegExp( data[ i ].version + "[- /:;]([\\d._]+)", "i" );
+							matches = string.match( regexv );
+							version = "";
+							if ( matches ) {
+								if ( matches[ 1 ] ) {
+									matches = matches[ 1 ];
+								}
+							}
+							if ( matches ) {
+								matches = matches.split( /[._]+/ );
+								for ( j = 0; j < matches.length; j += 1 ) {
+									if ( j === 0 ) {
+										version += matches[ j ] + ".";
+									} else {
+										version += matches[ j ];
+									}
+								}
+							} else {
+								version = "0";
+							}
+							return {
+								name: data[ i ].name,
+								version: parseFloat( version )
+							};
+						}
+					}
+					return {
+						name: "unknown",
+						version: 0
+					};
+				}
+			};
+
+			var e = module.init(),
+				debug = "";
+
+			debug = e.os.name;
+
+			if ( debug === "Windows" ) {
+				console.log( "soy windows" );
+			} else {
+				console.log( "no soy windows :-(" );
+			}
+		} )();
+	</script>
 	<script src="desktop.js"></script>
 </body>
 
