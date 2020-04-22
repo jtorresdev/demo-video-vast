@@ -10,7 +10,7 @@ var tapOnVideo = function () {
 	if (document.getElementById("sidebar") || document.getElementById("header")) {
 		// nothing...
 	} else {
-		document.getElementById("unmuteButton").remove();
+		document.getElementById("unmuteButton").style.opacity = "0";
 		video.muteToggle("video-id", true);
 		video.play();
 
@@ -25,7 +25,7 @@ var tapOnVideo = function () {
 		var wrapperSwitch = document.createElement("div");
 		var containerImg = document.createElement("div");
 
-		menu.style = "position:absolute;width:100%;display:flex;top:76px;justify-content:center;z-index:1;";
+		menu.style.cssText = "position:absolute;width:100%;display:flex;top:76px;justify-content:center;z-index:1;";
 		var menuHTML = "";
 		menuHTML = "<ul style='margin:0; padding:12px 0;display:flex;justify-content:space-between;;width:90%;'>";
 		menuHTML += `<li class="active" id="homeItem"><a href="#"><img id="img-home" src="${base_url}/assets/home-white.png"'></a></li>`;
@@ -37,17 +37,17 @@ var tapOnVideo = function () {
 		menu.innerHTML = menuHTML;
 		menu.id = "menu";
 
-		document.getElementById("paper").remove();
+		document.getElementById("paper").style.opacity = "0";
 
-		closeButton.style = "float:right;width:10px;height:10px;margin:5px;cursor: pointer;";
+		closeButton.style.cssText = "float:right;width:10px;height:10px;margin:5px;cursor: pointer;";
 		closeButton.id = "closeButton";
 		closeButton.src = base_url + "/assets/close.png";
 
 		header.id = "header";
-		header.style = "width:100%;height:25px;text-align: center;";
+		header.style.cssText = "width:100%;height:25px;text-align: center;";
 
-		wrapper.style = `position: fixed;background-image: url(${base_url}/assets/background-mobile.png);height: 100%;top: 0px;background-size: 85%;background-repeat: no-repeat;background-position:bottom;width: 100%;background-color: black;left: 0;z-index: 999999999;`;
-		wrapperSwitch.style = "width:100%;position:absolute;top:25px;height:41px;z-index:1;";
+		wrapper.style.cssText = `position: fixed;background-image: url(${base_url}/assets/background-mobile.png);height: 100%;top: 0px;background-size: 85%;background-repeat: no-repeat;background-position:bottom;width: 100%;background-color: black;left: 0;z-index: 999999999;`;
+		wrapperSwitch.style.cssText = "width:100%;position:absolute;top:25px;height:41px;z-index:1;";
 		wrapperSwitch.id = "switch-div";
 		wrapperSwitch.innerHTML = `
 		<div id="wrapper-switch" style="display:flex; width:70%;margin:auto;border:solid 1px #ffffff; border-radius:5px;">
@@ -55,7 +55,7 @@ var tapOnVideo = function () {
 			<label id="sw-s20-ultra" style="height:40px;width:50%;background-color:#000000;border-radius:0 4px 4px 0;"><img src="${base_url}/assets/switch-2-mobil.png" style="width:20px;position:relative;top:6px;left:6px;"/> <span id="sw-text-s20-ultra" style="color:#ffffff;position:relative;bottom:6px;left:10px;font-family:Samsung Sharp Sans;font-size:9px;">Galaxy S20 Ultra</span></label>
 		</div>`;
 
-		containerImg.style = "position:absolute;top:25px;display:none;height:max-content;padding-bottom:5%;";
+		containerImg.style.cssText = "position:absolute;top:25px;display:none;height:max-content;padding-bottom:5%;";
 		containerImg.id = "containerImg";
 		containerImg.innerHTML = `
 		<img id="img-src" src="${base_url}/assets/bg-destacados-1-mobil.png" style="width:100%;"/>
@@ -604,19 +604,20 @@ var tapOnVideo = function () {
 			removeIfExists(["header", "switch-div", "menu", "containerImg"]);
 			document.getElementById("fluid_video_wrapper_video-id").style.display = "block";
 
-			document.getElementById("player").style = "width:100%;height:100%;";
-			document.getElementById("wrapper").style = "width: 100%;margin-top: 10px;";
+			document.getElementById("player").style.cssText = "width:100%;height:100%;";
+			document.getElementById("wrapper").style.cssText = "width: 100%;margin-top: 10px;";
 			document.getElementById("container").style.padding = "0px 10px";
 			document.getElementById("video-id").pause();
 
 			document.getElementById("video-id_fluid_controls_container").style.display = "none";
-			document.getElementById("video-id_fluid_initial_play").style = "cursor:none;display:none";
+			document.getElementById("video-id_fluid_initial_play").style.cssText = "cursor:none;display:none";
 
 			makeUnmuteButton();
 
 			makePaper();
 		});
 
+		document.getElementById("homeItem").click();
 		// efecto achicarse
 		player.style.height = "100%";
 		player.style.height = "230px";
@@ -624,25 +625,33 @@ var tapOnVideo = function () {
 };
 
 var makeUnmuteButton = function () {
+	if (document.getElementById("unmuteButton")) {
+		document.getElementById("unmuteButton").style.opacity = "1";
+		return;
+	}
 	var unmuteButton = document.createElement("div");
-	unmuteButton.style = "position: absolute;top: 70px;width: 100%;text-align: center;display: block;";
+	unmuteButton.style.cssText = "position: absolute;top: 200px;width: 100%;text-align: center;display: block;";
 	unmuteButton.innerHTML = '<img src="' + base_url + '/assets/unmute.png" width="80px">';
 	unmuteButton.id = "unmuteButton";
 
-	document.getElementById("fluid_video_wrapper_video-id").appendChild(unmuteButton);
+	document.getElementById("player").appendChild(unmuteButton);
 
 	unmuteButton.addEventListener("click", tapOnVideo);
 };
 
 var makePaper = function () {
+	if (document.getElementById("paper")) {
+		document.getElementById("paper").style.opacity = "1";
+		return;
+	}
 	var paper = document.createElement("img");
 	paper.src = base_url + "/assets/paper.png";
-	paper.style = "position: absolute;bottom: 0px;right: 0px;z-index: 99;cursor:pointer;width: 120px;";
+	paper.style.cssText = "position: absolute;bottom: 0px;right: 0px;z-index: 99;cursor:pointer;width: 120px;";
 	paper.id = "paper";
 
 	paper.addEventListener("click", tapOnVideo);
 
-	document.getElementById("fluid_video_wrapper_video-id").appendChild(paper);
+	document.getElementById("player").appendChild(paper);
 };
 
 /**
@@ -716,11 +725,11 @@ var hidePlayerButtons = function () {
 	var hide = "display:none";
 
 	var fullscreen = document.getElementById("video-id_fluid_control_fullscreen");
-	fullscreen.style = hide;
+	fullscreen.style.cssText = hide;
 	var theatre = document.getElementById("video-id_fluid_control_theatre");
-	theatre.style = hide;
+	theatre.style.cssText = hide;
 	var progress = document.getElementById("video-id_fluid_control_duration");
-	progress.style = hide;
+	progress.style.cssText = hide;
 };
 
 var options = {
@@ -736,7 +745,7 @@ var options = {
 		playerInitCallback: function () {
 			hidePlayerButtons();
 			document.getElementById("video-id_fluid_controls_container").style.display = "none";
-			document.getElementById("video-id_fluid_initial_play").style = "cursor:none;display:none";
+			document.getElementById("video-id_fluid_initial_play").style.cssText = "cursor:none;display:none";
 
 			makeUnmuteButton();
 
@@ -758,12 +767,12 @@ video.on("pause", function () {
 	var unmute = document.getElementById("video-id_fluid_initial_play");
 	if (unmute.classList[0] != "fluid_initial_play") {
 		unmute.remove();
-		document.getElementById("video-id_fluid_initial_play").style = "display:block;background:#fff";
+		document.getElementById("video-id_fluid_initial_play").style.cssText = "display:block;background:#fff";
 	}
 });
 
 document.getElementById("player").addEventListener("transitionend", function (event) {
-	document.getElementById("player").style = "position:absolute;top:118px;";
+	document.getElementById("player").style.cssText = "position:absolute;top:118px;";
 	if (document.getElementById("wrapper").style.height === "100%") {
 		document.getElementById("video-id_fluid_controls_container").style.display = "block";
 	}
